@@ -1,18 +1,17 @@
 import React from 'react';
-// import styled from 'styled-components';
-// import {
-//   useTable,
-//   usePagination,
-//   useSortBy,
-//   useFilters,
-//   useGroupBy,
-//   useExpanded,
-//   useRowSelect,
-// } from 'react-table';
-// import matchSorter from 'match-sorter';
+import styled from 'styled-components';
+import {
+  useTable,
+  usePagination,
+  useSortBy,
+  useFilters,
+  useGroupBy,
+  useExpanded,
+  useRowSelect,
+} from 'react-table';
+import matchSorter from 'match-sorter';
 
-// import makeData from '../../utils/makeData';
-// import { any } from '@uirouter/core';
+import makeData from '../../utils/makeData';
 
 // const Styles = styled.div`
 //   padding: 1rem;
@@ -340,7 +339,7 @@ import React from 'react';
 //             ),
 //             // The cell can use the individual row's getToggleRowSelectedProps method
 //             // to the render a checkbox
-//             Cell: ({ row }) => (
+//             Cell: ({ row }: { row: any }) => (
 //               <div>
 //                 <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
 //               </div>
@@ -350,7 +349,7 @@ import React from 'react';
 //         ]
 //       })
 //     }
-//   )
+//   );
 
 //   // Render the UI for your table
 //   return (
@@ -520,7 +519,7 @@ import React from 'react';
 // }
 
 // const IndeterminateCheckbox = React.forwardRef(
-//   ({ indeterminate, ...rest }: { indeterminate: any; rest: any }, ref) => {
+//   ({ indeterminate, ...rest }: { indeterminate: any; rest: any }, ref: any) => {
 //     const defaultRef = React.useRef()
 //     const resolvedRef = ref || defaultRef
 
