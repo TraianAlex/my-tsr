@@ -6,13 +6,23 @@ import {
   // useSrefActive,
   pushStateLocationPlugin,
 } from "@uirouter/react";
+import { visualizer } from '@uirouter/visualizer';
+
 import "./index.css";
 import Navigation from './components/Navigation';
 import SnowApp from "./snow/SnowApp";
+import Tablez from './components/Tablez';
 import * as serviceWorker from "./serviceWorker";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Home = () => <h3>hello world</h3>;
+
+export default function config(router: any) {
+  // Specify the initial route when the initial URL matched no state
+  router.urlService.rules.initial({ state: "home" });
+  // Setup the state visualizer
+  visualizer(router);
+};
 
 const App = () => {
   //const activeClass = "active";
@@ -33,12 +43,14 @@ const App = () => {
 
 const homeState = { name: "home", url: "/home", component: Home };
 const snowState = { name: "snow", url: "/snow", component: SnowApp };
+const tablezState = { name: "tablez", url: "/tablez", component: Tablez };
 
 ReactDOM.render(
   <React.StrictMode>
     <UIRouter
       plugins={[pushStateLocationPlugin]}
-      states={[homeState, snowState]}
+      states={[homeState, snowState, tablezState]}
+      config={config}
     >
       <App />
     </UIRouter>
