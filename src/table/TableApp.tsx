@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 
 import axios from 'axios';
-import Table from "../components/Table";
+import Table from "../components/tables/Table";
 import { columnsData } from './columns';
 import "./App.css";
 

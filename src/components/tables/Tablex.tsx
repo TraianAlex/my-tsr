@@ -11,7 +11,7 @@ import React from 'react';
 // } from 'react-table';
 // import matchSorter from 'match-sorter';
 
-// import makeData from '../utils/makeData';
+// import makeData from '../../utils/makeData';
 // import { any } from '@uirouter/core';
 
 // const Styles = styled.div`

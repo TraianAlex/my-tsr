@@ -10,8 +10,8 @@ import { visualizer } from '@uirouter/visualizer';
 
 import "./index.css";
 import Navigation from './components/Navigation';
-import SnowApp from "./snow/SnowApp";
-import Tablez from './components/Tablez';
+import SnowApp from "./table/TableApp";
+import Tablez from './components/tables/Tablez';
 import * as serviceWorker from "./serviceWorker";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
