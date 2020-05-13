@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 import {
   useTable,
   usePagination,
@@ -8,238 +8,264 @@ import {
   useGroupBy,
   useExpanded,
   useRowSelect,
-} from 'react-table';
-import matchSorter from 'match-sorter';
+} from "react-table";
+import matchSorter from "match-sorter";
 
-import makeData from '../../utils/makeData';
+import makeData from "../../utils/makeData";
 
-// const Styles = styled.div`
-//   padding: 1rem;
+const Styles = styled.div`
+  padding: 1rem;
 
-//   table {
-//     border-spacing: 0;
-//     border: 1px solid black;
+  table {
+    border-spacing: 0;
+    border: 1px solid black;
 
-//     tr {
-//       :last-child {
-//         td {
-//           border-bottom: 0;
-//         }
-//       }
-//     }
+    tr {
+      :last-child {
+        td {
+          border-bottom: 0;
+        }
+      }
+    }
 
-//     th,
-//     td {
-//       margin: 0;
-//       padding: 0.5rem;
-//       border-bottom: 1px solid black;
-//       border-right: 1px solid black;
+    th,
+    td {
+      margin: 0;
+      padding: 0.5rem;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
 
-//       :last-child {
-//         border-right: 0;
-//       }
-//     }
+      :last-child {
+        border-right: 0;
+      }
+    }
 
-//     td {
-//       input {
-//         font-size: 1rem;
-//         padding: 0;
-//         margin: 0;
-//         border: 0;
-//       }
-//     }
-//   }
+    td {
+      input {
+        font-size: 1rem;
+        padding: 0;
+        margin: 0;
+        border: 0;
+      }
+    }
+  }
 
-//   .pagination {
-//     padding: 0.5rem;
-//   }
-// `
+  .pagination {
+    padding: 0.5rem;
+  }
+`;
 
-// // Create an editable cell renderer
-// const EditableCell = ({
-//   value: initialValue,
-//   row: { index },
-//   column: { id },
-//   updateMyData, // This is a custom function that we supplied to our table instance
-//   editable,
-// }:{
-//   value: any;
-//   row: any;
-//   column: any,
-//   updateMyData: any; // This is a custom function that we supplied to our table instance
-//   editable: any
-// }) => {
-//   // We need to keep and update the state of the cell normally
-//   const [value, setValue] = React.useState(initialValue)
+// Create an editable cell renderer
+const EditableCell = ({
+  value: initialValue,
+  row: { index },
+  column: { id },
+  updateMyData, // This is a custom function that we supplied to our table instance
+  editable,
+}: {
+  value: any;
+  row: any;
+  column: any;
+  updateMyData: any;
+  editable: any;
+}) => {
+  // We need to keep and update the state of the cell normally
+  const [value, setValue] = React.useState(initialValue);
 
-//   const onChange = (e: { target: { value: any; }; }) => {
-//     setValue(e.target.value)
-//   }
+  const onChange = (e: { target: { value: any } }) => {
+    setValue(e.target.value);
+  };
 
-//   // We'll only update the external data when the input is blurred
-//   const onBlur = () => {
-//     updateMyData(index, id, value)
-//   }
+  // We'll only update the external data when the input is blurred
+  const onBlur = () => {
+    updateMyData(index, id, value);
+  };
 
-//   // If the initialValue is changed externall, sync it up with our state
-//   React.useEffect(() => {
-//     setValue(initialValue)
-//   }, [initialValue])
+  // If the initialValue is changed externall, sync it up with our state
+  React.useEffect(() => {
+    setValue(initialValue);
+  }, [initialValue]);
 
-//   if (!editable) {
-//     return `${initialValue}`
-//   }
+  if (!editable) {
+    return `${initialValue}`;
+  }
 
-//   return <input value={value} onChange={onChange} onBlur={onBlur} />
-// }
+  return <input value={value} onChange={onChange} onBlur={onBlur} />;
+};
 
-// // Define a default UI for filtering
-// function DefaultColumnFilter({
-//   column: { filterValue, preFilteredRows, setFilter },
-// }: { column: { filterValue: any; preFilteredRows: any; setFilter: any; }}) {
-//   const count = preFilteredRows.length
+// Define a default UI for filtering
+function DefaultColumnFilter({
+  column: { filterValue, preFilteredRows, setFilter },
+}: {
+  column: { filterValue: any; preFilteredRows: any; setFilter: any };
+}) {
+  const count = preFilteredRows.length;
 
-//   return (
-//     <input
-//       value={filterValue || ''}
-//       onChange={e => {
-//         setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
-//       }}
-//       placeholder={`Search ${count} records...`}
-//     />
-//   )
-// }
+  return (
+    <input
+      value={filterValue || ""}
+      onChange={(e) => {
+        setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
+      }}
+      placeholder={`Search ${count} records...`}
+    />
+  );
+}
 
-// // This is a custom filter UI for selecting
-// // a unique option from a list
-// function SelectColumnFilter({
-//   column: { filterValue, setFilter, preFilteredRows, id },
-// }: { column: { filterValue: any; preFilteredRows: any; setFilter: any; id: any; }}) {
-//   // Calculate the options for filtering
-//   // using the preFilteredRows
-//   const options: any = React.useMemo(() => {
-//     const options = new Set()
-//     preFilteredRows.forEach((row: { values: { [x: string]: unknown; }; }) => {
-//       options.add(row.values[id])
-//     })
-//     return [...options.values()]
-//   }, [id, preFilteredRows])
+// This is a custom filter UI for selecting
+// a unique option from a list
+function SelectColumnFilter({
+  column: { filterValue, setFilter, preFilteredRows, id },
+}: {
+  column: { filterValue: any; preFilteredRows: any; setFilter: any; id: any };
+}) {
+  // Calculate the options for filtering
+  // using the preFilteredRows
+  const options: any = React.useMemo(() => {
+    const options = new Set();
+    preFilteredRows.forEach((row: { values: { [x: string]: unknown } }) => {
+      options.add(row.values[id]);
+    });
+    return [...options.values()];
+  }, [id, preFilteredRows]);
 
-//   // Render a multi-select box
-//   return (
-//     <select
-//       value={filterValue}
-//       onChange={e => {
-//         setFilter(e.target.value || undefined)
-//       }}
-//     >
-//       <option value="">All</option>
-//       {options.map((option: any, i: any) => (
-//         <option key={i} value={option}>
-//           {option}
-//         </option>
-//       ))}
-//     </select>
-//   )
-// }
+  // Render a multi-select box
+  return (
+    <select
+      value={filterValue}
+      onChange={(e) => {
+        setFilter(e.target.value || undefined);
+      }}
+    >
+      <option value="">All</option>
+      {options.map((option: any, i: any) => (
+        <option key={i} value={option}>
+          {option}
+        </option>
+      ))}
+    </select>
+  );
+}
 
-// // This is a custom filter UI that uses a
-// // slider to set the filter value between a column's
-// // min and max values
-// function SliderColumnFilter({
-//   column: { filterValue, setFilter, preFilteredRows, id },
-// }: { column: { filterValue: any; preFilteredRows: any; setFilter: any; id: any; }}) {
-//   // Calculate the min and max
-//   // using the preFilteredRows
+// This is a custom filter UI that uses a
+// slider to set the filter value between a column's
+// min and max values
+function SliderColumnFilter({
+  column: { filterValue, setFilter, preFilteredRows, id },
+}: {
+  column: { filterValue: any; preFilteredRows: any; setFilter: any; id: any };
+}) {
+  // Calculate the min and max
+  // using the preFilteredRows
 
-//   const [min, max] = React.useMemo(() => {
-//     let min = preFilteredRows.length ? preFilteredRows[0].values[id] : 0
-//     let max = preFilteredRows.length ? preFilteredRows[0].values[id] : 0
-//     preFilteredRows.forEach((row: any) => {
-//       min = Math.min(row.values[id], min)
-//       max = Math.max(row.values[id], max)
-//     })
-//     return [min, max]
-//   }, [id, preFilteredRows])
+  const [min, max] = React.useMemo(() => {
+    let min = preFilteredRows.length ? preFilteredRows[0].values[id] : 0;
+    let max = preFilteredRows.length ? preFilteredRows[0].values[id] : 0;
+    preFilteredRows.forEach((row: any) => {
+      min = Math.min(row.values[id], min);
+      max = Math.max(row.values[id], max);
+    });
+    return [min, max];
+  }, [id, preFilteredRows]);
 
-//   return (
-//     <>
-//       <input
-//         type="range"
-//         min={min}
-//         max={max}
-//         value={filterValue || min}
-//         onChange={e => {
-//           setFilter(parseInt(e.target.value, 10))
-//         }}
-//       />
-//       <button onClick={() => setFilter(undefined)}>Off</button>
-//     </>
-//   )
-// }
+  return (
+    <>
+      <input
+        type="range"
+        min={min}
+        max={max}
+        value={filterValue || min}
+        onChange={(e) => {
+          setFilter(parseInt(e.target.value, 10));
+        }}
+      />
+      <button onClick={() => setFilter(undefined)}>Off</button>
+    </>
+  );
+}
 
-// // This is a custom UI for our 'between' or number range
-// // filter. It uses two number boxes and filters rows to
-// // ones that have values between the two
-// function NumberRangeColumnFilter({
-//   column: { filterValue = [], preFilteredRows, setFilter, id },
-// }: { column: { filterValue: any; preFilteredRows: any; setFilter: any; id: any; }}) {
-//   const [min, max] = React.useMemo(() => {
-//     let min = preFilteredRows.length ? preFilteredRows[0].values[id] : 0
-//     let max = preFilteredRows.length ? preFilteredRows[0].values[id] : 0
-//     preFilteredRows.forEach((row: { values: { [x: string]: number; }; }) => {
-//       min = Math.min(row.values[id], min)
-//       max = Math.max(row.values[id], max)
-//     })
-//     return [min, max]
-//   }, [id, preFilteredRows])
+// This is a custom UI for our 'between' or number range
+// filter. It uses two number boxes and filters rows to
+// ones that have values between the two
+function NumberRangeColumnFilter({
+  column: { filterValue = [], preFilteredRows, setFilter, id },
+}: {
+  column: { filterValue: any; preFilteredRows: any; setFilter: any; id: any };
+}) {
+  const [min, max] = React.useMemo(() => {
+    let min = preFilteredRows.length ? preFilteredRows[0].values[id] : 0;
+    let max = preFilteredRows.length ? preFilteredRows[0].values[id] : 0;
+    preFilteredRows.forEach((row: { values: { [x: string]: number } }) => {
+      min = Math.min(row.values[id], min);
+      max = Math.max(row.values[id], max);
+    });
+    return [min, max];
+  }, [id, preFilteredRows]);
 
-//   return (
-//     <div
-//       style={{
-//         display: 'flex',
-//       }}
-//     >
-//       <input
-//         value={filterValue[0] || ''}
-//         type="number"
-//         onChange={e => {
-//           const val = e.target.value
-//           setFilter((old: number[]) => [val ? parseInt(val, 10) : undefined, old[1]])
-//         }}
-//         placeholder={`Min (${min})`}
-//         style={{
-//           width: '70px',
-//           marginRight: '0.5rem',
-//         }}
-//       />
-//       to
-//       <input
-//         value={filterValue[1] || ''}
-//         type="number"
-//         onChange={e => {
-//           const val = e.target.value
-//           setFilter((old: number[]) => [old[0], val ? parseInt(val, 10) : undefined])
-//         }}
-//         placeholder={`Max (${max})`}
-//         style={{
-//           width: '70px',
-//           marginLeft: '0.5rem',
-//         }}
-//       />
-//     </div>
-//   )
-// }
+  return (
+    <div
+      style={{
+        display: "flex",
+      }}
+    >
+      <input
+        value={filterValue[0] || ""}
+        type="number"
+        onChange={(e) => {
+          const val = e.target.value;
+          setFilter((old: number[]) => [
+            val ? parseInt(val, 10) : undefined,
+            old[1],
+          ]);
+        }}
+        placeholder={`Min (${min})`}
+        style={{
+          width: "70px",
+          marginRight: "0.5rem",
+        }}
+      />
+      to
+      <input
+        value={filterValue[1] || ""}
+        type="number"
+        onChange={(e) => {
+          const val = e.target.value;
+          setFilter((old: number[]) => [
+            old[0],
+            val ? parseInt(val, 10) : undefined,
+          ]);
+        }}
+        placeholder={`Max (${max})`}
+        style={{
+          width: "70px",
+          marginLeft: "0.5rem",
+        }}
+      />
+    </div>
+  );
+}
 
-// function fuzzyTextFilterFn(rows: any, id: any, filterValue: any) {
-//   return matchSorter(rows, filterValue, { keys: [(row: any) => row.values[id]] })
-// }
+function fuzzyTextFilterFn(rows: any, id: any, filterValue: any) {
+  return matchSorter(rows, filterValue, {
+    keys: [(row: any) => row.values[id]],
+  });
+}
 
-// // Let the table remove the filter if the string is empty
-// fuzzyTextFilterFn.autoRemove = (val: any) => !val
+// Let the table remove the filter if the string is empty
+fuzzyTextFilterFn.autoRemove = (val: any) => !val;
 
-// // Be sure to pass our updateMyData and the skipReset option
-// function Table({ columns, data, updateMyData, skipReset }: { columns: any; data: any; updateMyData: any; skipReset: any; }) {
+// Be sure to pass our updateMyData and the skipReset option
+// function Table({
+//   columns,
+//   data,
+//   updateMyData,
+//   skipReset,
+// }: {
+//   columns: any;
+//   data: any;
+//   updateMyData: any;
+//   skipReset: any;
+// }) {
 //   const filterTypes = React.useMemo(
 //     () => ({
 //       // Add a new fuzzyTextFilterFn filter type.
@@ -248,17 +274,17 @@ import makeData from '../../utils/makeData';
 //       // "startWith"
 //       text: (rows: any, id: any, filterValue: any) => {
 //         return rows.filter((row: any) => {
-//           const rowValue = row.values[id]
+//           const rowValue = row.values[id];
 //           return rowValue !== undefined
 //             ? String(rowValue)
 //                 .toLowerCase()
 //                 .startsWith(String(filterValue).toLowerCase())
-//             : true
-//         })
+//             : true;
+//         });
 //       },
 //     }),
 //     []
-//   )
+//   );
 
 //   const defaultColumn = React.useMemo(
 //     () => ({
@@ -268,7 +294,7 @@ import makeData from '../../utils/makeData';
 //       Cell: EditableCell,
 //     }),
 //     []
-//   )
+//   );
 
 //   // Use the state and functions returned from useTable to build your UI
 //   const {
@@ -322,17 +348,21 @@ import makeData from '../../utils/makeData';
 //     usePagination,
 //     useRowSelect,
 //     // Here we will use a plugin to add our selection column
-//     hooks => {
-//       hooks.visibleColumns.push(columns => {
+//     (hooks) => {
+//       hooks.visibleColumns.push((columns) => {
 //         return [
 //           {
-//             id: 'selection',
+//             id: "selection",
 //             // Make this column a groupByBoundary. This ensures that groupBy columns
 //             // are placed after it
 //             groupByBoundary: true,
 //             // The header can use the table's getToggleAllRowsSelectedProps method
 //             // to render a checkbox
-//             Header: ({ getToggleAllRowsSelectedProps }: { getToggleAllRowsSelectedProps: any }) => (
+//             Header: ({
+//               getToggleAllRowsSelectedProps,
+//             }: {
+//               getToggleAllRowsSelectedProps: any;
+//             }) => (
 //               <div>
 //                 <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
 //               </div>
@@ -346,8 +376,8 @@ import makeData from '../../utils/makeData';
 //             ),
 //           },
 //           ...columns,
-//         ]
-//       })
+//         ];
+//       });
 //     }
 //   );
 
@@ -364,21 +394,21 @@ import makeData from '../../utils/makeData';
 //                     {column.canGroupBy ? (
 //                       // If the column can be grouped, let's add a toggle
 //                       <span {...column.getGroupByToggleProps()}>
-//                         {column.isGrouped ? '🛑 ' : '👊 '}
+//                         {column.isGrouped ? "🛑 " : "👊 "}
 //                       </span>
 //                     ) : null}
 //                     <span {...column.getSortByToggleProps()}>
-//                       {column.render('Header')}
+//                       {column.render("Header")}
 //                       {/* Add a sort direction indicator */}
 //                       {column.isSorted
 //                         ? column.isSortedDesc
-//                           ? ' 🔽'
-//                           : ' 🔼'
-//                         : ''}
+//                           ? " 🔽"
+//                           : " 🔼"
+//                         : ""}
 //                     </span>
 //                   </div>
 //                   {/* Render the columns filter UI */}
-//                   <div>{column.canFilter ? column.render('Filter') : null}</div>
+//                   <div>{column.canFilter ? column.render("Filter") : null}</div>
 //                 </th>
 //               ))}
 //             </tr>
@@ -386,7 +416,7 @@ import makeData from '../../utils/makeData';
 //         </thead>
 //         <tbody {...getTableBodyProps()}>
 //           {page.map((row: any) => {
-//             prepareRow(row)
+//             prepareRow(row);
 //             return (
 //               <tr {...row.getRowProps()}>
 //                 {row.cells.map((cell: any) => {
@@ -396,24 +426,24 @@ import makeData from '../../utils/makeData';
 //                         // If it's a grouped cell, add an expander and row count
 //                         <>
 //                           <span {...row.getToggleRowExpandedProps()}>
-//                             {row.isExpanded ? '👇' : '👉'}
-//                           </span>{' '}
-//                           {cell.render('Cell', { editable: false })} (
+//                             {row.isExpanded ? "👇" : "👉"}
+//                           </span>{" "}
+//                           {cell.render("Cell", { editable: false })} (
 //                           {row.subRows.length})
 //                         </>
 //                       ) : cell.isAggregated ? (
 //                         // If the cell is aggregated, use the Aggregated
 //                         // renderer for cell
-//                         cell.render('Aggregated')
+//                         cell.render("Aggregated")
 //                       ) : cell.isPlaceholder ? null : ( // For cells with repeated values, render null
 //                         // Otherwise, just render the regular cell
-//                         cell.render('Cell', { editable: true })
+//                         cell.render("Cell", { editable: true })
 //                       )}
 //                     </td>
-//                   )
+//                   );
 //                 })}
 //               </tr>
-//             )
+//             );
 //           })}
 //         </tbody>
 //       </table>
@@ -423,42 +453,42 @@ import makeData from '../../utils/makeData';
 //       */}
 //       <div className="pagination">
 //         <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-//           {'<<'}
-//         </button>{' '}
+//           {"<<"}
+//         </button>{" "}
 //         <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-//           {'<'}
-//         </button>{' '}
+//           {"<"}
+//         </button>{" "}
 //         <button onClick={() => nextPage()} disabled={!canNextPage}>
-//           {'>'}
-//         </button>{' '}
+//           {">"}
+//         </button>{" "}
 //         <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-//           {'>>'}
-//         </button>{' '}
+//           {">>"}
+//         </button>{" "}
 //         <span>
-//           Page{' '}
+//           Page{" "}
 //           <strong>
 //             {pageIndex + 1} of {pageOptions.length}
-//           </strong>{' '}
+//           </strong>{" "}
 //         </span>
 //         <span>
-//           | Go to page:{' '}
+//           | Go to page:{" "}
 //           <input
 //             type="number"
 //             defaultValue={pageIndex + 1}
-//             onChange={e => {
-//               const page = e.target.value ? Number(e.target.value) - 1 : 0
-//               gotoPage(page)
+//             onChange={(e) => {
+//               const page = e.target.value ? Number(e.target.value) - 1 : 0;
+//               gotoPage(page);
 //             }}
-//             style={{ width: '100px' }}
+//             style={{ width: "100px" }}
 //           />
-//         </span>{' '}
+//         </span>{" "}
 //         <select
 //           value={pageSize}
-//           onChange={e => {
-//             setPageSize(Number(e.target.value))
+//           onChange={(e) => {
+//             setPageSize(Number(e.target.value));
 //           }}
 //         >
-//           {[10, 20, 30, 40, 50].map(pageSize => (
+//           {[10, 20, 30, 40, 50].map((pageSize) => (
 //             <option key={pageSize} value={pageSize}>
 //               Show {pageSize}
 //             </option>
@@ -486,167 +516,167 @@ import makeData from '../../utils/makeData';
 //         </code>
 //       </pre>
 //     </>
-//   )
+//   );
 // }
 
-// // Define a custom filter filter function!
-// function filterGreaterThan(rows: any, id: any, filterValue: any) {
-//   return rows.filter((row: any) => {
-//     const rowValue = row.values[id]
-//     return rowValue >= filterValue
-//   })
-// }
+// Define a custom filter filter function!
+function filterGreaterThan(rows: any, id: any, filterValue: any) {
+  return rows.filter((row: any) => {
+    const rowValue = row.values[id];
+    return rowValue >= filterValue;
+  });
+}
 
-// // This is an autoRemove method on the filter function that
-// // when given the new filter value and returns true, the filter
-// // will be automatically removed. Normally this is just an undefined
-// // check, but here, we want to remove the filter if it's not a number
-// filterGreaterThan.autoRemove = (val: any) => typeof val !== 'number'
+// This is an autoRemove method on the filter function that
+// when given the new filter value and returns true, the filter
+// will be automatically removed. Normally this is just an undefined
+// check, but here, we want to remove the filter if it's not a number
+filterGreaterThan.autoRemove = (val: any) => typeof val !== "number";
 
-// // This is a custom aggregator that
-// // takes in an array of leaf values and
-// // returns the rounded median
-// function roundedMedian(leafValues: any) {
-//   let min = leafValues[0] || 0
-//   let max = leafValues[0] || 0
+// This is a custom aggregator that
+// takes in an array of leaf values and
+// returns the rounded median
+function roundedMedian(leafValues: any) {
+  let min = leafValues[0] || 0;
+  let max = leafValues[0] || 0;
 
-//   leafValues.forEach((value: any) => {
-//     min = Math.min(min, value)
-//     max = Math.max(max, value)
-//   })
+  leafValues.forEach((value: any) => {
+    min = Math.min(min, value);
+    max = Math.max(max, value);
+  });
 
-//   return Math.round((min + max) / 2)
-// }
+  return Math.round((min + max) / 2);
+}
 
-// const IndeterminateCheckbox = React.forwardRef(
-//   ({ indeterminate, ...rest }: { indeterminate: any; rest: any }, ref: any) => {
-//     const defaultRef = React.useRef()
-//     const resolvedRef = ref || defaultRef
+const IndeterminateCheckbox = React.forwardRef(
+  ({ indeterminate, ...rest }: { indeterminate: any; rest: any }, ref: any) => {
+    const defaultRef = React.useRef();
+    const resolvedRef = ref || defaultRef;
 
-//     React.useEffect(() => {
-//       resolvedRef.current.indeterminate = indeterminate
-//     }, [resolvedRef, indeterminate])
+    React.useEffect(() => {
+      resolvedRef.current.indeterminate = indeterminate;
+    }, [resolvedRef, indeterminate]);
 
-//     return (
-//       <>
-//         <input type="checkbox" ref={resolvedRef} {...rest} />
-//       </>
-//     )
-//   }
-// )
+    return (
+      <>
+        <input type="checkbox" ref={resolvedRef} {...rest} />
+      </>
+    );
+  }
+);
 
 // function App() {
 //   const columns = React.useMemo(
 //     () => [
 //       {
-//         Header: 'Name',
+//         Header: "Name",
 //         columns: [
 //           {
-//             Header: 'First Name',
-//             accessor: 'firstName',
+//             Header: "First Name",
+//             accessor: "firstName",
 //             // Use a two-stage aggregator here to first
 //             // count the total rows being aggregated,
 //             // then sum any of those counts if they are
 //             // aggregated further
-//             aggregate: 'count',
-//             Aggregated: ({ value }: { value: any}) => `${value} Names`,
+//             aggregate: "count",
+//             Aggregated: ({ value }: { value: any }) => `${value} Names`,
 //           },
 //           {
-//             Header: 'Last Name',
-//             accessor: 'lastName',
+//             Header: "Last Name",
+//             accessor: "lastName",
 //             // Use our custom `fuzzyText` filter on this column
-//             filter: 'fuzzyText',
+//             filter: "fuzzyText",
 //             // Use another two-stage aggregator here to
 //             // first count the UNIQUE values from the rows
 //             // being aggregated, then sum those counts if
 //             // they are aggregated further
-//             aggregate: 'uniqueCount',
-//             Aggregated: ({ value }: { value: any}) => `${value} Unique Names`,
+//             aggregate: "uniqueCount",
+//             Aggregated: ({ value }: { value: any }) => `${value} Unique Names`,
 //           },
 //         ],
 //       },
 //       {
-//         Header: 'Info',
+//         Header: "Info",
 //         columns: [
 //           {
-//             Header: 'Age',
-//             accessor: 'age',
+//             Header: "Age",
+//             accessor: "age",
 //             Filter: SliderColumnFilter,
-//             filter: 'equals',
+//             filter: "equals",
 //             // Aggregate the average age of visitors
-//             aggregate: 'average',
-//             Aggregated: ({ value }: { value: any}) => `${value} (avg)`,
+//             aggregate: "average",
+//             Aggregated: ({ value }: { value: any }) => `${value} (avg)`,
 //           },
 //           {
-//             Header: 'Visits',
-//             accessor: 'visits',
+//             Header: "Visits",
+//             accessor: "visits",
 //             Filter: NumberRangeColumnFilter,
-//             filter: 'between',
+//             filter: "between",
 //             // Aggregate the sum of all visits
-//             aggregate: 'sum',
-//             Aggregated: ({ value }: { value: any}) => `${value} (total)`,
+//             aggregate: "sum",
+//             Aggregated: ({ value }: { value: any }) => `${value} (total)`,
 //           },
 //           {
-//             Header: 'Status',
-//             accessor: 'status',
+//             Header: "Status",
+//             accessor: "status",
 //             Filter: SelectColumnFilter,
-//             filter: 'includes',
+//             filter: "includes",
 //           },
 //           {
-//             Header: 'Profile Progress',
-//             accessor: 'progress',
+//             Header: "Profile Progress",
+//             accessor: "progress",
 //             Filter: SliderColumnFilter,
 //             filter: filterGreaterThan,
 //             // Use our custom roundedMedian aggregator
 //             aggregate: roundedMedian,
-//             Aggregated: ({ value }: { value: any}) => `${value} (med)`,
+//             Aggregated: ({ value }: { value: any }) => `${value} (med)`,
 //           },
 //         ],
 //       },
 //     ],
 //     []
-//   )
+//   );
 
-//   const [data, setData] = React.useState(() => makeData(10000))
-//   const [originalData] = React.useState(data)
+//   const [data, setData] = React.useState(() => makeData(10000));
+//   const [originalData] = React.useState(data);
 
 //   // We need to keep the table from resetting the pageIndex when we
 //   // Update data. So we can keep track of that flag with a ref.
-//   const skipResetRef = React.useRef(false)
+//   const skipResetRef = React.useRef(false);
 
 //   // When our cell renderer calls updateMyData, we'll use
 //   // the rowIndex, columnId and new value to update the
 //   // original data
 //   const updateMyData = (rowIndex: any, columnId: any, value: any) => {
 //     // We also turn on the flag to not reset the page
-//     skipResetRef.current = true
+//     skipResetRef.current = true;
 //     setData((old: any) =>
 //       old.map((row: any, index: any) => {
 //         if (index === rowIndex) {
 //           return {
 //             ...row,
 //             [columnId]: value,
-//           }
+//           };
 //         }
-//         return row
+//         return row;
 //       })
-//     )
-//   }
+//     );
+//   };
 
 //   // After data changes, we turn the flag back off
 //   // so that if data actually changes when we're not
 //   // editing it, the page is reset
 //   React.useEffect(() => {
-//     skipResetRef.current = false
-//   }, [data])
+//     skipResetRef.current = false;
+//   }, [data]);
 
 //   // Let's add a data resetter/randomizer to help
 //   // illustrate that flow...
 //   const resetData = () => {
 //     // Don't reset the page when we do this
-//     skipResetRef.current = true
-//     setData(originalData)
-//   }
+//     skipResetRef.current = true;
+//     setData(originalData);
+//   };
 
 //   return (
 //     <Styles>
@@ -658,7 +688,7 @@ import makeData from '../../utils/makeData';
 //         skipReset={skipResetRef.current}
 //       />
 //     </Styles>
-//   )
+//   );
 // }
 
 // export default App;
