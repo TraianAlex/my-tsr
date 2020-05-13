@@ -10,8 +10,8 @@ import { visualizer } from '@uirouter/visualizer';
 
 import "./index.css";
 import Navigation from './components/Navigation';
-import SnowApp from "./table/TableApp";
-import Tablez from './components/tables/Tablez';
+import TableApp from "./table/TableApp";
+import Filterjs from './components/tables/Filterjs';
 import * as serviceWorker from "./serviceWorker";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -42,14 +42,14 @@ const App = () => {
 };
 
 const homeState = { name: "home", url: "/home", component: Home };
-const snowState = { name: "snow", url: "/snow", component: SnowApp };
-const tablezState = { name: "tablez", url: "/tablez", component: Tablez };
+const tableState = { name: "table", url: "/table", component: TableApp };
+const filterjsState = { name: "filter", url: "/filter", component: Filterjs };
 
 ReactDOM.render(
   <React.StrictMode>
     <UIRouter
       plugins={[pushStateLocationPlugin]}
-      states={[homeState, snowState, tablezState]}
+      states={[homeState, tableState, filterjsState]}
       config={config}
     >
       <App />
