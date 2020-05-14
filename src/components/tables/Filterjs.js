@@ -4,7 +4,7 @@ import { useTable, useFilters, useGlobalFilter, useAsyncDebounce } from 'react-t
 // A great library for fuzzy filtering/sorting items
 import matchSorter from 'match-sorter';
 
-import makeData from '../../utils/filterData';
+import makeData from '../../utils/makeData';
 
 const Styles = styled.div`
   padding: 1rem;
