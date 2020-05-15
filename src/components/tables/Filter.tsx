@@ -325,7 +325,7 @@ fuzzyTextFilterFn.autoRemove = (val: any) => !val;
 //       filters,
 //       selectedRowIds,
 //     },
-//   } = useTable<Combined>(
+//   } = useTable(
 //     {
 //       columns,
 //       data,
