@@ -8,8 +8,6 @@ import {
   useGroupBy,
   useExpanded,
   useRowSelect,
-  TableOptions,
-  UseFiltersOptions,
 } from "react-table";
 import matchSorter from "match-sorter";
 
@@ -350,8 +348,8 @@ fuzzyTextFilterFn.autoRemove = (val: any) => !val;
 //     usePagination,
 //     useRowSelect,
 //     // Here we will use a plugin to add our selection column
-//     (hooks) => {
-//       hooks.visibleColumns.push((columns) => {
+//     (hooks: any) => {
+//       hooks.visibleColumns.push((columns: any) => {
 //         return [
 //           {
 //             id: "selection",
