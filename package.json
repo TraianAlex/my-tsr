@@ -8,6 +8,7 @@
     "@uirouter/visualizer": "^7.0.0",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
+    "dotenv": "^8.2.0",
     "match-sorter": "^4.1.0",
     "namor": "^2.0.2",
     "react": "^16.13.1",
