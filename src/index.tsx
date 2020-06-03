@@ -13,6 +13,7 @@ import Navigation from './components/Navigation';
 import TableApp from "./table/TableApp";
 import Filterjs from './components/tables/Filterjs';
 import Map from './components/Map';
+import { Todo } from './todolist/Todo';
 import * as serviceWorker from "./serviceWorker";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -46,12 +47,13 @@ const homeState = { name: "home", url: "/home", component: Home };
 const tableState = { name: "table", url: "/table", component: TableApp };
 const filterjsState = { name: "filter", url: "/filter", component: Filterjs };
 const mapState = { name: "map", url: "/map", component: Map };
+const todoState = { name: "todo", url: "/todo", component: Todo };
 
 ReactDOM.render(
   <React.StrictMode>
     <UIRouter
       plugins={[pushStateLocationPlugin]}
-      states={[homeState, tableState, filterjsState, mapState]}
+      states={[homeState, tableState, filterjsState, mapState, todoState]}
       config={config}
     >
       <App />
