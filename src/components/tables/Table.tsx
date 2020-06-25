@@ -1,18 +1,18 @@
 import React from "react";
 import { useTable } from "react-table";
-import BTable from 'react-bootstrap/Table';
+import BTable from "react-bootstrap/Table";
 
-export default function Table({ columns, data } : { columns: any, data: any }) {
+export default function Table({ columns, data }: { columns: any; data: any }) {
   // Use the useTable Hook to send the columns and data to build the table
   const {
     getTableProps, // table props from react-table
     getTableBodyProps, // table body props from react-table
     headerGroups, // headerGroups, if your table has groupings
     rows, // rows for the table based on the data passed
-    prepareRow // Prepare the row (this function needs to be called for each row before getting the row props)
+    prepareRow, // Prepare the row (this function needs to be called for each row before getting the row props)
   } = useTable({
     columns,
-    data
+    data,
   });
 
   /* 
@@ -22,9 +22,9 @@ export default function Table({ columns, data } : { columns: any, data: any }) {
   return (
     <BTable striped bordered hover size="sm" {...getTableProps()}>
       <thead>
-        {headerGroups.map(headerGroup => (
+        {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(column => (
+            {headerGroup.headers.map((column) => (
               <th {...column.getHeaderProps()}>{column.render("Header")}</th>
             ))}
           </tr>
@@ -35,7 +35,7 @@ export default function Table({ columns, data } : { columns: any, data: any }) {
           prepareRow(row);
           return (
             <tr {...row.getRowProps()}>
-              {row.cells.map(cell => {
+              {row.cells.map((cell) => {
                 return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
               })}
             </tr>

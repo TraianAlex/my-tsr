@@ -37,7 +37,13 @@ const App = () => {
   return (
     <div>
       {/* <a {...home}>Home</a>{' | '}<a {...table}>Table</a> */}
-      <Navigation home={home} table={table} filter={filter} map={map} todo={todo} />
+      <Navigation
+        home={home}
+        table={table}
+        filter={filter}
+        map={map}
+        todo={todo}
+      />
       <div className="container">
         <UIView />
       </div>
