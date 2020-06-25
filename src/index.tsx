@@ -3,19 +3,19 @@ import ReactDOM from "react-dom";
 import {
   UIRouter,
   UIView,
-  // useSrefActive,
+  useSrefActive,
   pushStateLocationPlugin,
 } from "@uirouter/react";
-import { visualizer } from '@uirouter/visualizer';
+import { visualizer } from "@uirouter/visualizer";
 
 import "./index.css";
-import Navigation from './components/Navigation';
+import { Navigation } from "./components/Navigation";
 import TableApp from "./table/TableApp";
-import Filterjs from './components/tables/Filterjs';
-import Map from './components/Map';
-import { Todo } from './todolist/Todo';
+import Filterjs from "./components/tables/Filterjs";
+import Map from "./components/Map";
+import { Todo } from "./todolist/Todo";
 import * as serviceWorker from "./serviceWorker";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Home = () => <h3>hello world</h3>;
 
@@ -24,18 +24,20 @@ export default function config(router: any) {
   router.urlService.rules.initial({ state: "home" });
   // Setup the state visualizer
   visualizer(router);
-};
+}
 
 const App = () => {
-  //const activeClass = "active";
-  // const helloSref = useSrefActive("home", {}, activeClass);
-  // const snowAppSref = useSrefActive("snow", {}, activeClass);
+  const activeClass = "active";
+  const home = useSrefActive("home", {}, activeClass);
+  const table = useSrefActive("table", {}, activeClass);
+  const filter = useSrefActive("filter", {}, activeClass);
+  const map = useSrefActive("map", {}, activeClass);
+  const todo = useSrefActive("todo", {}, activeClass);
 
   return (
     <div>
-      {/* <a {...helloSref}>Hello</a>{' | '}
-      <a {...snowAppSref}>Snow</a> */}
-      <Navigation />
+      {/* <a {...home}>Home</a>{' | '}<a {...table}>Table</a> */}
+      <Navigation home={home} table={table} filter={filter} map={map} todo={todo} />
       <div className="container">
         <UIView />
       </div>
