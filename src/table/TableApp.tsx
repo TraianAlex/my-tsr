@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useMemo } from "react";
 
-import axios from 'axios';
+import axios from "axios";
 import Table from "../components/tables/Table";
-import { columnsData } from './columns';
+import { columnsData } from "./columns";
 import "./App.css";
 
 function SnowApp() {
@@ -17,10 +17,7 @@ function SnowApp() {
     })();
   }, []);
 
-  const columns = useMemo(
-    () => columnsData,
-    []
-  );
+  const columns = useMemo(() => columnsData, []);
 
   return (
     <div className="App">

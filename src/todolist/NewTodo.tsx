@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import classes from './NewTodo.module.css';
+import React, { useRef } from "react";
+import classes from "./NewTodo.module.css";
 
 type NewTodoProps = {
   onAddTodo: (todoText: string) => void;
@@ -11,23 +11,32 @@ const NewTodo: React.FC<NewTodoProps> = (props) => {
   const todoSubmitHandler = (event: React.FormEvent) => {
     event.preventDefault();
     const enteredText = textInputRef.current!.value;
-    if (enteredText === '') {
-      alert('Enter text');
+    if (enteredText === "") {
+      alert("Enter text");
       return;
     }
     props.onAddTodo(enteredText);
-    textInputRef.current!.value = '';
-  }
+    textInputRef.current!.value = "";
+  };
 
   return (
     <form onSubmit={todoSubmitHandler} className={classes.form}>
       <div className={classes.formControl}>
-        <label htmlFor="todo-text" className={classes.label}>Todo Text</label>
-        <input type="text" id="todo-text" ref={textInputRef} className={classes.input} />
+        <label htmlFor="todo-text" className={classes.label}>
+          Todo Text
+        </label>
+        <input
+          type="text"
+          id="todo-text"
+          ref={textInputRef}
+          className={classes.input}
+        />
       </div>
-      <button type="submit" className={classes.button}>ADD TODO</button>
+      <button type="submit" className={classes.button}>
+        ADD TODO
+      </button>
     </form>
-  )
-}
+  );
+};
 
 export default NewTodo;

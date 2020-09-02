@@ -1,4 +1,4 @@
-import namor from 'namor';
+import namor from "namor";
 
 const range = (len: any) => {
   const arr = [];
@@ -6,7 +6,7 @@ const range = (len: any) => {
     arr.push(i);
   }
   return arr;
-}
+};
 
 const newPerson = () => {
   const statusChance = Math.random();
@@ -18,21 +18,21 @@ const newPerson = () => {
     progress: Math.floor(Math.random() * 100),
     status:
       statusChance > 0.66
-        ? 'relationship'
+        ? "relationship"
         : statusChance > 0.33
-        ? 'complicated'
-        : 'single',
+        ? "complicated"
+        : "single",
   };
 };
 
 export default function makeData(...lens: any[]) {
   const makeDataLevel = (depth = 0): any => {
     const len = lens[depth];
-    return range(len).map(d => {
+    return range(len).map((d) => {
       return {
         ...newPerson(),
         subRows: lens[depth + 1] ? makeDataLevel(depth + 1) : undefined,
-      }
+      };
     });
   };
 

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import axios from "axios";
-import classes from './Map.module.css';
+import classes from "./Map.module.css";
 
 type GoogleGeocodingResponse = {
   results: { geometry: { location: { lat: number; lng: number } } }[];
@@ -10,11 +10,11 @@ type GoogleGeocodingResponse = {
 const GOOGLE_API_KEY = process.env.GOOGLE_GEOCODING_API_KEY;
 
 export default function Map() {
-  const [address, setAddress] = useState('');
+  const [address, setAddress] = useState("");
 
   const updateAddress = (event: any) => {
     setAddress(event.target.value);
-  }
+  };
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -26,7 +26,7 @@ export default function Map() {
           enteredAddress
         )}&key=${GOOGLE_API_KEY}`
       )
-      .then(response => {
+      .then((response) => {
         console.log(response);
         if (response.data.status !== "OK") {
           throw new Error("Could not fetch location!");
@@ -34,26 +34,31 @@ export default function Map() {
         const coordinates = response.data.results[0].geometry.location;
         const map = new google.maps.Map(document.getElementById("map")!, {
           center: coordinates,
-          zoom: 16
+          zoom: 16,
         });
-  
+
         new google.maps.Marker({ position: coordinates, map: map });
       })
-      .catch(err => {
+      .catch((err) => {
         alert(err.message);
         console.log(err);
       });
-  }
+  };
 
   return (
     <div>
       <div id="map" className={classes.map}>
         <p>Please enter an address!</p>
       </div>
-      <form className={classes.form}  onSubmit={handleSubmit}>
-        <input type="text" name="address" value={address} onChange={updateAddress} />
+      <form className={classes.form} onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="address"
+          value={address}
+          onChange={updateAddress}
+        />
         <button type="submit">SEARCH ADDRESS</button>
       </form>
     </div>
-  )
+  );
 }

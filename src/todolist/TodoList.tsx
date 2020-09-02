@@ -1,6 +1,5 @@
-
-import React from 'react';
-import classes from './TodoList.module.css';
+import React from "react";
+import classes from "./TodoList.module.css";
 
 interface TodoListProps {
   items: { id: string; text: string }[];
@@ -10,7 +9,7 @@ interface TodoListProps {
 const TodoList: React.FC<TodoListProps> = (props) => {
   return (
     <ul className={classes.ul}>
-      { props.items.map(todo => (
+      {props.items.map((todo) => (
         <li key={todo.id} className={classes.li}>
           <span>{todo.text}</span>
           <button onClick={props.onDeleteTodo.bind(null, todo.id)}>
@@ -19,7 +18,7 @@ const TodoList: React.FC<TodoListProps> = (props) => {
         </li>
       ))}
     </ul>
-  )
-}
+  );
+};
 
 export default TodoList;
