@@ -14,6 +14,7 @@ import TableApp from "./table/TableApp";
 import Filterjs from "./components/tables/Filterjs";
 import Map from "./components/Map";
 import { Todo } from "./todolist/Todo";
+import RadioImageApp from "./components/forms/RadioImageApp";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -33,6 +34,7 @@ const App = () => {
   const filter = useSrefActive("filter", {}, activeClass);
   const map = useSrefActive("map", {}, activeClass);
   const todo = useSrefActive("todo", {}, activeClass);
+  const radioImage = useSrefActive("radioImage", {}, activeClass);
 
   return (
     <div>
@@ -43,6 +45,7 @@ const App = () => {
         filter={filter}
         map={map}
         todo={todo}
+        radioImage={radioImage}
       />
       <div className="container">
         <UIView />
@@ -56,12 +59,24 @@ const tableState = { name: "table", url: "/table", component: TableApp };
 const filterjsState = { name: "filter", url: "/filter", component: Filterjs };
 const mapState = { name: "map", url: "/map", component: Map };
 const todoState = { name: "todo", url: "/todo", component: Todo };
+const radioImageState = {
+  name: "radioImage",
+  url: "/radio-image",
+  component: RadioImageApp,
+};
 
 ReactDOM.render(
   <React.StrictMode>
     <UIRouter
       plugins={[pushStateLocationPlugin]}
-      states={[homeState, tableState, filterjsState, mapState, todoState]}
+      states={[
+        homeState,
+        tableState,
+        filterjsState,
+        mapState,
+        todoState,
+        radioImageState,
+      ]}
       config={config}
     >
       <App />
