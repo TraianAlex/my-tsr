@@ -15,6 +15,7 @@ export const Navigation = ({
   map,
   todo,
   radioImage,
+  radioImage2,
 }: {
   home: any;
   table: any;
@@ -22,6 +23,7 @@ export const Navigation = ({
   map: any;
   todo: any;
   radioImage: any;
+  radioImage2: any;
 }) => {
   return (
     <Navbar bg="light" expand="lg">
@@ -35,6 +37,7 @@ export const Navigation = ({
           <Nav.Link {...map}>Map</Nav.Link>
           <Nav.Link {...todo}>Todo</Nav.Link>
           <Nav.Link {...radioImage}>Radio Image</Nav.Link>
+          <Nav.Link {...radioImage2}>Radio Image2</Nav.Link>
           <NavDropdown title="Dropdown" id="basic-nav-dropdown">
             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.2">

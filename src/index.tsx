@@ -14,7 +14,8 @@ import TableApp from "./table/TableApp";
 import Filterjs from "./components/tables/Filterjs";
 import Map from "./components/Map";
 import { Todo } from "./todolist/Todo";
-import RadioImageApp from "./components/forms/RadioImageApp";
+import RadioImageApp from "./components/compound-components/RadioImageApp";
+import RadioImageApp2 from "./components/flexible-compound-components/RadioImageApp";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -35,6 +36,7 @@ const App = () => {
   const map = useSrefActive("map", {}, activeClass);
   const todo = useSrefActive("todo", {}, activeClass);
   const radioImage = useSrefActive("radioImage", {}, activeClass);
+  const radioImage2 = useSrefActive("radioImage2", {}, activeClass);
 
   return (
     <div>
@@ -46,6 +48,7 @@ const App = () => {
         map={map}
         todo={todo}
         radioImage={radioImage}
+        radioImage2={radioImage2}
       />
       <div className="container">
         <UIView />
@@ -64,6 +67,11 @@ const radioImageState = {
   url: "/radio-image",
   component: RadioImageApp,
 };
+const radioImageState2 = {
+  name: "radioImage2",
+  url: "/radio-image2",
+  component: RadioImageApp2,
+};
 
 ReactDOM.render(
   <React.StrictMode>
@@ -76,6 +84,7 @@ ReactDOM.render(
         mapState,
         todoState,
         radioImageState,
+        radioImageState2,
       ]}
       config={config}
     >
