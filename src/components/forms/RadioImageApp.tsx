@@ -11,6 +11,7 @@ function App() {
   const onChange = (value: string): void => {
     setValue(value);
   };
+
   return (
     <div className="App container">
       <Banner
