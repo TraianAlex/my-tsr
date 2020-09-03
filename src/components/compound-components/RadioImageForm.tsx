@@ -22,9 +22,6 @@ interface RadioInputProps {
 }
 
 /**
- * @name RadioImageForm
- * @author Alexi Taylor
- *
  * @desc RadioImageForm uses compound component pattern. 
  *  1. RadioImageForm - the parent component that manages the entire state
  * 	2. RadioInput - Next, the user can start adding their radio inputs 
@@ -32,16 +29,6 @@ interface RadioInputProps {
  * In the `RadioInput` component, we have abstracted the implementation details of the radio input element, 
  * where the parent component, RadioImageForm, deals with the onChange event actions and updating 
  * the currently checked radio input.
- * 
- * @props {(e: string): void;} [onStateChange] 
- * @props {string} [defaultValue]
- * 
- * @component RadioInput
- * @props {string} label
- * @props {string} value
- * @props {string} name
- * @props {string} imgSrc
- *
  * @example:
   <RadioImageForm onStateChange={onChange}>
 		{DATA.map(
@@ -128,7 +115,6 @@ class RadioImageForm extends React.Component<Props, State> {
 
   render(): React.ReactElement {
     /**
-     *
      * We're trying to let the consumer of our component to render the components they want within the
      * RadioImageForm component. But the RadioInput components will need access to the internal state,
      * the internal `onChange` function and as well the user's props for them to work properly. But how do

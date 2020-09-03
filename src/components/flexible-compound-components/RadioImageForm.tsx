@@ -35,9 +35,6 @@ const RadioImageFormContext = React.createContext({
 RadioImageFormContext.displayName = 'RadioImageForm';
 
 /**
- * @name RadioImageForm
- * @author Alexi Taylor
- *
  * @desc RadioImageForm uses flexible compound component pattern with React's Context API.
  * Flexible Compound Components allow to implicitly accept the internal state of our class
  * component regardless of where they're rendered within the level in the component tree.
@@ -51,16 +48,6 @@ RadioImageFormContext.displayName = 'RadioImageForm';
  * In the `RadioInput` component, we have abstracted the implementation details of the radio input element, 
  * where the parent component, RadioImageForm, deals with the onChange event actions and updating 
  * the currently checked radio input.
- * 
- * @props {(e: string): void;} [onStateChange] 
- * @props {string} [defaultValue]
- * 
- * @component RadioInput
- * @props {string} label
- * @props {string} value
- * @props {string} name
- * @props {string} imgSrc
- *
  * @example:
   <RadioImageForm onStateChange={onChange}>
 		{DATA.map(
