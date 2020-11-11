@@ -16,6 +16,8 @@ import Map from "./components/Map";
 import { Todo } from "./todolist/Todo";
 import RadioImageApp from "./components/compound-components/RadioImageApp";
 import RadioImageApp2 from "./components/flexible-compound-components/RadioImageApp";
+import Profile from "./components/provider-pattern/Profile";
+import DogFriends from "./components/provider-pattern/DogFriends";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -37,6 +39,8 @@ const App = () => {
   const todo = useSrefActive("todo", {}, activeClass);
   const radioImage = useSrefActive("radioImage", {}, activeClass);
   const radioImage2 = useSrefActive("radioImage2", {}, activeClass);
+  const profile = useSrefActive("profile", {}, activeClass);
+  const friends = useSrefActive("friends", {}, activeClass);
 
   return (
     <div>
@@ -49,6 +53,8 @@ const App = () => {
         todo={todo}
         radioImage={radioImage}
         radioImage2={radioImage2}
+        profile={profile}
+        friends={friends}
       />
       <div className="container">
         <UIView />
@@ -72,6 +78,8 @@ const radioImageState2 = {
   url: "/radio-image2",
   component: RadioImageApp2,
 };
+const dogProfileState = { name: "profile", url: "/profile", component: Profile };
+const dogFriendsState = { name: "friends", url: "/friends", component: DogFriends };
 
 ReactDOM.render(
   <React.StrictMode>
@@ -85,6 +93,8 @@ ReactDOM.render(
         todoState,
         radioImageState,
         radioImageState2,
+        dogProfileState,
+        dogFriendsState,
       ]}
       config={config}
     >

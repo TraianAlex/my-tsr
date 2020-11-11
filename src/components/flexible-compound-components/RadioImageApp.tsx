@@ -1,6 +1,6 @@
 import * as React from "react";
 import Banner from "./Banner";
-import RadioImageForm from "./RadioImageForm";
+import RadioImageForm from "./RadioImageForm2";
 import DATA from "../../utils/data";
 
 // import './styles.css';

@@ -3,9 +3,6 @@ import {
   Navbar,
   Nav,
   NavDropdown,
-  Form,
-  FormControl,
-  Button,
 } from "react-bootstrap";
 
 export const Navigation = ({
@@ -16,6 +13,8 @@ export const Navigation = ({
   todo,
   radioImage,
   radioImage2,
+  friends,
+  profile,
 }: {
   home: any;
   table: any;
@@ -24,6 +23,8 @@ export const Navigation = ({
   todo: any;
   radioImage: any;
   radioImage2: any;
+  friends: any;
+  profile: any;
 }) => {
   return (
     <Navbar bg="light" expand="lg">
@@ -38,6 +39,8 @@ export const Navigation = ({
           <Nav.Link {...todo}>Todo</Nav.Link>
           <Nav.Link {...radioImage}>Radio Image</Nav.Link>
           <Nav.Link {...radioImage2}>Radio Image2</Nav.Link>
+          <Nav.Link {...profile}>Profile</Nav.Link>
+          <Nav.Link {...friends}>Friends</Nav.Link>
           <NavDropdown title="Dropdown" id="basic-nav-dropdown">
             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.2">
@@ -50,10 +53,10 @@ export const Navigation = ({
             </NavDropdown.Item>
           </NavDropdown>
         </Nav>
-        <Form inline>
+        {/* <Form inline>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />
           <Button variant="outline-success">Search</Button>
-        </Form>
+        </Form> */}
       </Navbar.Collapse>
     </Navbar>
   );
