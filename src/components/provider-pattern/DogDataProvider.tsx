@@ -1,6 +1,6 @@
-import * as React from "react";
-import { IDog, Status } from "./dog.interface";
-import DATA from "../../utils/data-dog";
+import React, { useState, useEffect, createContext, useContext } from 'react';
+import { IDog, Status } from './dog.interface';
+import DATA from '../../utils/data-dog';
 
 interface State {
   data: IDog;
@@ -11,53 +11,38 @@ interface State {
 const initState: State = {
   status: Status.loading,
   data: {
-    name: "",
-    breed: "",
+    name: '',
+    breed: '',
     friends: [
       {
-        name: "",
-        breed: "",
+        name: '',
+        breed: '',
       },
     ],
   },
   error: {
-    name: "",
-    message: "",
+    name: '',
+    message: '',
   },
 };
 
-// Create a DogDataProviderContext with React.createContext
-const DogDataProviderContext = React.createContext(initState);
-// Context object accepts a displayName string property.
-// React DevTools uses this string to determine what to display
-// for the context.
-DogDataProviderContext.displayName = "DogDataProvider";
+const DogDataProviderContext = createContext(initState);
+DogDataProviderContext.displayName = 'DogDataProvider';
 
-// The Custom Consumer Hook
-// The custom hook uses React.useContext to get the provided context value, and
-// it will return the context state when we call it.
-// By exposing the custom hook, the consumer components can subscribe to the state
-// managed in the provider data component. Also, we have added error handling if the
-// hook is called in a component that is not a descendant of the data provider component.
-// This will ensure if misused that it will fail fast and provide a valuable error message.
 export function useDogProviderState() {
-  const context = React.useContext(DogDataProviderContext);
+  const context = useContext(DogDataProviderContext);
 
   if (context === undefined) {
-    throw new Error("useDogProviderState must be used within DogDataProvider.");
+    throw new Error('useDogProviderState must be used within DogDataProvider.');
   }
 
   return context;
 }
 
-// Our data provider wrapper component
 const DogDataProvider: React.FC = ({ children }): React.ReactElement => {
-  // Everything that we want to provide to our consumer components
-  // should be put into `state`.
-  // It will help us avoid unnecessary re-renders.
-  const [state, setState] = React.useState<State>(initState);
+  const [state, setState] = useState<State>(initState);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setState(initState);
 
     (async (): Promise<void> => {
@@ -74,13 +59,11 @@ const DogDataProvider: React.FC = ({ children }): React.ReactElement => {
         // 	);
         // };
         const data = await asyncMockApiFn();
-        // Once our SPA loads the data will only be fetched once even
-        // when we navigate to another page.
-        console.log("1 CALL");
+        console.log('1 CALL');
         setState({
           data,
           status: Status.loaded,
-          error: { name: "", message: "" },
+          error: { name: '', message: '' },
         });
       } catch (error) {
         console.log(error.message);
@@ -88,7 +71,7 @@ const DogDataProvider: React.FC = ({ children }): React.ReactElement => {
         setState({
           error,
           status: Status.error,
-          data: { name: "", breed: "" },
+          data: { name: '', breed: '' },
         });
       }
     })();

@@ -1,46 +1,47 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
 import {
   UIRouter,
   UIView,
   useSrefActive,
   pushStateLocationPlugin,
-} from "@uirouter/react";
-import { visualizer } from "@uirouter/visualizer";
+} from '@uirouter/react';
+import { visualizer } from '@uirouter/visualizer';
 
-import "./index.css";
-import { Navigation } from "./components/Navigation";
-import TableApp from "./table/TableApp";
-import Filterjs from "./components/tables/Filterjs";
-import Map from "./components/Map";
-import { Todo } from "./todolist/Todo";
-import RadioImageApp from "./components/compound-components/RadioImageApp";
-import RadioImageApp2 from "./components/flexible-compound-components/RadioImageApp";
-import Profile from "./components/provider-pattern/Profile";
-import DogFriends from "./components/provider-pattern/DogFriends";
-import * as serviceWorker from "./serviceWorker";
-import "bootstrap/dist/css/bootstrap.min.css";
+import './index.css';
+import { Navigation } from './components/Navigation';
+import TableApp from './table/TableApp';
+import Filterjs from './components/tables/Filterjs';
+import Map from './components/Map';
+import { Todo } from './todolist/Todo';
+import RadioImageApp from './components/compound-components/RadioImageApp';
+import RadioImageApp2 from './components/flexible-compound-components/RadioImageApp';
+import Profile from './components/provider-pattern/Profile';
+import DogFriends from './components/provider-pattern/DogFriends';
+import * as serviceWorker from './serviceWorker';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Home = () => <h3>hello world</h3>;
 
 export default function config(router: any) {
   // Specify the initial route when the initial URL matched no state
-  router.urlService.rules.initial({ state: "home" });
+  router.urlService.rules.initial({ state: 'home' });
   // Setup the state visualizer
   visualizer(router);
 }
 
 const App = () => {
-  const activeClass = "active";
-  const home = useSrefActive("home", {}, activeClass);
-  const table = useSrefActive("table", {}, activeClass);
-  const filter = useSrefActive("filter", {}, activeClass);
-  const map = useSrefActive("map", {}, activeClass);
-  const todo = useSrefActive("todo", {}, activeClass);
-  const radioImage = useSrefActive("radioImage", {}, activeClass);
-  const radioImage2 = useSrefActive("radioImage2", {}, activeClass);
-  const profile = useSrefActive("profile", {}, activeClass);
-  const friends = useSrefActive("friends", {}, activeClass);
+  const activeClass = 'active';
+  const home = useSrefActive('home', {}, activeClass);
+  const table = useSrefActive('table', {}, activeClass);
+  const filter = useSrefActive('filter', {}, activeClass);
+  const map = useSrefActive('map', {}, activeClass);
+  const todo = useSrefActive('todo', {}, activeClass);
+  const radioImage = useSrefActive('radioImage', {}, activeClass);
+  const radioImage2 = useSrefActive('radioImage2', {}, activeClass);
+  const profile = useSrefActive('profile', {}, activeClass);
+  const friends = useSrefActive('friends', {}, activeClass);
 
   return (
     <div>
@@ -63,23 +64,31 @@ const App = () => {
   );
 };
 
-const homeState = { name: "home", url: "/home", component: Home };
-const tableState = { name: "table", url: "/table", component: TableApp };
-const filterjsState = { name: "filter", url: "/filter", component: Filterjs };
-const mapState = { name: "map", url: "/map", component: Map };
-const todoState = { name: "todo", url: "/todo", component: Todo };
+const homeState = { name: 'home', url: '/home', component: Home };
+const tableState = { name: 'table', url: '/table', component: TableApp };
+const filterjsState = { name: 'filter', url: '/filter', component: Filterjs };
+const mapState = { name: 'map', url: '/map', component: Map };
+const todoState = { name: 'todo', url: '/todo', component: Todo };
 const radioImageState = {
-  name: "radioImage",
-  url: "/radio-image",
+  name: 'radioImage',
+  url: '/radio-image',
   component: RadioImageApp,
 };
 const radioImageState2 = {
-  name: "radioImage2",
-  url: "/radio-image2",
+  name: 'radioImage2',
+  url: '/radio-image2',
   component: RadioImageApp2,
 };
-const dogProfileState = { name: "profile", url: "/profile", component: Profile };
-const dogFriendsState = { name: "friends", url: "/friends", component: DogFriends };
+const dogProfileState = {
+  name: 'profile',
+  url: '/profile',
+  component: Profile,
+};
+const dogFriendsState = {
+  name: 'friends',
+  url: '/friends',
+  component: DogFriends,
+};
 
 ReactDOM.render(
   <React.StrictMode>
@@ -101,7 +110,7 @@ ReactDOM.render(
       <App />
     </UIRouter>
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root'),
 );
 
 // If you want your app to work offline and load faster, you can change

@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import TodoList from "./TodoList";
 import NewTodo from "./NewTodo";
 
-interface Todo {
+interface TodoState {
   id: string;
   text: string;
 }
 
 export const Todo: React.FC = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<TodoState[]>([]);
 
   const todoAddHandler = (text: string) => {
     setTodos((prevTodos) => [

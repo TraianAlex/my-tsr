@@ -1,11 +1,11 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components';
 
 interface LoaderContainerProps {
   isInherit?: boolean;
 }
 
 export const LoaderContainer = styled.div<LoaderContainerProps>`
-  position: ${(props) => (props.isInherit ? "inherit" : "absolute")};
+  position: ${(props) => (props.isInherit ? 'inherit' : 'absolute')};
   height: ${(props) => (props.isInherit ? 75 : 50)}px;
   width: 135px;
   top: 0;

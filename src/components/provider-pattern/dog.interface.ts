@@ -9,7 +9,7 @@ export interface IDog {
 }
 
 export enum Status {
-  loading = "LOADING",
-  loaded = "LOADED",
-  error = "ERROR",
+  loading = 'LOADING',
+  loaded = 'LOADED',
+  error = 'ERROR',
 }

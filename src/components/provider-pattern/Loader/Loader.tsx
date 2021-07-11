@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from 'react';
 import {
   LoaderContainer,
   BallOne,
@@ -9,7 +9,7 @@ import {
   BallShadowTwo,
   BallShadowThree,
   BallShadowFour,
-} from "./Atoms";
+} from './Atoms';
 
 interface LoaderProps {
   isInherit?: boolean;

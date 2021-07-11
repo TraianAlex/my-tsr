@@ -1,12 +1,11 @@
-import * as React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDogProviderState } from './DogDataProvider';
 import { Status } from './dog.interface';
 
 const Nav = () => {
-  // Our custom hook that "subscirbes" to the state changes in 
-	// the data provider component, DogDataProvider.
   const { data, status, error } = useDogProviderState();
+
   return (
     <nav className="flex items-center flex-col sm:flex-row bg-blue-500 p-6">
       <div className="flex items-center flex-shrink-0 text-white mr-6">
@@ -41,7 +40,6 @@ const Nav = () => {
         </div>
         <div>
           <span className="inline-block text-base py-2 leading-none text-white mt-0">
-            {/* Show the user's name, Collins, if the status is loaded and there is no error */}
             {status === Status.loaded && !error && data.name}
           </span>
         </div>

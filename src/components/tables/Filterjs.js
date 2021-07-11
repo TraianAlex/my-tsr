@@ -7,7 +7,7 @@ import {
   useAsyncDebounce,
 } from "react-table";
 // A great library for fuzzy filtering/sorting items
-import matchSorter from "match-sorter";
+import { matchSorter } from "match-sorter";
 
 import makeData from "../../utils/makeData";
 

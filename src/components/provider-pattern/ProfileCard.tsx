@@ -1,5 +1,5 @@
-import * as React from "react";
-import { IDog } from "./dog.interface";
+import React from 'react';
+import { IDog } from './dog.interface';
 
 interface ProfileCardProps {
   data: IDog;
