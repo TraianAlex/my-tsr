@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Form from './Form';
-import List from './List';
+import { Form } from './Form';
+import { List } from './List';
 
 export interface IState {
   form: {

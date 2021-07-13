@@ -2,34 +2,31 @@ import React from 'react';
 import styled from 'styled-components';
 import { IState as IProps } from './WatchList';
 
-const List: React.FC<IProps> = ({ form }) => {
-  const mapList = (): JSX.Element[] => {
-    return form.map((i) => {
-      return (
-        <tr>
-          <td>{i.name}</td>
-          <td>{i.rate}</td>
-          <td>{i.review}</td>
-        </tr>
-      );
-    });
-  };
+export const List: React.FC<IProps> = ({ form }) => {
+  const mapList = (): JSX.Element[] =>
+    form.map((i) => (
+      <tr key={Math.random()}>
+        <td>{i.name}</td>
+        <td>{i.rate}</td>
+        <td>{i.review}</td>
+      </tr>
+    ));
 
   return (
     <ListStyled>
       <table>
-        <tr>
-          <th>Movie</th>
-          <th>Rate</th>
-          <th>review</th>
-        </tr>
-        {mapList()}
+        <thead>
+          <tr>
+            <th>Movie</th>
+            <th>Rate</th>
+            <th>review</th>
+          </tr>
+        </thead>
+        <tbody>{mapList()}</tbody>
       </table>
     </ListStyled>
   );
 };
-
-export default List;
 
 const ListStyled = styled.div`
   max-height: 150px;

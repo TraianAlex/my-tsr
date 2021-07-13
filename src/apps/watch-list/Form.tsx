@@ -7,7 +7,7 @@ interface IProps {
   setForm: React.Dispatch<React.SetStateAction<Props['form']>>;
 }
 
-const Form: React.FC<IProps> = ({ form, setForm }) => {
+export const Form: React.FC<IProps> = ({ form, setForm }) => {
   const [input, setInput] = useState({
     name: '',
     rate: '',
@@ -16,12 +16,11 @@ const Form: React.FC<IProps> = ({ form, setForm }) => {
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ): void => {
+  ): void =>
     setInput({
       ...input,
       [e.target.name]: e.target.value,
     });
-  };
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.preventDefault();
@@ -82,8 +81,6 @@ const Form: React.FC<IProps> = ({ form, setForm }) => {
     </FormStyled>
   );
 };
-
-export default Form;
 
 const FormStyled = styled.form`
   h3 {
