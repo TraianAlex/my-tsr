@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container } from 'react-bootstrap';
 import DogDataProvider, { useDogProviderState } from './DogDataProvider';
 import { IDog, Status } from './dog.interface';
 import ProfileCard from './ProfileCard';
@@ -25,7 +26,7 @@ const PureDogFriends = () => {
   console.log({ data });
 
   return (
-    <div>
+    <Container>
       <h1 className="text-3xl font-bold leading-7 text-black sm:text-4xl sm:leading-9 sm:truncate my-5">
         Friends:
       </h1>
@@ -38,7 +39,7 @@ const PureDogFriends = () => {
           <FriendsList friends={data.friends} />
         )}
       </div>
-    </div>
+    </Container>
   );
 };
 

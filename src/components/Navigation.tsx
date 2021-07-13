@@ -1,9 +1,5 @@
-import React from "react";
-import {
-  Navbar,
-  Nav,
-  NavDropdown,
-} from "react-bootstrap";
+import React from 'react';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
 export const Navigation = ({
   home,
@@ -15,6 +11,7 @@ export const Navigation = ({
   radioImage2,
   friends,
   profile,
+  watchList,
 }: {
   home: any;
   table: any;
@@ -25,6 +22,7 @@ export const Navigation = ({
   radioImage2: any;
   friends: any;
   profile: any;
+  watchList: any;
 }) => {
   return (
     <Navbar bg="light" expand="lg">
@@ -41,8 +39,8 @@ export const Navigation = ({
           <Nav.Link {...radioImage2}>Radio Image2</Nav.Link>
           <Nav.Link {...profile}>Profile</Nav.Link>
           <Nav.Link {...friends}>Friends</Nav.Link>
-          <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+          <NavDropdown title="Apps" id="basic-nav-dropdown">
+            <NavDropdown.Item {...watchList}>Watch List</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.2">
               Another action
             </NavDropdown.Item>

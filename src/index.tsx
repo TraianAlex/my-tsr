@@ -19,10 +19,16 @@ import RadioImageApp from './components/compound-components/RadioImageApp';
 import RadioImageApp2 from './components/flexible-compound-components/RadioImageApp';
 import Profile from './components/provider-pattern/Profile';
 import DogFriends from './components/provider-pattern/DogFriends';
+import { WatchList } from './apps/watch-list/WatchList';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container } from 'react-bootstrap';
 
-const Home = () => <h3>hello world</h3>;
+const Home = () => (
+  <Container>
+    <h3>hello world</h3>
+  </Container>
+);
 
 export default function config(router: any) {
   // Specify the initial route when the initial URL matched no state
@@ -42,6 +48,7 @@ const App = () => {
   const radioImage2 = useSrefActive('radioImage2', {}, activeClass);
   const profile = useSrefActive('profile', {}, activeClass);
   const friends = useSrefActive('friends', {}, activeClass);
+  const watchList = useSrefActive('watch-list', {}, activeClass);
 
   return (
     <div>
@@ -56,10 +63,9 @@ const App = () => {
         radioImage2={radioImage2}
         profile={profile}
         friends={friends}
+        watchList={watchList}
       />
-      <div className="container">
-        <UIView />
-      </div>
+      <UIView />
     </div>
   );
 };
@@ -89,6 +95,11 @@ const dogFriendsState = {
   url: '/friends',
   component: DogFriends,
 };
+const watchListState = {
+  name: 'watch-list',
+  url: '/watch-list',
+  component: WatchList,
+};
 
 ReactDOM.render(
   <React.StrictMode>
@@ -104,6 +115,7 @@ ReactDOM.render(
         radioImageState2,
         dogProfileState,
         dogFriendsState,
+        watchListState,
       ]}
       config={config}
     >

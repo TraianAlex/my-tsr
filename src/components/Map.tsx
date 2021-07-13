@@ -1,16 +1,17 @@
-import React, { useState } from "react";
-import axios from "axios";
-import classes from "./Map.module.css";
+import React, { useState } from 'react';
+import axios from 'axios';
+import classes from './Map.module.css';
+import { Container } from 'react-bootstrap';
 
 type GoogleGeocodingResponse = {
   results: { geometry: { location: { lat: number; lng: number } } }[];
-  status: "OK" | "ZERO_RESULTS";
+  status: 'OK' | 'ZERO_RESULTS';
 };
 
 const GOOGLE_API_KEY = process.env.GOOGLE_GEOCODING_API_KEY;
 
 export default function Map() {
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState('');
 
   const updateAddress = (event: any) => {
     setAddress(event.target.value);
@@ -23,16 +24,16 @@ export default function Map() {
     axios
       .get<GoogleGeocodingResponse>(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURI(
-          enteredAddress
-        )}&key=${GOOGLE_API_KEY}`
+          enteredAddress,
+        )}&key=${GOOGLE_API_KEY}`,
       )
       .then((response) => {
         console.log(response);
-        if (response.data.status !== "OK") {
-          throw new Error("Could not fetch location!");
+        if (response.data.status !== 'OK') {
+          throw new Error('Could not fetch location!');
         }
         const coordinates = response.data.results[0].geometry.location;
-        const map = new google.maps.Map(document.getElementById("map")!, {
+        const map = new google.maps.Map(document.getElementById('map')!, {
           center: coordinates,
           zoom: 16,
         });
@@ -46,7 +47,7 @@ export default function Map() {
   };
 
   return (
-    <div>
+    <Container>
       <div id="map" className={classes.map}>
         <p>Please enter an address!</p>
       </div>
@@ -59,6 +60,6 @@ export default function Map() {
         />
         <button type="submit">SEARCH ADDRESS</button>
       </form>
-    </div>
+    </Container>
   );
 }

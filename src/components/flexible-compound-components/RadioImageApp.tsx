@@ -3,8 +3,6 @@ import Banner from "./Banner";
 import RadioImageForm from "./RadioImageForm2";
 import DATA from "../../utils/data";
 
-// import './styles.css';
-
 // function CurrentValueComponent() {
 //   return <RadioImageForm.CurrentValue />;
 // }

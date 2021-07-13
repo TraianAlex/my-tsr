@@ -1,15 +1,16 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+import { Container } from "react-bootstrap";
 import {
   useTable,
   useFilters,
   useGlobalFilter,
   useAsyncDebounce,
-} from "react-table";
+} from 'react-table';
 // A great library for fuzzy filtering/sorting items
-import { matchSorter } from "match-sorter";
+import { matchSorter } from 'match-sorter';
 
-import makeData from "../../utils/makeData";
+import makeData from '../../utils/makeData';
 
 const Styles = styled.div`
   padding: 1rem;
@@ -50,17 +51,17 @@ function GlobalFilter({
 
   return (
     <span>
-      Search:{" "}
+      Search:{' '}
       <input
-        value={value || ""}
+        value={value || ''}
         onChange={(e) => {
           setValue(e.target.value);
           onChange(e.target.value);
         }}
         placeholder={`${count} records...`}
         style={{
-          fontSize: "1.1rem",
-          border: "0",
+          fontSize: '1.1rem',
+          border: '0',
         }}
       />
     </span>
@@ -75,7 +76,7 @@ function DefaultColumnFilter({
 
   return (
     <input
-      value={filterValue || ""}
+      value={filterValue || ''}
       onChange={(e) => {
         setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
       }}
@@ -171,11 +172,11 @@ function NumberRangeColumnFilter({
   return (
     <div
       style={{
-        display: "flex",
+        display: 'flex',
       }}
     >
       <input
-        value={filterValue[0] || ""}
+        value={filterValue[0] || ''}
         type="number"
         onChange={(e) => {
           const val = e.target.value;
@@ -186,13 +187,13 @@ function NumberRangeColumnFilter({
         }}
         placeholder={`Min (${min})`}
         style={{
-          width: "70px",
-          marginRight: "0.5rem",
+          width: '70px',
+          marginRight: '0.5rem',
         }}
       />
       to
       <input
-        value={filterValue[1] || ""}
+        value={filterValue[1] || ''}
         type="number"
         onChange={(e) => {
           const val = e.target.value;
@@ -203,8 +204,8 @@ function NumberRangeColumnFilter({
         }}
         placeholder={`Max (${max})`}
         style={{
-          width: "70px",
-          marginLeft: "0.5rem",
+          width: '70px',
+          marginLeft: '0.5rem',
         }}
       />
     </div>
@@ -237,7 +238,7 @@ function Table({ columns, data }) {
         });
       },
     }),
-    []
+    [],
   );
 
   const defaultColumn = React.useMemo(
@@ -245,7 +246,7 @@ function Table({ columns, data }) {
       // Let's set up our default Filter UI
       Filter: DefaultColumnFilter,
     }),
-    []
+    [],
   );
 
   const {
@@ -266,7 +267,7 @@ function Table({ columns, data }) {
       filterTypes,
     },
     useFilters, // useFilters!
-    useGlobalFilter // useGlobalFilter!
+    useGlobalFilter, // useGlobalFilter!
   );
 
   // We don't want to render all of the rows for this example, so cap
@@ -281,9 +282,9 @@ function Table({ columns, data }) {
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
                 <th {...column.getHeaderProps()}>
-                  {column.render("Header")}
+                  {column.render('Header')}
                   {/* Render the columns filter UI */}
-                  <div>{column.canFilter ? column.render("Filter") : null}</div>
+                  <div>{column.canFilter ? column.render('Filter') : null}</div>
                 </th>
               ))}
             </tr>
@@ -292,7 +293,7 @@ function Table({ columns, data }) {
             <th
               colSpan={visibleColumns.length}
               style={{
-                textAlign: "left",
+                textAlign: 'left',
               }}
             >
               <GlobalFilter
@@ -310,7 +311,7 @@ function Table({ columns, data }) {
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell) => {
                   return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   );
                 })}
               </tr>
@@ -341,65 +342,67 @@ function filterGreaterThan(rows, id, filterValue) {
 // when given the new filter value and returns true, the filter
 // will be automatically removed. Normally this is just an undefined
 // check, but here, we want to remove the filter if it's not a number
-filterGreaterThan.autoRemove = (val) => typeof val !== "number";
+filterGreaterThan.autoRemove = (val) => typeof val !== 'number';
 
 function App() {
   const columns = React.useMemo(
     () => [
       {
-        Header: "Name",
+        Header: 'Name',
         columns: [
           {
-            Header: "First Name",
-            accessor: "firstName",
+            Header: 'First Name',
+            accessor: 'firstName',
           },
           {
-            Header: "Last Name",
-            accessor: "lastName",
+            Header: 'Last Name',
+            accessor: 'lastName',
             // Use our custom `fuzzyText` filter on this column
-            filter: "fuzzyText",
+            filter: 'fuzzyText',
           },
         ],
       },
       {
-        Header: "Info",
+        Header: 'Info',
         columns: [
           {
-            Header: "Age",
-            accessor: "age",
+            Header: 'Age',
+            accessor: 'age',
             Filter: SliderColumnFilter,
-            filter: "equals",
+            filter: 'equals',
           },
           {
-            Header: "Visits",
-            accessor: "visits",
+            Header: 'Visits',
+            accessor: 'visits',
             Filter: NumberRangeColumnFilter,
-            filter: "between",
+            filter: 'between',
           },
           {
-            Header: "Status",
-            accessor: "status",
+            Header: 'Status',
+            accessor: 'status',
             Filter: SelectColumnFilter,
-            filter: "includes",
+            filter: 'includes',
           },
           {
-            Header: "Profile Progress",
-            accessor: "progress",
+            Header: 'Profile Progress',
+            accessor: 'progress',
             Filter: SliderColumnFilter,
             filter: filterGreaterThan,
           },
         ],
       },
     ],
-    []
+    [],
   );
 
   const data = React.useMemo(() => makeData(10000), []);
 
   return (
-    <Styles>
-      <Table columns={columns} data={data} />
-    </Styles>
+    <Container>
+      <Styles>
+        <Table columns={columns} data={data} />
+      </Styles>
+    </Container>
   );
 }
 

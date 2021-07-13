@@ -19,3 +19,7 @@ code {
 a { text-decoration: none; }
 
 .active { font-weight: bold }
+
+.App {
+  text-align: center;
+}

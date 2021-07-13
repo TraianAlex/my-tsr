@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import TodoList from "./TodoList";
-import NewTodo from "./NewTodo";
+import React, { useState } from 'react';
+import TodoList from './TodoList';
+import NewTodo from './NewTodo';
+import { Container } from 'react-bootstrap';
 
 interface TodoState {
   id: string;
@@ -24,9 +25,9 @@ export const Todo: React.FC = () => {
   };
 
   return (
-    <div>
+    <Container>
       <NewTodo onAddTodo={todoAddHandler} />
       <TodoList items={todos} onDeleteTodo={todoDeleteHandler} />
-    </div>
+    </Container>
   );
 };
