@@ -1,6 +1,6 @@
-import React from "react";
-import { useTable } from "react-table";
-import BTable from "react-bootstrap/Table";
+import React from 'react';
+import { useTable } from 'react-table';
+import BTable from 'react-bootstrap/Table';
 
 export default function Table({ columns, data }: { columns: any; data: any }) {
   // Use the useTable Hook to send the columns and data to build the table
@@ -20,12 +20,12 @@ export default function Table({ columns, data }: { columns: any; data: any }) {
     - react-table doesn't have UI, it's headless. We just need to put the react-table props from the Hooks, and it will do its magic automatically
   */
   return (
-    <BTable striped bordered hover size="sm" {...getTableProps()}>
+    <BTable striped bordered hover responsive size="sm" {...getTableProps()}>
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (
-              <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+              <th {...column.getHeaderProps()}>{column.render('Header')}</th>
             ))}
           </tr>
         ))}
@@ -36,7 +36,7 @@ export default function Table({ columns, data }: { columns: any; data: any }) {
           return (
             <tr {...row.getRowProps()}>
               {row.cells.map((cell) => {
-                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
               })}
             </tr>
           );
