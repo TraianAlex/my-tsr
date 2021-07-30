@@ -35,9 +35,7 @@ const ListStyled = styled.div`
   table th,
   table td {
     color: rgb(168, 168, 168) !important;
-    padding: 10px;
-    padding-right: 36px;
-    padding-left: 36px;
+    padding: 10px 36px;
     font-size: 18px;
     text-align: left;
     max-width: 700px;

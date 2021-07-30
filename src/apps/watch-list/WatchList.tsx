@@ -56,7 +56,6 @@ const WatchStyled = styled.div`
     margin: auto;
     border: 1px solid rgb(26, 26, 26);
     height: fit-content;
-    //max-width: 700px;
     background-color: rgb(32, 32, 32);
     padding: 30px;
     margin-top: 10px;
