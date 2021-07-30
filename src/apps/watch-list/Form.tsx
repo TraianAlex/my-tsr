@@ -93,6 +93,10 @@ const FormStyled = styled.form`
     justify-content: center;
   }
 
+  .first div h3 {
+    margin-top: 1rem;
+  }
+
   .formDiv {
     margin: auto;
     padding-bottom: 1em;

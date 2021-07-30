@@ -11,7 +11,7 @@ export interface IState {
   }[];
 }
 
-function App() {
+const App = () => {
   const [people, setPeople] = useState<IState['people']>([
     {
       name: 'LeBron James',

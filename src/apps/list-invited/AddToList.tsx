@@ -98,6 +98,7 @@ const AddToListStyled = styled.form`
     margin: 0.3rem 0rem;
     padding: 0.5rem;
     font-size: 1rem;
+    border: 1px solid #ccc;
   }
 
   .AddToList-btn {

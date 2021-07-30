@@ -48,7 +48,6 @@ const WatchStyled = styled.div`
 
   .title {
     font-family: 'Zilla Slab', serif;
-    font-size: 55px;
     color: white;
   }
 

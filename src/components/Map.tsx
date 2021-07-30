@@ -51,7 +51,7 @@ export default function Map() {
       <MapStyled id="map">
         <p>Please enter an address!</p>
       </MapStyled>
-      <form className="form" onSubmit={handleSubmit}>
+      <FormStyled onSubmit={handleSubmit}>
         <input
           type="text"
           name="address"
@@ -59,7 +59,7 @@ export default function Map() {
           onChange={updateAddress}
         />
         <button type="submit">SEARCH ADDRESS</button>
-      </form>
+      </FormStyled>
     </Container>
   );
 }
@@ -73,9 +73,17 @@ const MapStyled = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
+`;
 
-  form {
-    text-align: center;
-    margin: 2rem auto;
+const FormStyled = styled.form`
+  text-align: center;
+  margin: 2rem auto;
+
+  input {
+    width: 50%;
+    font: inherit;
+    border: 1px solid #ccc;
+    padding: 0.25rem;
+    margin-right: 0.5rem;
   }
 `;
