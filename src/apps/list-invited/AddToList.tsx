@@ -24,7 +24,10 @@ const AddToList: React.FC<IProps> = ({ setPeople, people }) => {
     });
   };
 
-  const handleClick = () => {
+  const handleClick = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ): void => {
+    e.preventDefault();
     if (!input.name || !input.age) return;
 
     setPeople([
@@ -78,7 +81,7 @@ const AddToList: React.FC<IProps> = ({ setPeople, people }) => {
         value={input.note}
         placeholder="Note"
       />
-      <button onClick={handleClick} className="AddToList-btn">
+      <button onClick={(e) => handleClick(e)} className="AddToList-btn">
         Add to List
       </button>
     </AddToListStyled>
