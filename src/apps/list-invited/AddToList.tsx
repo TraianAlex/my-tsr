@@ -94,6 +94,7 @@ const AddToListStyled = styled.form`
   margin: 5rem auto;
 
   .AddToList-input {
+    width: 100%;
     margin: 0.3rem 0rem;
     padding: 0.5rem;
     font-size: 1rem;
