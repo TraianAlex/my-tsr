@@ -7,9 +7,12 @@ import {
   useSrefActive,
   pushStateLocationPlugin,
 } from '@uirouter/react';
-import { visualizer } from '@uirouter/visualizer';
-
+// import { visualizer } from '@uirouter/visualizer';
 import './index.css';
+import * as serviceWorker from './serviceWorker';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container } from 'react-bootstrap';
+
 import { Navigation } from './components/Navigation';
 import TableApp from './table/TableApp';
 import Filterjs from './components/tables/Filterjs';
@@ -20,9 +23,7 @@ import RadioImageApp2 from './components/flexible-compound-components/RadioImage
 import Profile from './components/provider-pattern/Profile';
 import DogFriends from './components/provider-pattern/DogFriends';
 import { WatchList } from './apps/watch-list/WatchList';
-import * as serviceWorker from './serviceWorker';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from 'react-bootstrap';
+import ListInvited from './apps/list-invited/ListInvited';
 
 const Home = () => (
   <Container>
@@ -30,12 +31,12 @@ const Home = () => (
   </Container>
 );
 
-export default function config(router: any) {
-  // Specify the initial route when the initial URL matched no state
-  router.urlService.rules.initial({ state: 'home' });
-  // Setup the state visualizer
-  visualizer(router);
-}
+// const config = (router: any) => {
+//   // Specify the initial route when the initial URL matched no state
+//   router.urlService.rules.initial({ state: 'home' });
+//   // Setup the state visualizer
+//   visualizer(router);
+// }
 
 const App = () => {
   const activeClass = 'active';
@@ -49,6 +50,7 @@ const App = () => {
   const profile = useSrefActive('profile', {}, activeClass);
   const friends = useSrefActive('friends', {}, activeClass);
   const watchList = useSrefActive('watch-list', {}, activeClass);
+  const listInvited = useSrefActive('list-invited', {}, activeClass);
 
   return (
     <div>
@@ -64,6 +66,7 @@ const App = () => {
         profile={profile}
         friends={friends}
         watchList={watchList}
+        listInvited={listInvited}
       />
       <UIView />
     </div>
@@ -100,6 +103,11 @@ const watchListState = {
   url: '/watch-list',
   component: WatchList,
 };
+const listInvitedState = {
+  name: 'list-invited',
+  url: '/list-invited',
+  component: ListInvited,
+};
 
 ReactDOM.render(
   <React.StrictMode>
@@ -116,8 +124,9 @@ ReactDOM.render(
         dogProfileState,
         dogFriendsState,
         watchListState,
+        listInvitedState,
       ]}
-      config={config}
+      // config={config}
     >
       <App />
     </UIRouter>

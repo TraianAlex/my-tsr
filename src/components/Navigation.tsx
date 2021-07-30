@@ -12,6 +12,7 @@ export const Navigation = ({
   friends,
   profile,
   watchList,
+  listInvited,
 }: {
   home: any;
   table: any;
@@ -23,6 +24,7 @@ export const Navigation = ({
   friends: any;
   profile: any;
   watchList: any;
+  listInvited: any;
 }) => {
   return (
     <Navbar bg="light" expand="lg">
@@ -41,9 +43,7 @@ export const Navigation = ({
           <Nav.Link {...friends}>Friends</Nav.Link>
           <NavDropdown title="Apps" id="basic-nav-dropdown">
             <NavDropdown.Item {...watchList}>Watch List</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">
-              Another action
-            </NavDropdown.Item>
+            <NavDropdown.Item {...listInvited}>List Invited</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item href="#action/3.4">

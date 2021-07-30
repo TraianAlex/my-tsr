@@ -23,7 +23,7 @@ const NewTodo: React.FC<NewTodoProps> = (props) => {
     <form onSubmit={todoSubmitHandler} className={classes.form}>
       <div className={classes.formControl}>
         <label htmlFor="todo-text" className={classes.label}>
-          Todo Text
+          Todo
         </label>
         <input
           type="text"
