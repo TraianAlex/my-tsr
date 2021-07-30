@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import classes from './Map.module.css';
+import styled from 'styled-components';
 import { Container } from 'react-bootstrap';
 
 type GoogleGeocodingResponse = {
@@ -48,10 +48,10 @@ export default function Map() {
 
   return (
     <Container>
-      <div id="map" className={classes.map}>
+      <MapStyled id="map">
         <p>Please enter an address!</p>
-      </div>
-      <form className={classes.form} onSubmit={handleSubmit}>
+      </MapStyled>
+      <form className="form" onSubmit={handleSubmit}>
         <input
           type="text"
           name="address"
@@ -63,3 +63,19 @@ export default function Map() {
     </Container>
   );
 }
+
+const MapStyled = styled.div`
+  width: 90%;
+  height: 20rem;
+  border: 1px solid #ccc;
+  margin: 2rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  form {
+    text-align: center;
+    margin: 2rem auto;
+  }
+`;
