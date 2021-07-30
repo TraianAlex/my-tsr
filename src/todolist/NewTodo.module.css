@@ -16,15 +16,12 @@ label, input {
   margin-right: 0.5rem;
 }
 
-input {
-  width: 100%;
-}
-
 label {
   font-weight: bold;
 }
 
 input {
+  width: 100%;
   font: inherit;
   border: 1px solid #ccc;
   padding: 0.25rem;
