@@ -11,7 +11,6 @@ import {
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from 'react-bootstrap';
 
 import { Navigation } from './components/Navigation';
 import TableApp from './table/TableApp';
@@ -24,12 +23,7 @@ import Profile from './components/provider-pattern/Profile';
 import DogFriends from './components/provider-pattern/DogFriends';
 import { WatchList } from './apps/watch-list/WatchList';
 import ListInvited from './apps/list-invited/ListInvited';
-
-const Home = () => (
-  <Container>
-    <h3>hello world</h3>
-  </Container>
-);
+import { Home } from './components/Home';
 
 // const config = (router: any) => {
 //   // Specify the initial route when the initial URL matched no state
