@@ -5,6 +5,8 @@
   "dependencies": {
     "@babel/core": "7.14.6",
     "@craco/craco": "^6.2.0",
+    "@headlessui/react": "^1.4.0",
+    "@heroicons/react": "^1.0.3",
     "@svgr/webpack": "5.5.0",
     "@types/lodash": "^4.14.161",
     "@types/react-router-dom": "^5.1.5",
