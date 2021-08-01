@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import { useTypeWritting } from '../utils/hooks/useTypeWritting';
-import SlideOver from './slide-over';
+import { SlideOver } from './slide-over';
 
 const words = [
   'Web Development',
@@ -14,7 +14,7 @@ export const Home = () => {
   const text = useTypeWritting(words);
   return (
     <Container>
-      <SlideOver />
+      <SlideOver text={text} />
       <h3>{text}</h3>
     </Container>
   );
