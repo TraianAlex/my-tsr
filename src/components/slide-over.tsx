@@ -1,10 +1,13 @@
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
+import { SlideOverProps } from './Home';
 
-export const SlideOver = ({ text }: { text: string }) => {
-  const [open, setOpen] = useState(true);
-
+export const SlideOver: React.FC<SlideOverProps> = ({
+  open,
+  setOpen,
+  text,
+}) => {
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
