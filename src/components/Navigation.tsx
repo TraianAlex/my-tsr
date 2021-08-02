@@ -16,7 +16,7 @@ export const Navigation: React.FC<NavProps> = ({
   listInvited,
 }) => {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="lg" collapseOnSelect>
       <Navbar.Brand {...home} className="ml-3">
         Logo
       </Navbar.Brand>
