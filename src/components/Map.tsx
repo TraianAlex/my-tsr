@@ -13,9 +13,7 @@ const GOOGLE_API_KEY = process.env.GOOGLE_GEOCODING_API_KEY;
 export default function Map() {
   const [address, setAddress] = useState('');
 
-  const updateAddress = (event: any) => {
-    setAddress(event.target.value);
-  };
+  const updateAddress = (event: any) => setAddress(event.target.value);
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
