@@ -24,7 +24,7 @@ export const Home: React.FC = () => {
   return (
     <Container>
       <SlideOver open={open} setOpen={setOpen} text={text} />
-      <span className="hidden sm:block ml-3 mt-2 mb-2">
+      <span className="hidden sm:block ml-3 mt-2 mb-4">
         <button
           type="button"
           onClick={() => setOpen(true)}
@@ -37,7 +37,7 @@ export const Home: React.FC = () => {
           View Panel
         </button>
       </span>
-      <h3>{text}</h3>
+      <h5>{text}</h5>
     </Container>
   );
 };

@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
+import { Nav } from 'react-bootstrap';
 import { SlideOverProps } from './Home';
 
 export const SlideOver: React.FC<SlideOverProps> = ({
@@ -67,6 +68,14 @@ export const SlideOver: React.FC<SlideOverProps> = ({
                   </div>
                   <div className="mt-6 relative flex-1 px-4 sm:px-6">
                     {text}
+                    <Nav defaultActiveKey="/home" className="flex-column">
+                      <Nav.Link href="/home">Active</Nav.Link>
+                      <Nav.Link eventKey="link-1">Link</Nav.Link>
+                      <Nav.Link eventKey="link-2">Link</Nav.Link>
+                      <Nav.Link eventKey="disabled" disabled>
+                        Disabled
+                      </Nav.Link>
+                    </Nav>
                     <div className="absolute inset-0 px-4 sm:px-6">
                       <div
                         className="h-full border-2 border-dashed border-gray-200"

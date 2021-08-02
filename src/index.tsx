@@ -32,7 +32,27 @@ import { Home } from './components/Home';
 //   visualizer(router);
 // }
 
-const App = () => {
+export type NavProps = {
+  home: object;
+  table: object;
+  filter: object;
+  map: object;
+  todo: object;
+  radioImage: object;
+  radioImage2: object;
+  friends: object;
+  profile: object;
+  watchList: object;
+  listInvited: object;
+};
+
+type LinkState = {
+  name: string;
+  url: string;
+  component: React.FC<{}>;
+};
+
+const App: React.FC = () => {
   const activeClass = 'active';
   const home = useSrefActive('home', {}, activeClass);
   const table = useSrefActive('table', {}, activeClass);
@@ -67,37 +87,45 @@ const App = () => {
   );
 };
 
-const homeState = { name: 'home', url: '/home', component: Home };
-const tableState = { name: 'table', url: '/table', component: TableApp };
-const filterjsState = { name: 'filter', url: '/filter', component: Filterjs };
-const mapState = { name: 'map', url: '/map', component: Map };
-const todoState = { name: 'todo', url: '/todo', component: Todo };
-const radioImageState = {
+const homeState: LinkState = { name: 'home', url: '/home', component: Home };
+const tableState: LinkState = {
+  name: 'table',
+  url: '/table',
+  component: TableApp,
+};
+const filterjsState: LinkState = {
+  name: 'filter',
+  url: '/filter',
+  component: Filterjs,
+};
+const mapState: LinkState = { name: 'map', url: '/map', component: Map };
+const todoState: LinkState = { name: 'todo', url: '/todo', component: Todo };
+const radioImageState: LinkState = {
   name: 'radioImage',
   url: '/radio-image',
   component: RadioImageApp,
 };
-const radioImageState2 = {
+const radioImageState2: LinkState = {
   name: 'radioImage2',
   url: '/radio-image2',
   component: RadioImageApp2,
 };
-const dogProfileState = {
+const dogProfileState: LinkState = {
   name: 'profile',
   url: '/profile',
   component: Profile,
 };
-const dogFriendsState = {
+const dogFriendsState: LinkState = {
   name: 'friends',
   url: '/friends',
   component: DogFriends,
 };
-const watchListState = {
+const watchListState: LinkState = {
   name: 'watch-list',
   url: '/watch-list',
   component: WatchList,
 };
-const listInvitedState = {
+const listInvitedState: LinkState = {
   name: 'list-invited',
   url: '/list-invited',
   component: ListInvited,
