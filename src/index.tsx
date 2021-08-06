@@ -25,12 +25,12 @@ import { WatchList } from './apps/watch-list/WatchList';
 import ListInvited from './apps/list-invited/ListInvited';
 import { Home } from './components/Home';
 
-// const config = (router: any) => {
-//   // Specify the initial route when the initial URL matched no state
-//   router.urlService.rules.initial({ state: 'home' });
-//   // Setup the state visualizer
-//   visualizer(router);
-// }
+const config = (router: any) => {
+  // Specify the initial route when the initial URL matched no state
+  router.urlService.rules.initial({ state: 'home' });
+  // Setup the state visualizer
+  // visualizer(router);
+}
 
 export type NavProps = {
   home: object;
@@ -148,7 +148,7 @@ ReactDOM.render(
         watchListState,
         listInvitedState,
       ]}
-      // config={config}
+      config={config}
     >
       <App />
     </UIRouter>
