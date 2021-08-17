@@ -8,22 +8,20 @@ type GoogleGeocodingResponse = {
   status: 'OK' | 'ZERO_RESULTS';
 };
 
-const GOOGLE_API_KEY = process.env.GOOGLE_GEOCODING_API_KEY;
-
 export default function Map() {
   const [address, setAddress] = useState('');
 
-  const updateAddress = (event: any) => setAddress(event.target.value);
+  const updateAddress = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setAddress(event.target.value);
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    const enteredAddress = address;
 
     axios
       .get<GoogleGeocodingResponse>(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURI(
-          enteredAddress,
-        )}&key=${GOOGLE_API_KEY}`,
+          address,
+        )}&key=${process.env.REACT_APP_GOOGLE_GEOCODING_API_KEY}`,
       )
       .then((response) => {
         console.log(response);
