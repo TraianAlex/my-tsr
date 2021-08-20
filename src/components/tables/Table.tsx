@@ -1,8 +1,14 @@
 import React from 'react';
-import { useTable } from 'react-table';
+import { Column, useTable } from 'react-table';
 import BTable from 'react-bootstrap/Table';
 
-export default function Table({ columns, data }: { columns: any; data: any }) {
+export default function Table({
+  columns,
+  data,
+}: {
+  columns: Column<{}>[];
+  data: {}[];
+}) {
   // Use the useTable Hook to send the columns and data to build the table
   const {
     getTableProps, // table props from react-table

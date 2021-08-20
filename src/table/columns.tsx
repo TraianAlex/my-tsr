@@ -1,17 +1,21 @@
 import React from 'react';
 
-const Genres = ({ values }: any) => {
+type genres = { values: string[] };
+type runtime = { value: number };
+
+const Genres = ({ values }: genres) => {
   return (
     <>
-      {values.map(
-        (genre: React.ReactNode, idx: string | number | undefined) => {
-          return (
-            <span key={idx} className="badge text-black-50">
-              {genre}
-            </span>
-          );
-        },
-      )}
+      {values &&
+        values.map(
+          (genre: React.ReactNode, idx: string | number | undefined) => {
+            return (
+              <span key={idx} className="badge text-black-50">
+                {genre}
+              </span>
+            );
+          },
+        )}
     </>
   );
 };
@@ -40,12 +44,14 @@ export const columnsData = [
       {
         Header: 'Genre(s)',
         accessor: 'show.genres',
-        Cell: ({ cell: { value } }: any) => <Genres values={value} />,
+        Cell: ({ cell: { values } }: { cell: genres }) => (
+          <Genres values={values} />
+        ),
       },
       {
         Header: 'Runtime',
         accessor: 'show.runtime',
-        Cell: ({ cell: { value } }: any) => {
+        Cell: ({ cell: { value } }: { cell: runtime }) => {
           const hour = Math.floor(value / 60);
           const min = Math.floor(value % 60);
           return (

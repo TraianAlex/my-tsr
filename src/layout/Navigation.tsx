@@ -24,15 +24,20 @@ export const Navigation: React.FC<NavProps> = ({
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link {...home}>Home</Nav.Link>
-          <Nav.Link {...table}>Table</Nav.Link>
-          <Nav.Link {...filter}>Filter</Nav.Link>
+          <NavDropdown title="Tables" id="basic-nav-dropdown">
+            <NavDropdown.Item {...table}>Table</NavDropdown.Item>
+            <NavDropdown.Item {...filter}>Filter</NavDropdown.Item>
+          </NavDropdown>
           <Nav.Link {...map}>Map</Nav.Link>
-          <Nav.Link {...todo}>Todo</Nav.Link>
-          <Nav.Link {...radioImage}>Radio Image</Nav.Link>
-          <Nav.Link {...radioImage2}>Radio Image2</Nav.Link>
-          <Nav.Link {...profile}>Profile</Nav.Link>
-          <Nav.Link {...friends}>Friends</Nav.Link>
+          <NavDropdown title="Components" id="basic-nav-dropdown">
+            <NavDropdown.Item {...radioImage}>Radio Image</NavDropdown.Item>
+            <NavDropdown.Item {...radioImage2}>Radio Image2</NavDropdown.Item>
+            <NavDropdown.Item {...profile}>Profile</NavDropdown.Item>
+            <NavDropdown.Item {...friends}>Friends</NavDropdown.Item>
+            <NavDropdown.Divider />
+          </NavDropdown>
           <NavDropdown title="Apps" id="basic-nav-dropdown">
+          <NavDropdown.Item {...todo}>Todo</NavDropdown.Item>
             <NavDropdown.Item {...watchList}>Watch List</NavDropdown.Item>
             <NavDropdown.Item {...listInvited}>List Invited</NavDropdown.Item>
             <NavDropdown.Divider />

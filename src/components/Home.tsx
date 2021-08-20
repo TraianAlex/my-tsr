@@ -2,7 +2,7 @@ import { LinkIcon } from '@heroicons/react/outline';
 import { useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { useTypeWritting } from '../utils/hooks/useTypeWritting';
-import { SlideOver } from './slide-over';
+import { SlideOver } from '../layout/slide-over';
 
 const words = [
   'Web Development',
@@ -10,12 +10,6 @@ const words = [
   'Typescript',
   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
 ];
-
-export type SlideOverProps = {
-  open: boolean;
-  setOpen: (value: boolean) => void;
-  text: string;
-};
 
 export const Home: React.FC = () => {
   const [open, setOpen] = useState(true);

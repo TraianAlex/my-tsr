@@ -12,7 +12,7 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { Navigation } from './components/Navigation';
+import { Navigation } from './layout/Navigation';
 import TableApp from './table/TableApp';
 import Filterjs from './components/tables/Filterjs';
 import Map from './components/Map';

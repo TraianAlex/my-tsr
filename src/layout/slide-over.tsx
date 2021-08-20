@@ -2,7 +2,12 @@ import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
 import { Nav } from 'react-bootstrap';
-import { SlideOverProps } from './Home';
+
+type SlideOverProps = {
+  open: boolean;
+  setOpen: (value: boolean) => void;
+  text: string;
+};
 
 export const SlideOver: React.FC<SlideOverProps> = ({
   open,
