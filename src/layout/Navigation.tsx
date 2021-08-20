@@ -28,8 +28,8 @@ export const Navigation: React.FC<NavProps> = ({
             <NavDropdown.Item {...table}>Table</NavDropdown.Item>
             <NavDropdown.Item {...filter}>Filter</NavDropdown.Item>
           </NavDropdown>
-          <Nav.Link {...map}>Map</Nav.Link>
           <NavDropdown title="Components" id="basic-nav-dropdown">
+          <NavDropdown.Item {...map}>Google Map</NavDropdown.Item>
             <NavDropdown.Item {...radioImage}>Radio Image</NavDropdown.Item>
             <NavDropdown.Item {...radioImage2}>Radio Image2</NavDropdown.Item>
             <NavDropdown.Item {...profile}>Profile</NavDropdown.Item>

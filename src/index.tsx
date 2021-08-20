@@ -16,7 +16,7 @@ import { Navigation } from './layout/Navigation';
 import TableApp from './table/TableApp';
 import Filterjs from './components/tables/Filterjs';
 import Map from './components/Map';
-import { Todo } from './todolist/Todo';
+import { Todo } from './apps/todolist/Todo';
 import RadioImageApp from './components/compound-components/RadioImageApp';
 import RadioImageApp2 from './components/flexible-compound-components/RadioImageApp';
 import Profile from './components/provider-pattern/Profile';
