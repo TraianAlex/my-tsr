@@ -1,7 +1,7 @@
 import React from "react";
 import { render, cleanup } from "@testing-library/react";
 
-import "jsdom-global/register";
+// import "jsdom-global/register";
 import Banner from "./Banner";
 
 afterEach(cleanup);
