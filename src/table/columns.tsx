@@ -1,9 +1,7 @@
 import React from 'react';
+import { CellValue } from 'react-table';
 
-type genres = { values: string[] };
-type runtime = { value: number };
-
-const Genres = ({ values }: genres) => {
+const Genres = ({ values }: CellValue) => {
   return (
     <>
       {values &&
@@ -44,14 +42,12 @@ export const columnsData = [
       {
         Header: 'Genre(s)',
         accessor: 'show.genres',
-        Cell: ({ cell: { values } }: { cell: genres }) => (
-          <Genres values={values} />
-        ),
+        Cell: ({ cell: { values } }: CellValue) => <Genres values={values} />,
       },
       {
         Header: 'Runtime',
         accessor: 'show.runtime',
-        Cell: ({ cell: { value } }: { cell: runtime }) => {
+        Cell: ({ cell: { value } }: CellValue) => {
           const hour = Math.floor(value / 60);
           const min = Math.floor(value % 60);
           return (
