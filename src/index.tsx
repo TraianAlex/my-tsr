@@ -23,6 +23,7 @@ import Profile from './components/provider-pattern/Profile';
 import DogFriends from './components/provider-pattern/DogFriends';
 import { WatchList } from './apps/watch-list/WatchList';
 import ListInvited from './apps/list-invited/ListInvited';
+import { GoogleSheets } from './apps/google-sheets/GoogleSheets';
 import { Home } from './components/Home';
 
 const config = (router: any) => {
@@ -44,6 +45,7 @@ export type NavProps = {
   profile: object;
   watchList: object;
   listInvited: object;
+  googleSheets: object;
 };
 
 type LinkState = {
@@ -65,6 +67,7 @@ const App: React.FC = () => {
   const friends = useSrefActive('friends', {}, activeClass);
   const watchList = useSrefActive('watch-list', {}, activeClass);
   const listInvited = useSrefActive('list-invited', {}, activeClass);
+  const googleSheets = useSrefActive('google-sheets', {}, activeClass);
 
   return (
     <div>
@@ -81,6 +84,7 @@ const App: React.FC = () => {
         friends={friends}
         watchList={watchList}
         listInvited={listInvited}
+        googleSheets={googleSheets}
       />
       <UIView />
     </div>
@@ -130,6 +134,11 @@ const listInvitedState: LinkState = {
   url: '/list-invited',
   component: ListInvited,
 };
+const googleSheetsState: LinkState = {
+  name: 'google-sheets',
+  url: '/google-sheets',
+  component: GoogleSheets,
+};
 
 ReactDOM.render(
   <React.StrictMode>
@@ -147,6 +156,7 @@ ReactDOM.render(
         dogFriendsState,
         watchListState,
         listInvitedState,
+        googleSheetsState,
       ]}
       config={config}
     >

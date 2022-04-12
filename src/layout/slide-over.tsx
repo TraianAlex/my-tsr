@@ -6,7 +6,7 @@ import { Nav } from 'react-bootstrap';
 type SlideOverProps = {
   open: boolean;
   setOpen: (value: boolean) => void;
-  text: string;
+  text?: string;
 };
 
 export const SlideOver: React.FC<SlideOverProps> = ({

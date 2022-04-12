@@ -14,6 +14,7 @@ export const Navigation: React.FC<NavProps> = ({
   profile,
   watchList,
   listInvited,
+  googleSheets,
 }) => {
   return (
     <Navbar bg="light" expand="lg" collapseOnSelect>
@@ -37,7 +38,8 @@ export const Navigation: React.FC<NavProps> = ({
             <NavDropdown.Divider />
           </NavDropdown>
           <NavDropdown title="Apps" id="basic-nav-dropdown">
-          <NavDropdown.Item {...todo}>Todo</NavDropdown.Item>
+            <NavDropdown.Item {...googleSheets}>Google Sheets</NavDropdown.Item>
+            <NavDropdown.Item {...todo}>Todo</NavDropdown.Item>
             <NavDropdown.Item {...watchList}>Watch List</NavDropdown.Item>
             <NavDropdown.Item {...listInvited}>List Invited</NavDropdown.Item>
             <NavDropdown.Divider />
