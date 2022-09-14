@@ -17,6 +17,7 @@ import TableApp from './table/TableApp';
 import Filterjs from './components/tables/Filterjs';
 import Map from './components/Map';
 import { Todo } from './apps/todolist/Todo';
+import { Todos } from './apps/todo-store/Todos';
 import RadioImageApp from './components/compound-components/RadioImageApp';
 import RadioImageApp2 from './components/flexible-compound-components/RadioImageApp';
 import Profile from './components/provider-pattern/Profile';
@@ -39,6 +40,7 @@ export type NavProps = {
   filter: object;
   map: object;
   todo: object;
+  todos: object;
   radioImage: object;
   radioImage2: object;
   friends: object;
@@ -61,6 +63,7 @@ const App: React.FC = () => {
   const filter = useSrefActive('filter', {}, activeClass);
   const map = useSrefActive('map', {}, activeClass);
   const todo = useSrefActive('todo', {}, activeClass);
+  const todos = useSrefActive('todos', {}, activeClass);
   const radioImage = useSrefActive('radioImage', {}, activeClass);
   const radioImage2 = useSrefActive('radioImage2', {}, activeClass);
   const profile = useSrefActive('profile', {}, activeClass);
@@ -78,6 +81,7 @@ const App: React.FC = () => {
         filter={filter}
         map={map}
         todo={todo}
+        todos={todos}
         radioImage={radioImage}
         radioImage2={radioImage2}
         profile={profile}
@@ -104,6 +108,7 @@ const filterjsState: LinkState = {
 };
 const mapState: LinkState = { name: 'map', url: '/map', component: Map };
 const todoState: LinkState = { name: 'todo', url: '/todo', component: Todo };
+const todosState: LinkState = { name: 'todos', url: '/todos', component: Todos };
 const radioImageState: LinkState = {
   name: 'radioImage',
   url: '/radio-image',
@@ -150,6 +155,7 @@ ReactDOM.render(
         filterjsState,
         mapState,
         todoState,
+        todosState,
         radioImageState,
         radioImageState2,
         dogProfileState,

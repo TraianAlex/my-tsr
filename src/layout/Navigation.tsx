@@ -8,6 +8,7 @@ export const Navigation: React.FC<NavProps> = ({
   filter,
   map,
   todo,
+  todos,
   radioImage,
   radioImage2,
   friends,
@@ -40,6 +41,7 @@ export const Navigation: React.FC<NavProps> = ({
           <NavDropdown title="Apps" id="basic-nav-dropdown">
             <NavDropdown.Item {...googleSheets}>Google Sheets</NavDropdown.Item>
             <NavDropdown.Item {...todo}>Todo</NavDropdown.Item>
+            <NavDropdown.Item {...todos}>Todo-store</NavDropdown.Item>
             <NavDropdown.Item {...watchList}>Watch List</NavDropdown.Item>
             <NavDropdown.Item {...listInvited}>List Invited</NavDropdown.Item>
             <NavDropdown.Divider />
