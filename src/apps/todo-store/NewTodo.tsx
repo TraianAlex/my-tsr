@@ -1,12 +1,17 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
+import { useSelector } from '../../utils/store';
+import { todoStore } from './Todos';
 
 type NewTodoProps = {
   onAddTodo: (todoText: string) => void;
+  createList: (text: string) => void;
 };
 
-const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo }) => {
+const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo, createList }) => {
+  const user = useSelector(todoStore, 'user');
   const textInputRef = useRef<HTMLInputElement>(null);
+  const listInputRef = useRef<HTMLInputElement>(null);
 
   const todoSubmitHandler = (event: React.FormEvent) => {
     event.preventDefault();
@@ -19,25 +24,54 @@ const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo }) => {
     textInputRef.current!.value = '';
   };
 
+  const createListHandler = (event: React.FormEvent) => {
+    event.preventDefault();
+    const enteredText = listInputRef.current!.value;
+    if (enteredText === '') {
+      alert('Enter text');
+      return;
+    }
+    createList(enteredText);
+    listInputRef.current!.value = '';
+  };
+
   console.log('render NewTodoForm');
 
   return (
-    <FormStyled onSubmit={todoSubmitHandler}>
+    <>
+      <FormStyled onSubmit={todoSubmitHandler}>
+        <div className="formControl">
+          <label htmlFor="todo-text" className="label">
+            Todo {user}
+          </label>
+          <input
+            type="text"
+            id="todo-list"
+            ref={textInputRef}
+            className="input"
+          />
+        </div>
+        <button type="submit" className="button">
+          ADD TODO
+        </button>
+      </FormStyled>
+      <FormStyled onSubmit={createListHandler}>
       <div className="formControl">
-        <label htmlFor="todo-text" className="label">
-          Todo
-        </label>
-        <input
-          type="text"
-          id="todo-text"
-          ref={textInputRef}
-          className="input"
-        />
-      </div>
-      <button type="submit" className="button">
-        ADD TODO
-      </button>
-    </FormStyled>
+          <label htmlFor="todo-text" className="label">
+            Todo {user}
+          </label>
+          <input
+            type="text"
+            id="todo-text"
+            ref={listInputRef}
+            className="input"
+          />
+        </div>
+        <button type="submit" className="button">
+          ADD TO LIST
+        </button>
+      </FormStyled>
+    </>
   );
 };
 

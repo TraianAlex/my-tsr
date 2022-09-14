@@ -4,16 +4,34 @@ import TodoList from './TodoList';
 import NewTodoForm from './NewTodo';
 import { Container } from 'react-bootstrap';
 import { Decoration } from './Decoration';
+import { Count } from './Count';
+import { List } from './List';
 
-interface TodoState {
+interface TodosState {
   id: string;
   text: string;
 }
 
-export const todoStore = createStore({ todos: [], decoration: '12345567' });
+// type State = {
+//   todos: TodosState[];
+//   decoration: string;
+//   count: number;
+//   user: string;
+//   list: string[];
+// }
+
+export const todoStore = createStore({
+  todos: [],
+  decoration: 'xxxxxxxxxxxxxxxxxxxxxx',
+  count: 0,
+  user: '',
+  list: [],
+});
 const { getState, setState } = todoStore;
 
 export const Todos: React.FC = () => {
+  setState({ ...getState(), user: 'Alex' });
+
   const todoAddHandler = (text: string) => {
     setState({
       ...getState(),
@@ -21,6 +39,14 @@ export const Todos: React.FC = () => {
         ...getState().todos,
         { id: Math.random().toString(), text: text },
       ],
+      count: getState().count + 1,
+    });
+  };
+
+  const createList = (text: string) => {
+    setState({
+      ...getState(),
+      list: [...getState().list, text],
     });
   };
 
@@ -28,8 +54,9 @@ export const Todos: React.FC = () => {
     setState({
       ...getState(),
       todos: [
-        ...getState().todos.filter((todo: TodoState) => todo.id !== todoId),
+        ...getState().todos.filter((todo: TodosState) => todo.id !== todoId),
       ],
+      count: getState().count - 1,
     });
   };
 
@@ -37,8 +64,10 @@ export const Todos: React.FC = () => {
 
   return (
     <Container>
-      <NewTodoForm onAddTodo={todoAddHandler} />
+      <NewTodoForm onAddTodo={todoAddHandler} createList={createList} />
+      <List />
       <Decoration />
+      <Count />
       <TodoList onDeleteTodo={todoDeleteHandler} />
     </Container>
   );

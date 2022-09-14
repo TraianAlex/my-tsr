@@ -1,9 +1,9 @@
 import React from 'react';
-import { useStoreItem } from '../../utils/store';
+import { useSelector } from '../../utils/store';
 import { todoStore } from './Todos';
 
 export const Decoration = () => {
-  const decor = useStoreItem(todoStore, 'decoration');
+  const decor = useSelector(todoStore, 'decoration');
 
   console.log('render Decoration');
 

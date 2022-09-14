@@ -1,5 +1,5 @@
 import React from 'react';
-import { useStoreItem } from '../../utils/store';
+import { useSelector } from '../../utils/store';
 import { todoStore } from './Todos';
 import styled from 'styled-components';
 
@@ -8,7 +8,7 @@ interface TodoListProps {
 }
 
 const TodoList: React.FC<TodoListProps> = ({ onDeleteTodo }) => {
-  const todos = useStoreItem(todoStore, 'todos');
+  const todos = useSelector(todoStore, 'todos');
 
   console.log('render TodoList', todos, typeof todos);
 

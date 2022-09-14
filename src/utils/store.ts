@@ -36,7 +36,7 @@ export const useStore = (store: Store, selector = (state: State) => state) => {
   return state;
 };
 
-export const useStoreItem = (store: Store, item: string | number) => 
+export const useSelector = (store: Store, item: string | number) => 
   useStore(store, (state) => state[item]);
 
 // export const useStore = (store, selector = (state) => state) =>
