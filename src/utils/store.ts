@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 type State = Record<string, any>;
+type Selector<State> = (state: State) => any;
 
 type Store = {
   getState: () => State;
@@ -24,7 +25,10 @@ export const createStore = (initialState: State): Store => {
   };
 };
 
-export const useStore = (store: Store, selector = (state: State) => state) => {
+export const useStore = (
+  store: Store,
+  selector: Selector<State> = (state: State) => state,
+) => {
   const { getState, subscribe } = store;
   const [state, setState] = useState(selector(getState()));
 
