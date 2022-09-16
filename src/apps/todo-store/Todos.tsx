@@ -12,13 +12,13 @@ interface TodosState {
   text: string;
 }
 
-// type State = {
-//   todos: TodosState[];
-//   decoration: string;
-//   count: number;
-//   user: string;
-//   list: string[];
-// }
+type State = {
+  todos: TodosState[];
+  decoration: string;
+  count: number;
+  user: string;
+  list: string[];
+}
 
 export const todoStore = createStore({
   todos: [],
@@ -26,7 +26,7 @@ export const todoStore = createStore({
   count: 0,
   user: '',
   list: [],
-});
+} as State);
 const { getState, setState } = todoStore;
 
 export const Todos: React.FC = () => {

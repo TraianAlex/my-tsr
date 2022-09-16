@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-type State = any;
+type State = Record<string, any>;
 
 type Store = {
   getState: () => State;
@@ -15,7 +15,7 @@ export const createStore = (initialState: State): Store => {
     getState: () => currentState,
     setState: (newState) => {
       currentState = newState;
-      listeners.forEach((listener: State) => listener(currentState));
+      listeners.forEach((listener: any) => listener(currentState));
     },
     subscribe: (listener: State) => {
       listeners.add(listener);
@@ -36,8 +36,19 @@ export const useStore = (store: Store, selector = (state: State) => state) => {
   return state;
 };
 
-export const useSelector = (store: Store, item: string | number) => 
+export const useSelector = (store: Store, item: string | number) =>
   useStore(store, (state) => state[item]);
 
+// Too many renders
+// export const useStoreRaw = (store: Store) => {
+//   const { getState, subscribe } = store;
+//   const [state, setState] = useState(getState());
+
+//   useEffect(() => subscribe(setState), [subscribe]);
+
+//   return state;
+// };
+
+// React 18 only
 // export const useStore = (store, selector = (state) => state) =>
 //   useSyncExternalStore(store.subscribe, () => selector(store.getState()));
