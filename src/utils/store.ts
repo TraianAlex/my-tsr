@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 type State = Record<string, any>;
-type Selector<State> = (state: State) => any;
+type Selector<State> = (state: State) => State;
 
 type Store = {
   getState: () => State;
@@ -15,7 +15,7 @@ export const createStore = (initialState: State): Store => {
   return {
     getState: () => currentState,
     setState: (newState) => {
-      currentState = newState;
+      currentState = { ...currentState, ...newState };
       listeners.forEach((listener: any) => listener(currentState));
     },
     subscribe: (listener: State) => {

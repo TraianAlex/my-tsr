@@ -10,11 +10,11 @@ interface TodoListProps {
 const TodoList: React.FC<TodoListProps> = ({ onDeleteTodo }) => {
   const todos = useSelector(todoStore, 'todos');
 
-  console.log('render TodoList', todos, typeof todos);
+  console.log('render TodoList');
 
   return (
     <ListStyled>
-      {todos.map((todo: any) => (
+      {todos?.map((todo: any) => (
         <li key={todo.id}>
           <span>{todo.text}</span>
           <button onClick={onDeleteTodo.bind(null, todo.id)}>DELETE</button>

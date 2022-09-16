@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { useSelector } from '../../utils/store';
 import { todoStore } from './Todos';
 
@@ -7,7 +7,11 @@ export const List = () => {
 
   console.log('render List');
 
-  return list.map((item: string) => (
-    <span key={Math.random()}>{item} / </span>
-  ));
-}
+  return (
+    <>
+      {list?.map((item: string) => (
+        <span key={Math.random()}>{item} / </span>
+      ))}
+    </>
+  );
+};

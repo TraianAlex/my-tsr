@@ -18,7 +18,7 @@ type State = {
   count: number;
   user: string;
   list: string[];
-}
+};
 
 export const todoStore = createStore({
   todos: [],
@@ -30,11 +30,10 @@ export const todoStore = createStore({
 const { getState, setState } = todoStore;
 
 export const Todos: React.FC = () => {
-  setState({ ...getState(), user: 'Alex' });
+  setState({ user: 'Alex' });
 
   const todoAddHandler = (text: string) => {
     setState({
-      ...getState(),
       todos: [
         ...getState().todos,
         { id: Math.random().toString(), text: text },
@@ -45,14 +44,12 @@ export const Todos: React.FC = () => {
 
   const createList = (text: string) => {
     setState({
-      ...getState(),
       list: [...getState().list, text],
     });
   };
 
   const todoDeleteHandler = (todoId: string) => {
     setState({
-      ...getState(),
       todos: [
         ...getState().todos.filter((todo: TodosState) => todo.id !== todoId),
       ],
