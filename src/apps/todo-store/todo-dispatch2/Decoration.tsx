@@ -7,14 +7,14 @@ export const Decoration = () => {
 
   //const { title, todos } = useStoreRaw(todoStore);
 
-  const { user } = useTest();
+  const { testFunction2 } = useTest();
 
   console.log('render title');
 
   return (
     <>
       <div>
-        {title} {user}
+        {title} {testFunction2()}
       </div>
       <div>{}</div>
     </>

@@ -5,7 +5,7 @@ import { todoStore } from './TodoStore';
 export const List = () => {
   const list = useSelector(todoStore, 'list');
 
-  console.log('render List');
+  console.log('render List', list);
 
   return (
     <>

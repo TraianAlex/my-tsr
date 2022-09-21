@@ -101,11 +101,19 @@ export const todoStore = createStore(initialState, todoReducer);
 export const useTest = () => {
   const user = useSelector(todoStore, 'user');
 
-  return { user };
+  const testFunction2 = () => {
+    return `${user} is ok`;
+  };
+
+  return { testFunction2 };
 };
 
 export const useTest2 = () => {
   const count2 = useSelector(todoStore, 'count2');
 
-  return { count2 };
+  const testFunction1 = () => {
+    return `${count2} increased`;
+  }
+
+  return { testFunction1 };
 };

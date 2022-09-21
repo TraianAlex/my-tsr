@@ -2,9 +2,9 @@ import React from 'react';
 import { useTest2 } from './TodoStore';
 
 export const Header = () => {
-  const { count2 } = useTest2();
+  const { testFunction1 } = useTest2();
 
-  console.log('render header');
+  console.log('render header', testFunction1());
 
-  return <div>Header {count2}</div>;
+  return <div>Header {testFunction1()}</div>;
 };
