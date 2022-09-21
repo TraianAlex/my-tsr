@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import { useSelector } from '../../utils/store';
-import { todoStore } from './Todos';
+import { useSelector } from './store';
+import { todoStore } from './TodoStore';
 
 type NewTodoProps = {
   onAddTodo: (todoText: string) => void;
@@ -58,7 +58,7 @@ const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo, createList }) => {
       <FormStyled onSubmit={createListHandler}>
       <div className="formControl">
           <label htmlFor="todo-text" className="label">
-            Todo {user}
+            Todo {"user"}
           </label>
           <input
             type="text"

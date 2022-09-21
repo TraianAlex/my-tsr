@@ -1,16 +1,13 @@
 import React from 'react';
-import { useSelector } from '../../utils/store';
-import { todoStore } from './Todos';
 import styled from 'styled-components';
 
 interface TodoListProps {
   onDeleteTodo: (id: string) => void;
+  todos: { id: string; text: string }[];
 }
 
-const TodoList: React.FC<TodoListProps> = ({ onDeleteTodo }) => {
-  const todos = useSelector(todoStore, 'todos');
-
-  console.log('render TodoList');
+const TodoList: React.FC<TodoListProps> = ({ todos, onDeleteTodo }) => {
+  console.log('render TodoList', todos);
 
   return (
     <ListStyled>

@@ -17,7 +17,7 @@ import TableApp from './table/TableApp';
 import Filterjs from './components/tables/Filterjs';
 import Map from './components/Map';
 import { Todo } from './apps/todolist/Todo';
-import { Todos } from './apps/todo-store/Todos';
+import { TodoApp } from './apps/todo-store/TodoApp';
 import RadioImageApp from './components/compound-components/RadioImageApp';
 import RadioImageApp2 from './components/flexible-compound-components/RadioImageApp';
 import Profile from './components/provider-pattern/Profile';
@@ -32,7 +32,7 @@ const config = (router: any) => {
   router.urlService.rules.initial({ state: 'home' });
   // Setup the state visualizer
   // visualizer(router);
-}
+};
 
 export type NavProps = {
   home: object;
@@ -108,7 +108,11 @@ const filterjsState: LinkState = {
 };
 const mapState: LinkState = { name: 'map', url: '/map', component: Map };
 const todoState: LinkState = { name: 'todo', url: '/todo', component: Todo };
-const todosState: LinkState = { name: 'todos', url: '/todos', component: Todos };
+const todosState: LinkState = {
+  name: 'todos',
+  url: '/todos',
+  component: TodoApp,
+};
 const radioImageState: LinkState = {
   name: 'radioImage',
   url: '/radio-image',
