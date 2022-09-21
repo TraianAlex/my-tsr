@@ -68,10 +68,10 @@ export const resolveEach =
  * type your initial state
  * -------------------------------------
  * type TodosType = {
- *  todos: TodosState[]; (interface TodosState { id: string; text: string })
+ *  todos: Map<string, number | string>[];
  *  count: number;
  *  user: string;
- *  list: string[];
+ *  list: sList<string | number>[];
  * };
  * -------------------------------------
  * create the initial state with default values
