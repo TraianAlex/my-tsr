@@ -1,17 +1,12 @@
-import Immutable, { Map } from 'immutable';
+import Immutable, { Map, List } from 'immutable';
 import { IAction, createStore, Reducer, State, resolveEach } from './store';
 
-interface TodosState {
-  id: string;
-  text: string;
-}
-
 type TodosType = {
-  todos: TodosState[];
+  todos: Map<string, number | string>[];
   title: string;
   count: number;
   user: string;
-  list: string[];
+  list: List<string | number>[];
 };
 
 const initialState = Immutable.fromJS({
