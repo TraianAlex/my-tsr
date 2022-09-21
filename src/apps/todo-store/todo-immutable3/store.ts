@@ -146,9 +146,11 @@ export const resolveEach =
   * (not in the same time and in the same component with useSelector)
   * return the entire store - good for debugging or when all state need in the same file
    const todos = useStoreRaw(todoStore).get('todos'); OR
+   const { todos, list, count, user} = useStoreRaw(todoStore).toJS(); OR
    const state = useStoreRaw(todoStore);
    const todos = state.get('todos').toJS();
-   const title = state.get('title);
+   const title = state.get('title); 
+
 */
 
 // React 18 only
