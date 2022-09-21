@@ -93,7 +93,7 @@ export const useStoreRaw = (store: Store) => {
   * this will render only the component that consume this part of state
    const todos = useSelector(todoStore, 'todos');
 
-  * OR *(not in the same time and in the same component with useSelector)
+  * OR - not recomended (not in the same time and in the same component with useSelector)
   * return the entire store - good for debugging or when all state need in the same file
   * the component will always render
    const { todos, count, user, list } = useStoreRaw(todoState);
