@@ -54,7 +54,6 @@ const useStore = (
 export const useSelector = (store: Store, item: string | number) =>
   useStore(store, (state) => state[item]);
 
-// Too many renders if you use in the same file with useSelector
 export const useStoreRaw = (store: Store) => {
   const { getState, subscribe } = store;
   const [state, setState] = useState(getState());

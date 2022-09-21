@@ -1,12 +1,14 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { useSelector } from './store';
-import { todoStore } from './TodoStore';
+import { SET_COUNT, SET_COUNT2, todoStore } from './TodoStore';
 
 type NewTodoProps = {
   onAddTodo: (todoText: string) => void;
   createList: (text: string) => void;
 };
+
+const { dispatch } = todoStore;
 
 const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo, createList }) => {
   const user = useSelector(todoStore, 'user');
@@ -17,7 +19,7 @@ const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo, createList }) => {
     event.preventDefault();
     const enteredText = textInputRef.current!.value;
     if (enteredText === '') {
-      alert('Enter text');
+      onAddTodo('test');
       return;
     }
     onAddTodo(enteredText);
@@ -28,11 +30,19 @@ const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo, createList }) => {
     event.preventDefault();
     const enteredText = listInputRef.current!.value;
     if (enteredText === '') {
-      alert('Enter text');
+      createList('test');
       return;
     }
     createList(enteredText);
     listInputRef.current!.value = '';
+  };
+
+  const handleClick1 = () => {
+    dispatch({ type: SET_COUNT, value: 1 });
+  };
+
+  const handleClick2 = () => {
+    dispatch({ type: SET_COUNT2, value: 1 });
   };
 
   console.log('render NewTodoForm');
@@ -50,15 +60,18 @@ const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo, createList }) => {
             ref={textInputRef}
             className="input"
           />
-        </div>
+        </div>{' '}
         <button type="submit" className="button">
           ADD TODO
         </button>
+        <button onClick={handleClick1} type="button" className="button">
+          COUNT1
+        </button>
       </FormStyled>
       <FormStyled onSubmit={createListHandler}>
-      <div className="formControl">
+        <div className="formControl">
           <label htmlFor="todo-text" className="label">
-            Todo {"user"}
+            Todo {'user'}
           </label>
           <input
             type="text"
@@ -69,6 +82,9 @@ const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo, createList }) => {
         </div>
         <button type="submit" className="button">
           ADD TO LIST
+        </button>
+        <button onClick={handleClick2} type="button" className="button">
+          COUNT2
         </button>
       </FormStyled>
     </>
@@ -117,6 +133,7 @@ const FormStyled = styled.form`
     color: white;
     padding: 0.3rem 1rem;
     cursor: pointer;
+    margin-right: 0.1rem;
   }
 
   button:focus {

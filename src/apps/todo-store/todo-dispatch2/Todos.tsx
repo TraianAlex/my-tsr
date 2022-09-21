@@ -12,6 +12,7 @@ import { Container } from 'react-bootstrap';
 import { Decoration } from './Decoration';
 import { Count } from './Count';
 import { List } from './List';
+import { Header } from './Header';
 
 const { dispatch } = todoStore;
 
@@ -35,6 +36,7 @@ const Todos: React.FC = () => {
   return (
     <Container>
       <Decoration />
+      <Header />
       <NewTodoForm onAddTodo={todoAddHandler} createList={createList} />
       <List />
       <Count />
