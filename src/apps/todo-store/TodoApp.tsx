@@ -12,9 +12,9 @@ export const TodoApp = () => {
     <>
       <MenuStyled>
         <ul>
-          <li onClick={() => setPage('standard')}>Default |</li>
-          <li onClick={() => setPage('set-state')}>SetState |</li>
-          <li onClick={() => setPage('dispatch')}>Dispatch |</li>
+          <li onClick={() => setPage('standard')}>Default</li>
+          <li onClick={() => setPage('set-state')}>SetState</li>
+          <li onClick={() => setPage('dispatch')}>Dispatch</li>
           <li onClick={() => setPage('immutable')}>Immutable</li>
         </ul>
       </MenuStyled>
@@ -30,5 +30,13 @@ const MenuStyled = styled.nav`
 ul {
   display: flex;
   align-items: center;
+}
+
+li {
+  margin: 0 5px;
+  padding: 0 5px;
+  background-color: #50005a;
+  color: white;
+  cursor: pointer;
 }
 `;

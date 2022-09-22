@@ -96,9 +96,9 @@ export default NewTodoForm;
 const FormStyled = styled.form`
   display: flex;
   align-items: center;
-  width: 90%;
+  width: 100%;
   max-width: 40rem;
-  margin: 2rem auto;
+  margin: 1rem auto;
 
   .formControl {
     display: flex;

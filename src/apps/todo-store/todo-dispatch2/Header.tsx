@@ -1,10 +1,18 @@
 import React from 'react';
 import { useTest2 } from './TodoStore';
+import { Decoration } from './Decoration';
 
 export const Header = () => {
-  const { testFunction1 } = useTest2();
+  const { countingDirection } = useTest2();
 
-  console.log('render header', testFunction1());
+  console.log('render header');
 
-  return <div>Header {testFunction1()}</div>;
+  return (
+    <div>
+      Header {countingDirection()}
+      <div>
+        <Decoration />
+      </div>
+    </div>
+  );
 };
