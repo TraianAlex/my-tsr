@@ -1,11 +1,11 @@
 import React, { memo } from 'react';
-import { useSelector } from './store';
+import { useSelector, useStoreRaw } from './store';
 import { todoStore, useTest } from './TodoStore';
 
 export const Decoration = memo(() => {
   const title = useSelector(todoStore, 'title');
 
-  //const { title, todos } = useStoreRaw(todoStore);
+  const { todos } = useStoreRaw(todoStore);
 
   const { userStatus } = useTest();
 
@@ -16,7 +16,7 @@ export const Decoration = memo(() => {
       <div>
         {title} {userStatus()}
       </div>
-      <div>{}</div>
+      <div>{JSON.stringify(todos)}</div>
     </>
   );
 });
