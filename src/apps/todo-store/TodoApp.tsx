@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import TodosStandard from './todo-standard/Todos';
 import TodosSetState from './todo-setstate1/Todos';
 import TodosSetState2 from './todo-setstate2/Todos';
-import TodosDispatch from './todo-dispatch2/Todos';
-import TodosImmutable from './todo-immutable3/Todos';
+import TodosDispatch from './todo-dispatch/Todos';
+import TodosImmutable from './todo-immutable/Todos';
 
 export const TodoApp = () => {
   const [page, setPage] = useState('standard');
