@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import { useSelector } from './store';
-import { todoStore } from './TodoStore';
+import { useGlobalState } from './TodoStore';
 
 type NewTodoProps = {
   onAddTodo: (todoText: string) => void;
@@ -9,7 +8,7 @@ type NewTodoProps = {
 };
 
 const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo, createList }) => {
-  const user = useSelector(todoStore, 'user');
+  const user = useGlobalState('user');
   const textInputRef = useRef<HTMLInputElement>(null);
   const listInputRef = useRef<HTMLInputElement>(null);
 

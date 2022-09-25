@@ -1,9 +1,8 @@
 import React from 'react';
-import { useSelector } from './store';
-import { todoStore } from './TodoStore';
+import { useGlobalState } from './TodoStore';
 
 export const List = () => {
-  const list = useSelector(todoStore, 'list');
+  const [ list ] = useGlobalState('list');
 
   console.log('render List');
 

@@ -1,4 +1,4 @@
-import { createStore } from './store';
+import { createGlobalState } from './createGlobalState';
 
 export interface TodosState {
   id: string;
@@ -21,30 +21,27 @@ const initialState: TodosType = {
   list: [],
 };
 
-export const todoStore = createStore(initialState);
+const { setGlobalState, useGlobalState } = createGlobalState(initialState);
 
-const { getState, setState } = todoStore;
-
-setState({ user: 'Alex2' });
+setGlobalState('user', 'Alex2');
 
 export const todoAddHandler = (text: string) => {
-  setState({
-    todos: [...getState().todos, { id: Math.random().toString(), text: text }],
-    count: getState().count + 1,
-  });
+  setGlobalState('todos', (v) => [
+    ...v,
+    { id: Math.random().toString(), text: text },
+  ]);
+  setGlobalState('count', (v) => v + 1);
 };
 
 export const createList = (text: string) => {
-  setState({
-    list: [...getState().list, text],
-  });
+  setGlobalState('list', (v) => [...v, text]);
 };
 
 export const todoDeleteHandler = (todoId: string) => {
-  setState({
-    todos: [
-      ...getState().todos.filter((todo: TodosState) => todo.id !== todoId),
-    ],
-    count: getState().count - 1,
-  });
+  setGlobalState('todos', (v) =>
+    v.filter((todo: TodosState) => todo.id !== todoId),
+  );
+  setGlobalState('count', (v) => v - 1);
 };
+
+export { useGlobalState };

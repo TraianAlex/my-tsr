@@ -1,6 +1,5 @@
 import React from 'react';
-import { useSelector } from './store';
-import { todoStore } from './TodoStore';
+import { useGlobalState } from './TodoStore';
 import styled from 'styled-components';
 
 interface TodoListProps {
@@ -8,7 +7,7 @@ interface TodoListProps {
 }
 
 const TodoList: React.FC<TodoListProps> = ({ onDeleteTodo }) => {
-  const todos = useSelector(todoStore, 'todos');
+  const [ todos ] = useGlobalState('todos');
 
   console.log('render TodoList', todos);
 
