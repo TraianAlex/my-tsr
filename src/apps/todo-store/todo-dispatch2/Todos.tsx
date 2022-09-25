@@ -16,21 +16,21 @@ import { Header } from './Header';
 
 const { dispatch } = todoStore;
 
+dispatch({ type: SET_USER, value: 'Alex' });
+
+const todoAddHandler = (text: string) => {
+  dispatch({ type: ADD_TODO, value: text });
+};
+
+const createList = (text: string) => {
+  dispatch({ type: ADD_LIST, value: text });
+};
+
+const todoDeleteHandler = (todoId: string) => {
+  dispatch({ type: DELETE_TODO, value: todoId });
+};
+
 const Todos: React.FC = () => {
-  dispatch({ type: SET_USER, value: 'Alex' });
-
-  const todoAddHandler = (text: string) => {
-    dispatch({ type: ADD_TODO, value: text });
-  };
-
-  const createList = (text: string) => {
-    dispatch({ type: ADD_LIST, value: text });
-  };
-
-  const todoDeleteHandler = (todoId: string) => {
-    dispatch({ type: DELETE_TODO, value: todoId });
-  };
-
   console.log('render Todos');
 
   return (
