@@ -30,16 +30,17 @@ export const TodoApp = () => {
 };
 
 const MenuStyled = styled.nav`
-ul {
-  display: flex;
-  align-items: center;
-}
+  ul {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
 
-li {
-  margin: 0 5px;
-  padding: 0 5px;
-  background-color: #50005a;
-  color: white;
-  cursor: pointer;
-}
+  li {
+    margin: 0 5px 4px 0;
+    padding: 0 5px;
+    background-color: #50005a;
+    color: white;
+    cursor: pointer;
+  }
 `;
