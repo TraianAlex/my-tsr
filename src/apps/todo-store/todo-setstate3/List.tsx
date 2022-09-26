@@ -8,10 +8,10 @@ export const List = () => {
   console.log('render List');
 
   return (
-    <>
-      {list?.map((item: string) => (
-        <span key={Math.random()}>{item} / </span>
+    <div style={{ width: '90%', margin: 'auto'}}>
+      {list?.map((item: string, i: number) => (
+        <span key={Math.random()}>{item} {i+1} / </span>
       ))}
-    </>
+    </div>
   );
 };

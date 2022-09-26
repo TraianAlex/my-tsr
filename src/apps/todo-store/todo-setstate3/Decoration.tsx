@@ -8,9 +8,9 @@ export const Decoration = () => {
   console.log('render Title');
 
   return (
-    <>
+    <div style={{ width: '90%', margin: 'auto'}}>
       <div>{decor}</div>
       <div>{}</div>
-    </>
+    </div>
   );
 };

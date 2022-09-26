@@ -7,5 +7,5 @@ export const Count = () => {
 
   console.log('render Count', count);
 
-  return <div>{count} rows</div>;
+  return <div style={{ width: '90%', margin: 'auto' }}>{count} rows</div>;
 };

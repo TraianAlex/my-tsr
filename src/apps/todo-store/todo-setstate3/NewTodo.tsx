@@ -16,9 +16,8 @@ const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo, createList }) => {
   const todoSubmitHandler = (event: React.FormEvent) => {
     event.preventDefault();
     const enteredText = textInputRef.current!.value;
-    let count = 0;
     if (enteredText === '') {
-      onAddTodo(`test ${count++}`);
+      onAddTodo('test');
       return;
     }
     onAddTodo(enteredText);
@@ -83,7 +82,7 @@ const FormStyled = styled.form`
   align-items: center;
   width: 90%;
   max-width: 40rem;
-  margin: 2rem auto;
+  margin: 1rem auto;
 
   .formControl {
     display: flex;
