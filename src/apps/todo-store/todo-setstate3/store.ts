@@ -32,9 +32,7 @@ export const createStore = (initialState: State) => {
     return () => listeners.delete(listener);
   };
 
-  const useStore = (
-    selector: Selector<State> = (state: State) => state,
-  ) => {
+  const useStore = (selector: Selector<State> = (state: State) => state) => {
     const [state, setState] = useState(selector(getState()));
 
     useEffect(() => {
@@ -44,8 +42,8 @@ export const createStore = (initialState: State) => {
     return state;
   };
 
-  const useSelector = (item: string | number) =>
-    useStore((state) => state[item]);
+  const useSelector = <StateKey extends StateKeys>(stateKey: StateKey) =>
+    useStore((state) => state[stateKey]);
 
   return { setState, useSelector };
 };
