@@ -21,9 +21,7 @@ const initialState: TodosType = {
   list: [],
 };
 
-export const todoStore = createStore(initialState);
-
-const { getState, setState } = todoStore;
+const { getState, setState, useSelector } = createStore(initialState);
 
 setState({ user: 'Alex' });
 
@@ -48,3 +46,5 @@ export const todoDeleteHandler = (todoId: string) => {
     count: getState().count - 1,
   });
 };
+
+export { useSelector };

@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 
-export type State = Record<string, any>;
+type State = Record<string, any>;
 type Selector<State> = (state: State) => State;
-export type Action = { type: string; value?: any };
 
 type Store = {
   getState: () => State;
   setState: (newState: State) => void;
-  subscribe: (listener: State) => void;
+  useSelector: (selector: string | number) => State;
 };
 
 export const createStore = (initialState: State): Store => {
@@ -26,36 +25,31 @@ export const createStore = (initialState: State): Store => {
     return () => listeners.delete(listener);
   };
 
-  return { getState, setState, subscribe };
+  const useStore = (selector: Selector<State> = (state: State) => state) => {
+    const [state, setState] = useState(selector(getState()));
+
+    useEffect(() => {
+      subscribe((state: State) => setState(selector(state)));
+    }, [selector]);
+
+    return state;
+  };
+
+  const useSelector = (item: string | number) =>
+    useStore((state) => state[item]);
+
+  return { getState, setState, useSelector };
 };
-
-const useStore = (
-  store: Store,
-  selector: Selector<State> = (state: State) => state,
-) => {
-  const { getState, subscribe } = store;
-  const [state, setState] = useState(selector(getState()));
-
-  useEffect(
-    () => subscribe((state: State) => setState(selector(state))),
-    [selector, subscribe],
-  );
-
-  return state;
-};
-
-export const useSelector = (store: Store, item: string | number) =>
-  useStore(store, (state) => state[item]);
 
 /// Too many renders if you use in the same file with useSelector
-export const useStoreRaw = (store: Store) => {
-  const { getState, subscribe } = store;
-  const [state, setState] = useState(getState());
+// export const useStoreRaw = (store: Store) => {
+//   const { getState, subscribe } = store;
+//   const [state, setState] = useState(getState());
 
-  useEffect(() => subscribe(setState), [subscribe]);
+//   useEffect(() => subscribe(setState), [subscribe]);
 
-  return state;
-};
+//   return state;
+// };
 
 /*************************** CONFIG *********************************
  * type your initial state
@@ -79,11 +73,10 @@ export const useStoreRaw = (store: Store) => {
  * -------------------------------------
  * create the store
  * -------------------------------------
- * export const todoStore = createStore(initialState);
+ * export const { getState, setState, useSelector } = createStore(initialState);
  *----------------------------------------
  **************************** USAGE ***************************
  *** WRITE ***
-   const { getState, setState } = todoStore;
    setState({
       todos: [
         ...getState().todos,
@@ -94,12 +87,7 @@ export const useStoreRaw = (store: Store) => {
 
   *** READ *** - recomended when a peace of state need to use - 
   * this will render only the component that consume this part of state
-   const todos = useSelector(todoStore, 'todos');
-
-  * OR - not recomended (not in the same time and in the same component with useSelector)
-  * return the entire store - good for debugging or when all state need in the same file
-  * the component will always render
-   const { todos, count, user, list } = useStoreRaw(todoState);
+   const todos = useSelector('todos');
 */
 
 // React 18 only

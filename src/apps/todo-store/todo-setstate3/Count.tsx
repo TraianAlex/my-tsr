@@ -1,9 +1,8 @@
 import React from 'react';
-import { useSelector } from './store';
-import { todoStore } from './TodoStore';
+import { useSelector } from './TodoStore';
 
 export const Count = () => {
-  const count = useSelector(todoStore, 'count');
+  const count = useSelector('count');
 
   console.log('render Count', count);
 
