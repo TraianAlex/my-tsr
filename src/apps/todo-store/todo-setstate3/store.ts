@@ -13,17 +13,20 @@ type Store = {
 export const createStore = (initialState: State): Store => {
   let state = initialState;
   const listeners = new Set();
-  return {
-    getState: () => state,
-    setState: (newState) => {
-      state = { ...state, ...newState };
-      listeners.forEach((listener: any) => listener(state));
-    },
-    subscribe: (listener: State) => {
-      listeners.add(listener);
-      return () => listeners.delete(listener);
-    },
+
+  const getState = () => state;
+
+  const setState = (newState: any) => {
+    state = { ...state, ...newState };
+    listeners.forEach((listener: any) => listener(state));
   };
+
+  const subscribe = (listener: State) => {
+    listeners.add(listener);
+    return () => listeners.delete(listener);
+  };
+
+  return { getState, setState, subscribe };
 };
 
 const useStore = (
