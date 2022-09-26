@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import TodosStandard from './todo-standard/Todos';
 import TodosSetState from './todo-setstate1/Todos';
 import TodosSetState2 from './todo-setstate2/Todos';
+import TodosSetState3 from './todo-setstate3/Todos';
 import TodosDispatch from './todo-dispatch/Todos';
 import TodosImmutable from './todo-immutable/Todos';
 
@@ -16,6 +17,7 @@ export const TodoApp = () => {
           <li onClick={() => setPage('standard')}>Default</li>
           <li onClick={() => setPage('set-state')}>SetState</li>
           <li onClick={() => setPage('set-state2')}>SetState2</li>
+          <li onClick={() => setPage('set-state3')}>SetState3</li>
           <li onClick={() => setPage('dispatch')}>Dispatch</li>
           <li onClick={() => setPage('immutable')}>Immutable</li>
         </ul>
@@ -23,6 +25,7 @@ export const TodoApp = () => {
       {page === 'standard' && <TodosStandard />}
       {page === 'set-state' && <TodosSetState />}
       {page === 'set-state2' && <TodosSetState2 />}
+      {page === 'set-state3' && <TodosSetState3 />}
       {page === 'dispatch' && <TodosDispatch />}
       {page === 'immutable' && <TodosImmutable />}
     </>
