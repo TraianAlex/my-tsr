@@ -21,30 +21,27 @@ const initialState: TodosType = {
   list: [],
 };
 
-const { getState, setState, useSelector } = createStore(initialState);
+const { setState, useSelector } = createStore(initialState);
 
-setState({ user: 'Alex' });
+setState('user', 'Alex');
 
 export const todoAddHandler = (text: string) => {
-  setState({
-    todos: [...getState().todos, { id: Math.random().toString(), text: text }],
-    count: getState().count + 1,
-  });
+  setState('todos', (p: any) => [
+    ...p,
+    { id: Math.random().toString(), text: text },
+  ]);
+  setState('count', (p: any) => p + 1);
 };
 
 export const createList = (text: string) => {
-  setState({
-    list: [...getState().list, text],
-  });
+  setState('list', (p: any) => [...p, text]);
 };
 
 export const todoDeleteHandler = (todoId: string) => {
-  setState({
-    todos: [
-      ...getState().todos.filter((todo: TodosState) => todo.id !== todoId),
-    ],
-    count: getState().count - 1,
-  });
+  setState('todos', (p: any) => [
+    ...p.filter((todo: TodosState) => todo.id !== todoId),
+  ]);
+  setState('count', (p: any) => p - 1);
 };
 
 export { useSelector };
