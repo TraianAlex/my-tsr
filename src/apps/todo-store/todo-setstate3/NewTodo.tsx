@@ -16,8 +16,9 @@ const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo, createList }) => {
   const todoSubmitHandler = (event: React.FormEvent) => {
     event.preventDefault();
     const enteredText = textInputRef.current!.value;
+    let count = 0;
     if (enteredText === '') {
-      alert('Enter text');
+      onAddTodo(`test ${count++}`);
       return;
     }
     onAddTodo(enteredText);
@@ -28,7 +29,7 @@ const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo, createList }) => {
     event.preventDefault();
     const enteredText = listInputRef.current!.value;
     if (enteredText === '') {
-      alert('Enter text');
+      createList('test');
       return;
     }
     createList(enteredText);
