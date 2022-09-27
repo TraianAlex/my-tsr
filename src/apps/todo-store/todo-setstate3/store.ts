@@ -62,7 +62,6 @@ export const createStore = (initialState: State) => {
  * type TodosType = {
  *  todos: TodosState[]; (interface TodosState { id: string; text: string })
  *  count: number;
- *  user: string;
  *  list: string[];
  * };
  * -------------------------------------
@@ -70,9 +69,7 @@ export const createStore = (initialState: State) => {
  * -------------------------------------
  * const initialState: TodosType = {
  *  todos: [],
- *  title: 'Dispatch',
  *  count: 0,
- *  user: '',
  *  list: [],
  * };
  * -------------------------------------
@@ -81,21 +78,24 @@ export const createStore = (initialState: State) => {
  * export const { setState, useSelector } = createStore(initialState);
  *----------------------------------------
  **************************** USAGE ***************************
- *** WRITE ***
+ *** SET OUTSIDE COMPONENT ***
   setState('todos', (prev: any) => [
     ...prev,
     { id: Math.random().toString(), text: text },
   ]);
   setState('count', (prev: any) => prev + 1);
 
-  *** READ *** - recomended when a peace of state need to use - 
+  export { useSelector };
+
+  *** GET and SET ***
   * this will render only the component that consume this part of state
    const [todos] = useSelector('todos');
    const count = useSelector('count);
 
-  ** get and set like useState
+  ** get and set like useState, use in component
    const [list, setList] = useSelector('list');
-   setList((p: State['list']) => [...p, 'initial list']);
+   setList((prev: State['list']) => [...prev, 'initial list']);
+   return <div>{list.map(item, index) => (<div key={1ndex}>{item}</div>))}</div>
 */
 
 // React 18 only
