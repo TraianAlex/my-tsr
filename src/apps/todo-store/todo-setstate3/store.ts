@@ -1,6 +1,6 @@
-import { useState, useEffect, SetStateAction } from 'react';
+import { useState, useEffect, SetStateAction, useCallback } from 'react';
 
-type State = Record<string, any>;
+export type State = Record<string, any>;
 type StateKeys = keyof State;
 type Selector<State> = (state: State) => State;
 
@@ -42,8 +42,16 @@ export const createStore = (initialState: State) => {
     return state;
   };
 
-  const useSelector = <StateKey extends StateKeys>(stateKey: StateKey) =>
-    useStore((state) => state[stateKey]);
+  const useSelector = <StateKey extends StateKeys>(stateKey: StateKey) => {
+    const selector = useCallback((state: State) => state[stateKey], [stateKey]);
+    const partialState = useStore(selector);
+    const updater = useCallback(
+      (u: SetStateAction<State[StateKey]>) => setState(stateKey, u),
+      [stateKey],
+    );
+
+    return [partialState, updater] as const;
+  };
 
   return { setState, useSelector };
 };
@@ -70,7 +78,7 @@ export const createStore = (initialState: State) => {
  * -------------------------------------
  * create the store
  * -------------------------------------
- * export const { getState, setState, useSelector } = createStore(initialState);
+ * export const { setState, useSelector } = createStore(initialState);
  *----------------------------------------
  **************************** USAGE ***************************
  *** WRITE ***
@@ -82,7 +90,12 @@ export const createStore = (initialState: State) => {
 
   *** READ *** - recomended when a peace of state need to use - 
   * this will render only the component that consume this part of state
-   const todos = useSelector('todos');
+   const [todos] = useSelector('todos');
+   const count = useSelector('count);
+
+  ** get and set like useState
+   const [list, setList] = useSelector('list');
+   setList((p: State['list']) => [...p, 'initial list']);
 */
 
 // React 18 only

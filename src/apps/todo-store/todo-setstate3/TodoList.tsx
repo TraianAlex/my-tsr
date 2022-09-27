@@ -7,7 +7,7 @@ interface TodoListProps {
 }
 
 const TodoList: React.FC<TodoListProps> = ({ onDeleteTodo }) => {
-  const todos = useSelector('todos');
+  const [todos] = useSelector('todos');
 
   console.log('render TodoList', todos);
 
@@ -15,7 +15,9 @@ const TodoList: React.FC<TodoListProps> = ({ onDeleteTodo }) => {
     <ListStyled>
       {todos?.map((todo: any, i: number) => (
         <li key={todo.id}>
-          <span>{todo.text} {i+1}</span>
+          <span>
+            {todo.text} {i + 1}
+          </span>
           <button onClick={onDeleteTodo.bind(null, todo.id)}>DELETE</button>
         </li>
       ))}
