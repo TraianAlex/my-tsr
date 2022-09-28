@@ -1,10 +1,12 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
+import { State } from './store';
 import {
   useSelector,
   todoAddHandler,
   createList,
   todoDeleteHandler,
+  setCount,
 } from './TodoStore';
 
 const NewTodoForm: React.FC = () => {
@@ -34,6 +36,10 @@ const NewTodoForm: React.FC = () => {
     listInputRef.current!.value = '';
   };
 
+  const handleClick1 = () => {
+    setCount(1);
+  };
+
   console.log('render NewTodoForm');
 
   return (
@@ -52,6 +58,9 @@ const NewTodoForm: React.FC = () => {
         </div>
         <button type="submit" className="button">
           ADD TODO
+        </button>
+        <button onClick={handleClick1} type="button" className="button">
+          COUNT1
         </button>
       </FormStyled>
       <FormStyled onSubmit={createListHandler}>
@@ -116,6 +125,7 @@ const FormStyled = styled.form`
     color: white;
     padding: 0.3rem 1rem;
     cursor: pointer;
+    margin-right: 0.1rem;
   }
 
   button:focus {

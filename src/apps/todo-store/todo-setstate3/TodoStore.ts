@@ -46,4 +46,8 @@ export const todoDeleteHandler = (todoId: string) => {
   setState('count', (p: State['count']) => p - 1);
 };
 
+export const setCount = (nr: number) => {
+  setState('count', (p: State['count']) => p + nr);
+};
+
 export { useSelector };
