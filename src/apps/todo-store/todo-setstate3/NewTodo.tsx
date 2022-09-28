@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import { State } from './store';
 import {
   useSelector,
   todoAddHandler,
