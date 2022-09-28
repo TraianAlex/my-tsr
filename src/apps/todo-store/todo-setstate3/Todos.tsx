@@ -1,5 +1,4 @@
 import React from 'react';
-import { todoAddHandler, createList, todoDeleteHandler } from './TodoStore';
 import TodoList from './TodoList';
 import NewTodoForm from './NewTodo';
 import { Container } from 'react-bootstrap';
@@ -13,10 +12,10 @@ export const Todos: React.FC = () => {
   return (
     <Container>
       <Decoration />
-      <NewTodoForm onAddTodo={todoAddHandler} createList={createList} />
+      <NewTodoForm />
       <List />
       <Count />
-      <TodoList onDeleteTodo={todoDeleteHandler} />
+      <TodoList />
     </Container>
   );
 };

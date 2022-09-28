@@ -1,16 +1,17 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { useSelector } from './store';
-import { SET_COUNT, SET_COUNT2, todoStore } from './TodoStore';
-
-type NewTodoProps = {
-  onAddTodo: (todoText: string) => void;
-  createList: (text: string) => void;
-};
+import {
+  ADD_LIST,
+  ADD_TODO,
+  SET_COUNT,
+  SET_COUNT2,
+  todoStore,
+} from './TodoStore';
 
 const { dispatch } = todoStore;
 
-const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo, createList }) => {
+const NewTodoForm: React.FC = () => {
   const user = useSelector(todoStore, 'user');
   const textInputRef = useRef<HTMLInputElement>(null);
   const listInputRef = useRef<HTMLInputElement>(null);
@@ -19,10 +20,10 @@ const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo, createList }) => {
     event.preventDefault();
     const enteredText = textInputRef.current!.value;
     if (enteredText === '') {
-      onAddTodo('test');
+      dispatch({ type: ADD_TODO, value: 'test' });
       return;
     }
-    onAddTodo(enteredText);
+    dispatch({ type: ADD_TODO, value: enteredText });
     textInputRef.current!.value = '';
   };
 
@@ -30,10 +31,10 @@ const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo, createList }) => {
     event.preventDefault();
     const enteredText = listInputRef.current!.value;
     if (enteredText === '') {
-      createList('test');
+      dispatch({ type: ADD_LIST, value: 'test' });
       return;
     }
-    createList(enteredText);
+    dispatch({ type: ADD_LIST, value: enteredText });
     listInputRef.current!.value = '';
   };
 

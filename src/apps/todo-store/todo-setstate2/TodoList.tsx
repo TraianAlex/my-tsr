@@ -1,12 +1,8 @@
 import React from 'react';
-import { useGlobalState } from './TodoStore';
+import { todoDeleteHandler, useGlobalState } from './TodoStore';
 import styled from 'styled-components';
 
-interface TodoListProps {
-  onDeleteTodo: (id: string) => void;
-}
-
-const TodoList: React.FC<TodoListProps> = ({ onDeleteTodo }) => {
+const TodoList: React.FC = () => {
   const [ todos ] = useGlobalState('todos');
 
   console.log('render TodoList', todos);
@@ -16,7 +12,7 @@ const TodoList: React.FC<TodoListProps> = ({ onDeleteTodo }) => {
       {todos?.map((todo: any) => (
         <li key={todo.id}>
           <span>{todo.text}</span>
-          <button onClick={onDeleteTodo.bind(null, todo.id)}>DELETE</button>
+          <button onClick={todoDeleteHandler.bind(null, todo.id)}>DELETE</button>
         </li>
       ))}
     </ListStyled>

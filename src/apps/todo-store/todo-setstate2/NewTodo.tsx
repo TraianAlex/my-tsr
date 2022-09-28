@@ -1,13 +1,12 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import { useGlobalState } from './TodoStore';
+import {
+  useGlobalState,
+  todoAddHandler,
+  createList,
+} from './TodoStore';
 
-type NewTodoProps = {
-  onAddTodo: (todoText: string) => void;
-  createList: (text: string) => void;
-};
-
-const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo, createList }) => {
+const NewTodoForm: React.FC = () => {
   const user = useGlobalState('user');
   const textInputRef = useRef<HTMLInputElement>(null);
   const listInputRef = useRef<HTMLInputElement>(null);
@@ -19,7 +18,7 @@ const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo, createList }) => {
       alert('Enter text');
       return;
     }
-    onAddTodo(enteredText);
+    todoAddHandler(enteredText);
     textInputRef.current!.value = '';
   };
 

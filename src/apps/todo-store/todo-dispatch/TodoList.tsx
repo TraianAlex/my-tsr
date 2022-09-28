@@ -1,14 +1,16 @@
 import React from 'react';
 import { useSelector } from './store';
-import { todoStore } from './TodoStore';
+import { DELETE_TODO, todoStore } from './TodoStore';
 import styled from 'styled-components';
 
-interface TodoListProps {
-  onDeleteTodo: (id: string) => void;
-}
+const { dispatch } = todoStore;
 
-const TodoList: React.FC<TodoListProps> = ({ onDeleteTodo }) => {
+const TodoList: React.FC = () => {
   const todos = useSelector(todoStore, 'todos');
+
+  const todoDeleteHandler = (todoId: string) => {
+    dispatch({ type: DELETE_TODO, value: todoId });
+  };
 
   console.log('render TodoList', todos);
 
@@ -17,7 +19,9 @@ const TodoList: React.FC<TodoListProps> = ({ onDeleteTodo }) => {
       {todos?.map((todo: any) => (
         <li key={todo.id}>
           <span>{todo.text}</span>
-          <button onClick={onDeleteTodo.bind(null, todo.id)}>DELETE</button>
+          <button onClick={todoDeleteHandler.bind(null, todo.id)}>
+            DELETE
+          </button>
         </li>
       ))}
     </ListStyled>

@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  ADD_LIST,
-  ADD_TODO,
-  DELETE_TODO,
-  SET_USER,
-  todoStore,
-} from './TodoStore';
+import { SET_USER, todoStore } from './TodoStore';
 import TodoList from './TodoList';
 import NewTodoForm from './NewTodo';
 import { Container } from 'react-bootstrap';
@@ -18,18 +12,6 @@ const { dispatch } = todoStore;
 
 dispatch({ type: SET_USER, value: 'Alex' });
 
-const todoAddHandler = (text: string) => {
-  dispatch({ type: ADD_TODO, value: text });
-};
-
-const createList = (text: string) => {
-  dispatch({ type: ADD_LIST, value: text });
-};
-
-const todoDeleteHandler = (todoId: string) => {
-  dispatch({ type: DELETE_TODO, value: todoId });
-};
-
 const Todos: React.FC = () => {
   console.log('render Todos');
 
@@ -37,10 +19,10 @@ const Todos: React.FC = () => {
     <Container>
       <Decoration />
       <Header />
-      <NewTodoForm onAddTodo={todoAddHandler} createList={createList} />
+      <NewTodoForm />
       <List />
       <Count />
-      <TodoList onDeleteTodo={todoDeleteHandler} />
+      <TodoList />
     </Container>
   );
 };

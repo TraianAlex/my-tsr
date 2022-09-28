@@ -1,18 +1,15 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { useSelector } from './store';
-import { todoStore } from './TodoStore';
+import { ADD_LIST, ADD_TODO, SET_COUNT, todoStore } from './TodoStore';
 
-type NewTodoProps = {
-  onAddTodo: (todoText: string) => void;
-  createList: (text: string) => void;
-};
-
-const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo, createList }) => {
+const NewTodoForm: React.FC = () => {
   const user = useSelector(todoStore, 'user');
   //const user = useStoreRaw(todoStore).get('user');
   const textInputRef = useRef<HTMLInputElement>(null);
   const listInputRef = useRef<HTMLInputElement>(null);
+
+  const { dispatch } = todoStore;
 
   const todoSubmitHandler = (event: React.FormEvent) => {
     event.preventDefault();
@@ -21,7 +18,8 @@ const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo, createList }) => {
       alert('Enter text');
       return;
     }
-    onAddTodo(enteredText);
+    dispatch({ type: ADD_TODO, value: enteredText });
+    dispatch({ type: SET_COUNT, value: 1 });
     textInputRef.current!.value = '';
   };
 
@@ -32,7 +30,7 @@ const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo, createList }) => {
       alert('Enter text');
       return;
     }
-    createList(enteredText);
+    dispatch({ type: ADD_LIST, value: enteredText });
     listInputRef.current!.value = '';
   };
 

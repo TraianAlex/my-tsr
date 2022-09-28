@@ -11,20 +11,20 @@ const { getState, setState } = todoStore;
 
 setState({ user: 'Alex' });
 
-const todoAddHandler = (text: string) => {
+export const todoAddHandler = (text: string) => {
   setState({
     todos: [...getState().todos, { id: Math.random().toString(), text: text }],
     count: getState().count + 1,
   });
 };
 
-const createList = (text: string) => {
+export const createList = (text: string) => {
   setState({
     list: [...getState().list, text],
   });
 };
 
-const todoDeleteHandler = (todoId: string) => {
+export const todoDeleteHandler = (todoId: string) => {
   setState({
     todos: [
       ...getState().todos.filter((todo: TodosState) => todo.id !== todoId),
@@ -39,10 +39,10 @@ export const Todos: React.FC = () => {
   return (
     <Container>
       <Decoration />
-      <NewTodoForm onAddTodo={todoAddHandler} createList={createList} />
+      <NewTodoForm />
       <List />
       <Count />
-      <TodoList onDeleteTodo={todoDeleteHandler} />
+      <TodoList />
     </Container>
   );
 };
