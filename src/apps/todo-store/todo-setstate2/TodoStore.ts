@@ -44,4 +44,8 @@ export const todoDeleteHandler = (todoId: string) => {
   setGlobalState('count', (v) => v - 1);
 };
 
+export const setCount = (text: number) => {
+  setGlobalState('count', (v) => v + 1);
+};
+
 export { useGlobalState };
