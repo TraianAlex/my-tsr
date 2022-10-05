@@ -6,6 +6,7 @@ import {
   createList,
   todoDeleteHandler,
   setCount,
+  setCount2,
 } from './TodoStore';
 
 const NewTodoForm: React.FC = () => {
@@ -37,6 +38,10 @@ const NewTodoForm: React.FC = () => {
 
   const handleClick1 = () => {
     setCount(1);
+  };
+
+  const handleClick2 = () => {
+    setCount2(1);
   };
 
   console.log('render NewTodoForm');
@@ -76,6 +81,9 @@ const NewTodoForm: React.FC = () => {
         </div>
         <button type="submit" className="button">
           ADD TO LIST
+        </button>
+        <button onClick={handleClick2} type="button" className="button">
+          COUNT2
         </button>
       </FormStyled>
     </>

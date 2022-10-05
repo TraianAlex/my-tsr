@@ -27,7 +27,7 @@ const ListStyled = styled.ul`
   list-style: none;
   width: 90%;
   max-width: 40rem;
-  margin: 2rem auto;
+  margin: 1rem auto;
   padding: 0;
 
   li {

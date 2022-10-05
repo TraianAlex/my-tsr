@@ -1,4 +1,5 @@
 import { createStore, State } from './store';
+import { uppercaseWords } from './utils';
 
 /* CONFIG */
 export interface TodosState {
@@ -9,23 +10,33 @@ export interface TodosState {
 type TodosType = {
   todos: TodosState[];
   title: string;
+  subTitle: string;
   count: number;
+  count2: number;
   user: string;
   list: string[];
+  render: boolean;
 };
 
 const initialState: TodosType = {
   todos: [],
   title: 'SetState3',
+  subTitle: '',
   count: 0,
+  count2: 0,
   user: '',
   list: [],
+  render: false,
 };
 
 const { setState, useSelector } = createStore(initialState);
 
 /* USE */
 setState('user', 'Alex');
+
+export const setSubTitle = (text: string) => {
+  setState('subTitle', uppercaseWords(text));
+};
 
 export const todoAddHandler = (text: string) => {
   setState('todos', (p: State['count']) => [
@@ -49,5 +60,13 @@ export const todoDeleteHandler = (todoId: string) => {
 export const setCount = (nr: number) => {
   setState('count', (p: State['count']) => p + nr);
 };
+
+export const setCount2 = (nr: number) => {
+  setState('count2', (p: State['count2']) => p + nr);
+};
+
+// export const setRender = (value: boolean) => {
+//   setState('render', (p: State['render']) => !value);
+// }
 
 export { useSelector };
