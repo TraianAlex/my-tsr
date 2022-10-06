@@ -1,19 +1,19 @@
 import React from 'react';
-import { useSelector } from './store';
-import { todoStore } from './TodoStore';
 import styled from 'styled-components';
-import { todoDeleteHandler } from './Todos';
+import { todoDeleteHandler, useSelector } from './TodoStore';
 
 const TodoList: React.FC = () => {
-  const todos = useSelector(todoStore, 'todos');
+  const [todos] = useSelector('todos');
 
   console.log('render TodoList', todos);
 
   return (
     <ListStyled>
-      {todos?.map((todo: any) => (
+      {todos?.map((todo: any, i: number) => (
         <li key={todo.id}>
-          <span>{todo.text}</span>
+          <span>
+            {todo.text} {i + 1}
+          </span>
           <button onClick={todoDeleteHandler.bind(null, todo.id)}>DELETE</button>
         </li>
       ))}
@@ -27,7 +27,7 @@ const ListStyled = styled.ul`
   list-style: none;
   width: 90%;
   max-width: 40rem;
-  margin: 2rem auto;
+  margin: 1rem auto;
   padding: 0;
 
   li {

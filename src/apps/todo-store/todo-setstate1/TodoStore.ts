@@ -15,7 +15,7 @@ type TodosType = {
 
 const initialState: TodosType = {
   todos: [],
-  title: 'SetState',
+  title: 'SetState1',
   count: 0,
   user: '',
   list: [],

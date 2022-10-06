@@ -5,9 +5,12 @@ import { todoStore } from './TodoStore';
 export const Decoration = () => {
   const title = useSelector(todoStore, 'title');
 
-  //const { title, todos } = useStoreRaw(todoStore);
+  //const title = useStoreRaw(todoStore).get('title');
+  //const state = useStoreRaw(todoStore);
+  //state.get('todos').toJS() state.get('title')
+  //const { todos, list, count, user} = useStoreRaw(todoStore).toJS();
 
-  console.log('render title');
+  console.log('render Title');
 
   return (
     <>

@@ -1,9 +1,15 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { useSelector } from './store';
-import { createList, todoAddHandler } from './Todos';
-import { todoStore } from './TodoStore';
+import {
+  ADD_LIST,
+  ADD_TODO,
+  SET_COUNT,
+  SET_COUNT2,
+  todoStore,
+} from './TodoStore';
 
+const { dispatch } = todoStore;
 
 const NewTodoForm: React.FC = () => {
   const user = useSelector(todoStore, 'user');
@@ -14,10 +20,10 @@ const NewTodoForm: React.FC = () => {
     event.preventDefault();
     const enteredText = textInputRef.current!.value;
     if (enteredText === '') {
-      alert('Enter text');
+      dispatch({ type: ADD_TODO, value: 'test' });
       return;
     }
-    todoAddHandler(enteredText);
+    dispatch({ type: ADD_TODO, value: enteredText });
     textInputRef.current!.value = '';
   };
 
@@ -25,11 +31,19 @@ const NewTodoForm: React.FC = () => {
     event.preventDefault();
     const enteredText = listInputRef.current!.value;
     if (enteredText === '') {
-      alert('Enter text');
+      dispatch({ type: ADD_LIST, value: 'test' });
       return;
     }
-    createList(enteredText);
+    dispatch({ type: ADD_LIST, value: enteredText });
     listInputRef.current!.value = '';
+  };
+
+  const handleClick1 = () => {
+    dispatch({ type: SET_COUNT, value: 1 });
+  };
+
+  const handleClick2 = () => {
+    dispatch({ type: SET_COUNT2, value: 1 });
   };
 
   console.log('render NewTodoForm');
@@ -47,9 +61,12 @@ const NewTodoForm: React.FC = () => {
             ref={textInputRef}
             className="input"
           />
-        </div>
+        </div>{' '}
         <button type="submit" className="button">
           ADD TODO
+        </button>
+        <button onClick={handleClick1} type="button" className="button">
+          COUNT1
         </button>
       </FormStyled>
       <FormStyled onSubmit={createListHandler}>
@@ -67,6 +84,9 @@ const NewTodoForm: React.FC = () => {
         <button type="submit" className="button">
           ADD TO LIST
         </button>
+        <button onClick={handleClick2} type="button" className="button">
+          COUNT2
+        </button>
       </FormStyled>
     </>
   );
@@ -77,9 +97,9 @@ export default NewTodoForm;
 const FormStyled = styled.form`
   display: flex;
   align-items: center;
-  width: 90%;
+  width: 100%;
   max-width: 40rem;
-  margin: 2rem auto;
+  margin: 1rem auto;
 
   .formControl {
     display: flex;
@@ -114,6 +134,7 @@ const FormStyled = styled.form`
     color: white;
     padding: 0.3rem 1rem;
     cursor: pointer;
+    margin-right: 0.1rem;
   }
 
   button:focus {

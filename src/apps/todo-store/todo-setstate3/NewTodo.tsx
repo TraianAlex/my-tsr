@@ -1,16 +1,16 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import { useSelector } from './store';
-import { todoStore } from './TodoStore';
+import {
+  useSelector,
+  todoAddHandler,
+  createList,
+  todoDeleteHandler,
+  setCount,
+  setCount2,
+} from './TodoStore';
 
-type NewTodoProps = {
-  onAddTodo: (todoText: string) => void;
-  createList: (text: string) => void;
-};
-
-const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo, createList }) => {
-  const user = useSelector(todoStore, 'user');
-  //const user = useStoreRaw(todoStore).get('user');
+const NewTodoForm: React.FC = () => {
+  const user = useSelector('user');
   const textInputRef = useRef<HTMLInputElement>(null);
   const listInputRef = useRef<HTMLInputElement>(null);
 
@@ -18,10 +18,10 @@ const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo, createList }) => {
     event.preventDefault();
     const enteredText = textInputRef.current!.value;
     if (enteredText === '') {
-      alert('Enter text');
+      todoAddHandler('test');
       return;
     }
-    onAddTodo(enteredText);
+    todoDeleteHandler(enteredText);
     textInputRef.current!.value = '';
   };
 
@@ -29,11 +29,19 @@ const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo, createList }) => {
     event.preventDefault();
     const enteredText = listInputRef.current!.value;
     if (enteredText === '') {
-      alert('Enter text');
+      createList('test');
       return;
     }
     createList(enteredText);
     listInputRef.current!.value = '';
+  };
+
+  const handleClick1 = () => {
+    setCount(1);
+  };
+
+  const handleClick2 = () => {
+    setCount2(1);
   };
 
   console.log('render NewTodoForm');
@@ -55,6 +63,9 @@ const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo, createList }) => {
         <button type="submit" className="button">
           ADD TODO
         </button>
+        <button onClick={handleClick1} type="button" className="button">
+          COUNT1
+        </button>
       </FormStyled>
       <FormStyled onSubmit={createListHandler}>
         <div className="formControl">
@@ -71,6 +82,9 @@ const NewTodoForm: React.FC<NewTodoProps> = ({ onAddTodo, createList }) => {
         <button type="submit" className="button">
           ADD TO LIST
         </button>
+        <button onClick={handleClick2} type="button" className="button">
+          COUNT2
+        </button>
       </FormStyled>
     </>
   );
@@ -83,7 +97,7 @@ const FormStyled = styled.form`
   align-items: center;
   width: 90%;
   max-width: 40rem;
-  margin: 2rem auto;
+  margin: 1rem auto;
 
   .formControl {
     display: flex;
@@ -118,6 +132,7 @@ const FormStyled = styled.form`
     color: white;
     padding: 0.3rem 1rem;
     cursor: pointer;
+    margin-right: 0.1rem;
   }
 
   button:focus {
