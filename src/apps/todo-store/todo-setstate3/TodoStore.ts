@@ -29,7 +29,7 @@ const initialState: TodosType = {
   render: false,
 };
 
-const { setState, useSelector } = createStore(initialState);
+const { setState, useSelector, useStore } = createStore(initialState);
 
 /* USE */
 setState('user', 'Alex');
@@ -69,4 +69,4 @@ export const setCount2 = (nr: number) => {
 //   setState('render', (p: State['render']) => !value);
 // }
 
-export { useSelector };
+export { useSelector, useStore };

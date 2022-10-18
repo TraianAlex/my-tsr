@@ -32,7 +32,7 @@ export const createStore = (initialState: State) => {
     return () => listeners.delete(listener);
   };
 
-  const useStore = (selector: Selector<State> = (state: State) => state) => {
+  const useSelector = (selector: Selector<State> = (state: State) => state) => {
     const [state, setState] = useState(selector(getState()));
 
     useEffect(() => {
@@ -42,9 +42,9 @@ export const createStore = (initialState: State) => {
     return state;
   };
 
-  const useSelector = <StateKey extends StateKeys>(stateKey: StateKey) => {
+  const useStore = <StateKey extends StateKeys>(stateKey: StateKey) => {
     const selector = useCallback((state: State) => state[stateKey], [stateKey]);
-    const partialState = useStore(selector);
+    const partialState = useSelector(selector);
     const updater = useCallback(
       (u: SetStateAction<State[StateKey]>) => setState(stateKey, u),
       [stateKey],
@@ -53,7 +53,7 @@ export const createStore = (initialState: State) => {
     return [partialState, updater] as const;
   };
 
-  return { setState, useSelector };
+  return { setState, useSelector, useStore };
 };
 
 /*************************** CONFIG *********************************
@@ -75,7 +75,7 @@ export const createStore = (initialState: State) => {
  * -------------------------------------
  * create the store
  * -------------------------------------
- * export const { setState, useSelector } = createStore(initialState);
+ * export const { setState, useSelector, useStore} = createStore(initialState);
  *----------------------------------------
  **************************** USAGE ***************************
  *** SET OUTSIDE COMPONENT ***
@@ -85,15 +85,15 @@ export const createStore = (initialState: State) => {
   ]);
   setState('count', (prev: any) => prev + 1);
 
-  export { useSelector };
+  export { useSelector, useStore};
 
   *** GET and SET ***
   * this will render only the component that consume this part of state
-   const [todos] = useSelector('todos');
-   const count = useSelector('count);
+   const [todos] = useStore('todos'); or const todos = useSelector(state => state.todos);
+   const count = useStore('count);
 
   ** get and set like useState, use in component
-   const [list, setList] = useSelector('list');
+   const [list, setList] = useStore('list');
    setList((prev: State['list']) => [...prev, 'initial list']);
    return <div>{list.map(item, index) => (<div key={1ndex}>{item}</div>))}</div>
 */

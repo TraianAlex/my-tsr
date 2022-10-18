@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { useSelector } from './TodoStore';
+import { useStore } from './TodoStore';
 
 export const List = () => {
-  const [list, setList] = useSelector('list');
+  const [list, setList] = useStore('list');
 
   useEffect(() => {
     setList(() => ['initial list']);

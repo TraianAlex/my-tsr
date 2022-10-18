@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
 import {
-  useSelector,
+  useStore,
   todoAddHandler,
   createList,
   todoDeleteHandler,
@@ -10,7 +10,7 @@ import {
 } from './TodoStore';
 
 const NewTodoForm: React.FC = () => {
-  const user = useSelector('user');
+  const user = useStore('user');
   const textInputRef = useRef<HTMLInputElement>(null);
   const listInputRef = useRef<HTMLInputElement>(null);
 

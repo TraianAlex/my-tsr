@@ -18,6 +18,7 @@ const initPageInfo = async () => {
 
 export const Todos: React.FC = () => {
   const mounted = useRef(false);
+
   useEffect(() => {
     if (mounted.current) return;
     mounted.current = true;

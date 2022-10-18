@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { todoDeleteHandler, useSelector } from './TodoStore';
+import { todoDeleteHandler, useStore } from './TodoStore';
 
 const TodoList: React.FC = () => {
-  const [todos] = useSelector('todos');
+  const [todos] = useStore('todos');
 
   console.log('render TodoList', todos);
 

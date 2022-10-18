@@ -1,10 +1,10 @@
 import React from 'react';
 import { Count2 } from './Count2';
-import { useSelector } from './TodoStore';
+import { useStore } from './TodoStore';
 import { clearCookies, randomString } from './utils';
 
 export const Footer = () => {
-  const [render, setRender] = useSelector('render');
+  const [render, setRender] = useStore('render');
 
   console.log('render Footer, random string', render);
 
