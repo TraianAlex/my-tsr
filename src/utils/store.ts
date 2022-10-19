@@ -1,73 +1,60 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, SetStateAction, useCallback } from 'react';
 
-export interface IAction<T extends string = string> {
-  type: T;
-  value?: any;
-}
 export type State = Record<string, any>;
+type StateKeys = keyof State;
 type Selector<State> = (state: State) => State;
-//export type Action = { type: string; value?: any };
-export type Reducer = (state: State, action: IAction) => State;
 
-type Store = {
-  getState: () => State;
-  setState: (newState: State) => void;
-  subscribe: (listener: State) => void;
-  dispatch: (action: IAction) => void;
-};
+const isFunction = (fn: unknown): fn is Function => typeof fn === 'function';
 
-export const createStore = (initialState: State, reduce: Reducer): Store => {
+const updateValue = <Value>(oldValue: Value, newValue: SetStateAction<Value>) =>
+  isFunction(newValue) ? newValue(oldValue) : newValue;
+
+export const createStore = (initialState: State) => {
   let state = initialState;
   const listeners = new Set();
-  return {
-    getState: () => state,
-    setState: (newState) => {
-      state = { ...state, ...newState };
-      listeners.forEach((listener: any) => listener(state));
-    },
-    subscribe: (listener: State) => {
-      listeners.add(listener);
-      return () => listeners.delete(listener);
-    },
-    dispatch: (action) => {
-      state = reduce(state, action);
-      listeners.forEach((listener: any) => listener(state));
-    },
+
+  const getState = () => state;
+
+  const setState = <StateKey extends StateKeys>(
+    stateKey: StateKey,
+    update: SetStateAction<State[StateKey]>,
+  ) => {
+    state = {
+      ...state,
+      [stateKey]: updateValue(state[stateKey], update),
+    } as Pick<State, StateKey> as Partial<State>;
+
+    listeners.forEach((listener: any) => listener(getState()));
   };
+
+  const subscribe = (listener: State) => {
+    listeners.add(listener);
+    return () => listeners.delete(listener);
+  };
+
+  const useSelector = (selector: Selector<State> = (state: State) => state) => {
+    const [state, setState] = useState(selector(getState()));
+
+    useEffect(() => {
+      subscribe((state: State) => setState(selector(state)));
+    }, [selector]);
+
+    return state;
+  };
+
+  const useStore = <StateKey extends StateKeys>(stateKey: StateKey) => {
+    const selector = useCallback((state: State) => state[stateKey], [stateKey]);
+    const partialState = useSelector(selector);
+    const updater = useCallback(
+      (u: SetStateAction<State[StateKey]>) => setState(stateKey, u),
+      [stateKey],
+    );
+
+    return [partialState, updater] as const;
+  };
+
+  return { setState, useSelector, useStore };
 };
-
-const useStore = (
-  store: Store,
-  selector: Selector<State> = (state: State) => state,
-) => {
-  const { getState, subscribe } = store;
-  const [state, setState] = useState(selector(getState()));
-
-  useEffect(
-    () => subscribe((state: State) => setState(selector(state))),
-    [selector, subscribe],
-  );
-
-  return state;
-};
-
-export const useSelector = (store: Store, item: string | number) =>
-  useStore(store, (state) => state[item]);
-
-// Too many renders if you use in the same file with useSelector
-export const useStoreRaw = (store: Store) => {
-  const { getState, subscribe } = store;
-  const [state, setState] = useState(getState());
-
-  useEffect(() => subscribe(setState), [subscribe]);
-
-  return state;
-};
-
-export const resolveEach =
-  (initialState: State, handlers: State) =>
-  (state = initialState, action: IAction) =>
-    handlers[action.type] ? handlers[action.type](state, action) : state;
 
 /*************************** CONFIG *********************************
  * type your initial state
@@ -75,7 +62,6 @@ export const resolveEach =
  * type TodosType = {
  *  todos: TodosState[]; (interface TodosState { id: string; text: string })
  *  count: number;
- *  user: string;
  *  list: string[];
  * };
  * -------------------------------------
@@ -83,56 +69,33 @@ export const resolveEach =
  * -------------------------------------
  * const initialState: TodosType = {
  *  todos: [],
- *  title: 'Dispatch',
  *  count: 0,
- *  user: '',
  *  list: [],
  * };
  * -------------------------------------
- * create the action types
- * -------------------------------------
- * export const ADD_TODO = 'ADD_TODO';
- * -------------------------------------
- * create your reducer
- * -------------------------------------
- * const reducer: Reducer = (state: State, action: IAction) => state 
- 
- * or function for each state and use resolveEach to compose the reducer
- * const todoReducer: Reducer = resolveEach(initialState, {
- *  [ADD_TODO]: addTodo,
- *  [ADD_LIST]: addList,
- *  [SET_USER]: setUser,
- *  [DELETE_TODO]: deleteTodo,
- *  [SET_COUNT]: setCount,
- * });
- * -------------------------------------
  * create the store
  * -------------------------------------
- * export const todoStore = createStore(initialState, todoReducer);
+ * export const { setState, useSelector, useStore} = createStore(initialState);
  *----------------------------------------
  **************************** USAGE ***************************
- *** WRITE *** - recomended - 
-    const { dispatch } = todoStore;
-    dispatch({ type: ADD_TODO, value: text });
-  
- * OR - not recomended - this bring the logic back in the component
-   const { getState, setState } = todoStore;
-   setState({
-      todos: [
-        ...getState().todos,
-        { id: Math.random().toString(), text: 'value' },
-      ],
-      count: getState().count + 1,
-    });
+ *** SET OUTSIDE COMPONENT ***
+  setState('todos', (prev: any) => [
+    ...prev,
+    { id: Math.random().toString(), text: text },
+  ]);
+  setState('count', (prev: any) => prev + 1);
 
-  *** READ *** - recomended when a peace of state need to use - 
+  export { useSelector, useStore};
+
+  *** GET and SET ***
   * this will render only the component that consume this part of state
-   const todos = useSelector(todoStore, 'todos');
+   const [todos] = useStore('todos'); or const todos = useSelector(state => state.todos);
+   const count = useStore('count);
 
-  * OR *(not in the same time and in the same component with useSelector)
-  * return the entire store - good for debugging or when all state need in the same file
-  * the component will always render
-   const { todos, count, user, list } = useStoreRaw(todoState);
+  ** get and set like useState, use in component
+   const [list, setList] = useStore('list');
+   setList((prev: State['list']) => [...prev, 'initial list']);
+   return <div>{list.map(item, index) => (<div key={1ndex}>{item}</div>))}</div>
 */
 
 // React 18 only
