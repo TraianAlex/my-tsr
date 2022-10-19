@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
+import Table from '../../components/tables/Table';
 import {
   rowData,
   setRows,
@@ -21,7 +22,7 @@ export const GoogleSheets: React.FC = () => {
   const rowCount = useStore('rowCount');
 
   useEffect(() => {
-    const loadSpreadsheet = async () => {
+    (async () => {
       const sheet = await getSheetData();
       const rows = await sheet?.getRows();
       sheet && setSheet(sheet.title);
@@ -29,9 +30,24 @@ export const GoogleSheets: React.FC = () => {
       rows && setRows(rows);
       rows && setTarget1(rows[1]?.description);
       rows && setTarget2(rows[2].description);
-    };
-    loadSpreadsheet();
+    })();
   }, []);
+
+  const columns = [
+    {
+      Header: 'Company',
+      accessor: 'company',
+    },
+    {
+      Header: 'City',
+      accessor: 'city',
+    },
+  ];
+
+  const data = rows.map((row: rowData) => ({
+    company: row.company,
+    city: row.city,
+  }));
 
   return (
     <Container>
@@ -52,6 +68,7 @@ export const GoogleSheets: React.FC = () => {
       <div>Target1: {target1}</div>
       <div>Target2: {target2}</div>
       <RenderCell />
+      <Table columns={columns} data={data} />
     </Container>
   );
 };

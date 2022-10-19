@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
-
+import { Container } from 'react-bootstrap';
 import axios from 'axios';
 import Table from '../components/tables/Table';
 import { columnsData } from './columns';
-import { Container } from 'react-bootstrap';
 
 function SnowApp() {
   const [data, setData] = useState([]);
