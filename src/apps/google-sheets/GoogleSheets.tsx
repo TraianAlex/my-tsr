@@ -11,7 +11,7 @@ import {
   setRowCount,
 } from './sheetStore';
 import { RenderCell } from './RenderCell';
-import { getSheetData } from './utils';
+import { columns, getSheetData } from './utils';
 
 export const GoogleSheets: React.FC = () => {
   const title = useStore('title');
@@ -33,19 +33,11 @@ export const GoogleSheets: React.FC = () => {
     })();
   }, []);
 
-  const columns = [
-    {
-      Header: 'Company',
-      accessor: 'company',
-    },
-    {
-      Header: 'City',
-      accessor: 'city',
-    },
-  ];
-
   const data = rows.map((row: rowData) => ({
+    from: row.from,
+    to: row.to,
     company: row.company,
+    job_title: row.job_title,
     city: row.city,
   }));
 
@@ -53,21 +45,12 @@ export const GoogleSheets: React.FC = () => {
     <Container>
       Title: {title} <br /> Sheet: {sheet}
       <hr />
-      <div>
-        <span>Row count: {rowCount}</span>
-        {rows?.map((row: rowData) => (
-          <div key={row?.from}>
-            <span>
-              {row?.from} | {row?.to} | {row?.company} | {row?.job_title} |{' '}
-              {row?.city} | {row?.company}
-            </span>
-          </div>
-        ))}
-      </div>
-      <hr />
       <div>Target1: {target1}</div>
       <div>Target2: {target2}</div>
+      <hr />
       <RenderCell />
+      <hr />
+      <span>Row count: {rowCount}</span>
       <Table columns={columns} data={data} />
     </Container>
   );

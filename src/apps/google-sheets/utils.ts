@@ -25,3 +25,26 @@ export const getSheetData = async () => {
     console.error('Error: ', e);
   }
 };
+
+export const columns = [
+  {
+    Header: 'From',
+    accessor: 'from',
+  },
+  {
+    Header: 'To',
+    accessor: 'to',
+  },
+  {
+    Header: 'Company',
+    accessor: 'company',
+  },
+  {
+    Header: 'Job title',
+    accessor: 'job_title',
+  },
+  {
+    Header: 'City',
+    accessor: 'city',
+  },
+];
