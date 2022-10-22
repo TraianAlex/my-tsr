@@ -17,20 +17,33 @@ export const Header = () => {
   return (
     <div style={{ width: '90%', margin: 'auto' }}>
       <div>
-        {title} / Today is the {dayOfYear(new Date())} day
-      </div>
-      <div style={{ backgroundColor: `${randomColor()}` }}>
-        Colours {randomColor()}
+        Title: {title} / Today is the {dayOfYear(new Date())} day
       </div>
       <div>
-        SubTitle: {subTitle} / Count1: {count}
+        <span
+          style={{
+            backgroundColor: `${randomColor()}`,
+            width: '30%',
+            marginRight: '10px',
+          }}
+        >
+          Colours: {randomColor()}
+        </span>
+        Count1: {count}
       </div>
-      <button
-        style={{ border: '1px solid black', padding: ' 0 5px' }}
-        onClick={modifSubtitle}
-      >
-        Modify Subtitle
-      </button>
+      <div>
+        SubTitle: {subTitle}
+        <button
+          style={{
+            border: '1px solid black',
+            marginLeft: '5px',
+            padding: ' 0 5px',
+          }}
+          onClick={modifSubtitle}
+        >
+          Modify Subtitle
+        </button>
+      </div>
       <hr />
     </div>
   );

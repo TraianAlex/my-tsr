@@ -35,7 +35,7 @@ const { setState, useSelector, useStore } = createStore(initialState);
 setState('user', 'Alex');
 
 export const setSubTitle = (text: string) => {
-  setState('subTitle', uppercaseWords(text));
+  setState('subTitle', uppercaseWords(text.slice(0, 20)));
 };
 
 export const todoAddHandler = (text: string) => {

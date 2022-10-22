@@ -20,7 +20,7 @@ export const Footer = () => {
         }}
         onClick={() => setRender(!render)}
       >
-        Random
+        Render
       </button>
       <button
         style={{

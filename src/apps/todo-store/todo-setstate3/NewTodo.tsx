@@ -63,9 +63,6 @@ const NewTodoForm: React.FC = () => {
         <button type="submit" className="button">
           ADD TODO
         </button>
-        <button onClick={handleClick1} type="button" className="button">
-          COUNT1
-        </button>
       </FormStyled>
       <FormStyled onSubmit={createListHandler}>
         <div className="formControl">
@@ -81,6 +78,9 @@ const NewTodoForm: React.FC = () => {
         </div>
         <button type="submit" className="button">
           ADD TO LIST
+        </button>
+        <button onClick={handleClick1} type="button" className="button">
+          COUNT1
         </button>
         <button onClick={handleClick2} type="button" className="button">
           COUNT2

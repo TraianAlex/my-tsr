@@ -12,6 +12,7 @@ export const List = () => {
 
   return (
     <div style={{ width: '90%', margin: 'auto' }}>
+      <hr />
       {list?.map((item: string, i: number) => (
         <span key={Math.random()}>
           {item} {i + 1} /{' '}
