@@ -6,7 +6,7 @@ import { clearCookies, randomString } from './utils';
 export const Footer = () => {
   const [render, setRender] = useStore('render');
 
-  console.log('render Footer, random string', render);
+  console.log('render Footer, random string');
 
   return (
     <div style={{ width: '90%', margin: 'auto' }}>

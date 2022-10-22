@@ -5,7 +5,7 @@ import { todoDeleteHandler, useStore } from './TodoStore';
 const TodoList: React.FC = () => {
   const [todos] = useStore('todos');
 
-  console.log('render TodoList', todos);
+  console.log('render TodoList');
 
   return (
     <ListStyled>
