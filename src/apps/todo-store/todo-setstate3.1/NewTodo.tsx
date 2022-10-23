@@ -36,14 +36,6 @@ const NewTodoForm: React.FC = () => {
     listInputRef.current!.value = '';
   };
 
-  const handleClick1 = () => {
-    setCount(1);
-  };
-
-  const handleClick2 = () => {
-    setCount2(1);
-  };
-
   console.log('render NewTodoForm');
 
   return (
@@ -79,10 +71,10 @@ const NewTodoForm: React.FC = () => {
         <button type="submit" className="button">
           ADD TO LIST
         </button>
-        <button onClick={handleClick1} type="button" className="button">
+        <button onClick={() => setCount(1)} type="button" className="button">
           COUNT1
         </button>
-        <button onClick={handleClick2} type="button" className="button">
+        <button onClick={() => setCount2(1)} type="button" className="button">
           COUNT2
         </button>
       </FormStyled>

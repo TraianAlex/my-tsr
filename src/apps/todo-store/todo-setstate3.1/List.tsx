@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import styled from 'styled-components';
 import { useStore } from './TodoStore';
 
 export const List = () => {
@@ -11,13 +12,18 @@ export const List = () => {
   console.log('render List');
 
   return (
-    <div style={{ width: '90%', margin: 'auto' }}>
+    <ListStyled>
       <hr />
       {list?.map((item: string, i: number) => (
         <span key={Math.random()}>
           {item} {i + 1} /{' '}
         </span>
       ))}
-    </div>
+    </ListStyled>
   );
 };
+
+const ListStyled = styled.div`
+  width: 90%;
+  margin: auto;
+`;

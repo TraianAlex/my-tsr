@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { dayOfYear, pause, randomColor } from './utils';
 import { setSubTitle, useStore } from './TodoStore';
 
@@ -15,16 +16,15 @@ export const Header = () => {
   console.log('render Header');
 
   return (
-    <div style={{ width: '90%', margin: 'auto' }}>
+    <HeaderStyle>
       <div>
         Title: {title} / Today is the {dayOfYear(new Date())} day
       </div>
       <div>
         <span
+          className="span"
           style={{
             backgroundColor: `${randomColor()}`,
-            width: '30%',
-            marginRight: '10px',
           }}
         >
           Colours: {randomColor()}
@@ -33,18 +33,25 @@ export const Header = () => {
       </div>
       <div>
         SubTitle: {subTitle}
-        <button
-          style={{
-            border: '1px solid black',
-            marginLeft: '5px',
-            padding: ' 0 5px',
-          }}
-          onClick={modifSubtitle}
-        >
-          Modify Subtitle
-        </button>
+        <button onClick={modifSubtitle}>Modify Subtitle</button>
       </div>
       <hr />
-    </div>
+    </HeaderStyle>
   );
 };
+
+const HeaderStyle = styled.div`
+  width: 90%;
+  margin: auto;
+
+  span {
+    margin-right: 10px;
+  }
+
+  button {
+    border: 1px solid #50005a;
+    padding: 0 0.2rem;
+    cursor: pointer;
+    margin-left: 0.3rem;
+  }
+`;

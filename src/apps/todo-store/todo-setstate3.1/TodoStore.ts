@@ -65,8 +65,4 @@ export const setCount2 = (nr: number) => {
   setState('count2', (p: State['count2']) => p + nr);
 };
 
-// export const setRender = (value: boolean) => {
-//   setState('render', (p: State['render']) => !value);
-// }
-
 export { useSelector, useStore };
