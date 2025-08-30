@@ -88,7 +88,8 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test"
+    "test": "craco test",
+    "clean": "rm -rf node_modules .cache build && npm cache clean --force && npm install --legacy-peer-deps"
   },
   "eslintConfig": {
     "extends": "react-app"
