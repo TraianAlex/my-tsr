@@ -2,7 +2,7 @@ import React from 'react';
 import { useStore } from './TodoStore';
 
 export const Count = () => {
-  const count = useStore('count');
+  const [count] = useStore('count');
 
   console.log('render Count');
 

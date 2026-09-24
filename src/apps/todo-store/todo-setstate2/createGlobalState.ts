@@ -1,5 +1,5 @@
 import { SetStateAction, useCallback } from 'react';
-import create from 'zustand';
+import { create } from 'zustand';
 
 const validateStateKey = (keys: string[], stateKey: string) => {
   if (!keys.includes(stateKey)) {

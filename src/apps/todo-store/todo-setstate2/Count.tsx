@@ -2,7 +2,7 @@ import React from 'react';
 import { useGlobalState } from './TodoStore';
 
 export const Count = () => {
-  const count = useGlobalState('count');
+  const [count] = useGlobalState('count');
 
   console.log('render Count', count);
 

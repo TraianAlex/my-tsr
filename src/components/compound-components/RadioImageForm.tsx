@@ -4,6 +4,7 @@ import RadioImageFormWrapper from "./RadioImageFormWrapper";
 interface Props {
   onStateChange?(e: string): void;
   defaultValue?: string;
+  children?: React.ReactNode;
 }
 
 interface State {
@@ -133,18 +134,16 @@ class RadioImageForm extends React.Component<Props, State> {
         <form>
           {
             // So here we can take all this.props.children and make a copy of them that has those props.
-            React.Children.map(
-              this.props.children as React.ReactElement,
-              (child: React.ReactElement) =>
-                // Clone and return a new React element using element as the starting point.
-                // The resulting element will have the original element’s props with the
-                // new props merged in shallowly. New children will replace existing children.
-                React.cloneElement(child, {
-                  currentValue,
-                  onChange,
-                  defaultValue,
-                })
-            )
+            React.Children.map(this.props.children, (child) => {
+              if (!React.isValidElement(child)) {
+                return child;
+              }
+              return React.cloneElement(child, {
+                currentValue,
+                onChange,
+                defaultValue,
+              } as Partial<RadioInputProps>);
+            })
           }
         </form>
       </RadioImageFormWrapper>

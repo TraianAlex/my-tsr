@@ -2,6 +2,14 @@ import React from 'react';
 import { Column, useTable } from 'react-table';
 import BTable from 'react-bootstrap/Table';
 
+/** React 19: keys must not be spread into JSX. */
+function splitKeyProps<T extends { key?: React.Key }>(
+  props: T,
+): { key?: React.Key; rest: Omit<T, 'key'> } {
+  const { key, ...rest } = props;
+  return { key, rest };
+}
+
 export default function Table({
   columns,
   data,
@@ -28,21 +36,35 @@ export default function Table({
   return (
     <BTable striped bordered hover responsive size="sm" {...getTableProps()}>
       <thead>
-        {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column) => (
-              <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-            ))}
-          </tr>
-        ))}
+        {headerGroups.map((headerGroup) => {
+          const { key, rest } = splitKeyProps(headerGroup.getHeaderGroupProps());
+          return (
+            <tr key={key} {...rest}>
+              {headerGroup.headers.map((column) => {
+                const headerProps = splitKeyProps(column.getHeaderProps());
+                return (
+                  <th key={headerProps.key} {...headerProps.rest}>
+                    {column.render('Header')}
+                  </th>
+                );
+              })}
+            </tr>
+          );
+        })}
       </thead>
       <tbody {...getTableBodyProps()}>
-        {rows.map((row, i) => {
+        {rows.map((row) => {
           prepareRow(row);
+          const rowProps = splitKeyProps(row.getRowProps());
           return (
-            <tr {...row.getRowProps()}>
+            <tr key={rowProps.key} {...rowProps.rest}>
               {row.cells.map((cell) => {
-                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
+                const cellProps = splitKeyProps(cell.getCellProps());
+                return (
+                  <td key={cellProps.key} {...cellProps.rest}>
+                    {cell.render('Cell')}
+                  </td>
+                );
               })}
             </tr>
           );

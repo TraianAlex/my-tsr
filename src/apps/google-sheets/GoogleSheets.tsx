@@ -14,12 +14,12 @@ import { RenderCell } from './RenderCell';
 import { columns, getSheetData } from './utils';
 
 export const GoogleSheets: React.FC = () => {
-  const title = useStore('title');
-  const sheet = useStore('sheet');
+  const [title] = useStore('title');
+  const [sheet] = useStore('sheet');
   const [rows] = useStore('rows');
-  const target1 = useStore('target1');
-  const target2 = useStore('target2');
-  const rowCount = useStore('rowCount');
+  const [target1] = useStore('target1');
+  const [target2] = useStore('target2');
+  const [rowCount] = useStore('rowCount');
 
   useEffect(() => {
     (async () => {

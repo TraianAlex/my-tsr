@@ -4,9 +4,9 @@ import { dayOfYear, pause, randomColor } from './utils';
 import { setSubTitle, useStore } from './TodoStore';
 
 export const Header = () => {
-  const title = useStore('title');
-  const subTitle = useStore('subTitle');
-  const count = useStore('count');
+  const [title] = useStore('title');
+  const [subTitle] = useStore('subTitle');
+  const [count] = useStore('count');
 
   const modifSubtitle = async () => {
     await pause(1000);

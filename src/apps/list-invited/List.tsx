@@ -7,7 +7,7 @@ interface IProps {
 }
 
 const List: React.FC<IProps> = ({ people }) => {
-  const renderList = (): JSX.Element[] => {
+  const renderList = (): React.ReactElement[] => {
     return people.map((person) => {
       return (
         <li key={person.name + person.age} className="List">

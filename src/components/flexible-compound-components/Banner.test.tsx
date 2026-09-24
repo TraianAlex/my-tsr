@@ -31,8 +31,8 @@ describe("<Banner />", (): void => {
     const { title, subtitle } = setup();
 
     // Assert
-    expect(title.innerHTML).toContain("Hello CodeSandbox");
-    expect(subtitle.innerHTML).toContain(
+    expect(title?.innerHTML).toContain("Hello CodeSandbox");
+    expect(subtitle?.innerHTML).toContain(
       "Start editing to see some magic happen!"
     );
   });

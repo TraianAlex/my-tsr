@@ -2,7 +2,7 @@ import { useState, useEffect, SetStateAction, useCallback } from 'react';
 
 export type State = Record<string, any>;
 type StateKeys = keyof State;
-type Selector<State> = (state: State) => State;
+type Selector<T = any> = (state: State) => T;
 
 const isFunction = (fn: unknown): fn is Function => typeof fn === 'function';
 
@@ -32,8 +32,8 @@ export const createStore = (initialState: State) => {
     return () => listeners.delete(listener);
   };
 
-  const useSelector = (selector: Selector<State> = (state: State) => state) => {
-    const [state, setState] = useState(selector(getState()));
+  const useSelector = <T = any>(selector: Selector<T> = ((state: State) => state) as Selector<T>) => {
+    const [state, setState] = useState(() => selector(getState()));
 
     useEffect(() => {
       subscribe((state: State) => setState(selector(state)));

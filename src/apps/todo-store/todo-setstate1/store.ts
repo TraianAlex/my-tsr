@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export type State = Record<string, any>;
-type Selector<State> = (state: State) => State;
+type Selector<T = any> = (state: State) => T;
 export type Action = { type: string; value?: any };
 
 type Store = {
@@ -26,12 +26,12 @@ export const createStore = (initialState: State): Store => {
   };
 };
 
-const useStore = (
+const useStore = <T = any>(
   store: Store,
-  selector: Selector<State> = (state: State) => state,
+  selector: Selector<T> = ((state: State) => state) as Selector<T>,
 ) => {
   const { getState, subscribe } = store;
-  const [state, setState] = useState(selector(getState()));
+  const [state, setState] = useState(() => selector(getState()));
 
   useEffect(
     () => subscribe((state: State) => setState(selector(state))),
