@@ -4,6 +4,7 @@ import RadioImageFormWrapper from './RadioImageFormWrapper';
 interface Props {
 	onStateChange?(e: string): void;
 	defaultValue?: string;
+	children?: React.ReactNode;
 }
 
 interface State {

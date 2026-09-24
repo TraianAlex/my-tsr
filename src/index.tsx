@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import './index.css';
 import {
   UIRouter,
@@ -149,7 +149,12 @@ const googleSheetsState: LinkState = {
   component: GoogleSheets,
 };
 
-ReactDOM.render(
+const container = document.getElementById('root');
+if (!container) {
+  throw new Error('Root element #root not found');
+}
+
+createRoot(container).render(
   <React.StrictMode>
     <UIRouter
       plugins={[pushStateLocationPlugin]}
@@ -173,7 +178,6 @@ ReactDOM.render(
       <App />
     </UIRouter>
   </React.StrictMode>,
-  document.getElementById('root'),
 );
 
 // If you want your app to work offline and load faster, you can change

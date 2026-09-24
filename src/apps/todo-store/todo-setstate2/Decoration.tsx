@@ -2,7 +2,7 @@ import React from 'react';
 import { useGlobalState } from './TodoStore';
 
 export const Decoration = () => {
-  const decor = useGlobalState('title');
+  const [decor] = useGlobalState('title');
 
   console.log('render Title');
 

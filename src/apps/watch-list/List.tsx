@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { IState as IProps } from './WatchList';
 
 export const List: React.FC<IProps> = ({ form }) => {
-  const mapList = (): JSX.Element[] =>
+  const mapList = (): React.ReactElement[] =>
     form.map((i) => (
       <tr key={Math.random()}>
         <td>{i.name}</td>

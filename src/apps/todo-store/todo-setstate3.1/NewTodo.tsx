@@ -10,7 +10,7 @@ import {
 } from './TodoStore';
 
 const NewTodoForm: React.FC = () => {
-  const user = useStore('user');
+  const [user] = useStore('user');
   const textInputRef = useRef<HTMLInputElement>(null);
   const listInputRef = useRef<HTMLInputElement>(null);
 

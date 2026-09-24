@@ -3,8 +3,8 @@ import { setTarget3, setTarget4, useStore } from './sheetStore';
 import { getSheetData } from './utils';
 
 export const RenderCell = () => {
-  const target3 = useStore('target3');
-  const target4 = useStore('target4');
+  const [target3] = useStore('target3');
+  const [target4] = useStore('target4');
 
   useEffect(() => {
     (async () => {

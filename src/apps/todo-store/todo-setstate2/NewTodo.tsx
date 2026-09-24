@@ -8,7 +8,7 @@ import {
 } from './TodoStore';
 
 const NewTodoForm: React.FC = () => {
-  const user = useGlobalState('user');
+  const [user] = useGlobalState('user');
   const textInputRef = useRef<HTMLInputElement>(null);
   const listInputRef = useRef<HTMLInputElement>(null);
 

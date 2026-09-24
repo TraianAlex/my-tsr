@@ -39,7 +39,9 @@ export function useDogProviderState() {
   return context;
 }
 
-const DogDataProvider: React.FC = ({ children }): React.ReactElement => {
+const DogDataProvider: React.FC<{ children?: React.ReactNode }> = ({
+  children,
+}): React.ReactElement => {
   const [state, setState] = useState<State>(initState);
 
   useEffect(() => {
@@ -66,10 +68,11 @@ const DogDataProvider: React.FC = ({ children }): React.ReactElement => {
           error: { name: '', message: '' },
         });
       } catch (error) {
-        console.log(error.message);
+        const err = error instanceof Error ? error : new Error(String(error));
+        console.log(err.message);
 
         setState({
-          error,
+          error: err,
           status: Status.error,
           data: { name: '', breed: '' },
         });
