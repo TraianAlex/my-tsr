@@ -90,7 +90,7 @@
     "util": "^0.12.5",
     "vm-browserify": "^1.1.2",
     "webpack": "^5.97.0",
-    "webpack-dev-server": "^4.15.2",
+    "webpack-dev-server": "^5.2.6",
     "webpack-manifest-plugin": "4.1.1",
     "workbox-webpack-plugin": "6.6.0",
     "zustand": "^4.5.5"
